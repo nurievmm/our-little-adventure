@@ -1,0 +1,15 @@
+[
+  {"name":"Allison Burgerrs","race":"Undead","className":"Paladin","level":25},
+  {"name":"Aloy Cosem","race":"Troll","className":"Mage","level":15},
+  {"name":"Chipson Bomfrey","race":"Undead","className":"Rogue","level":42,"profession":{"name":"Engineering","skill":194}},
+  {"name":"Classic Schmosby","race":"Undead","className":"Priest","level":24},
+  {"name":"Dargor Springhill","race":"Tauren","className":"Shaman","level":25},
+  {"name":"Edou Khil","race":"Troll","className":"Shaman","level":24},
+  {"name":"Graag Gogkhilghak","race":"Orc","className":"Warlock","level":19},
+  {"name":"Hehehehe Hahahaha","race":"Orc","className":"Hunter","level":22},
+  {"name":"Lailah Primali","race":"Undead","className":"Warlock","level":10},
+  {"name":"Lailah Shemesh","race":"Windshaper Skyborne","className":"Druid","level":20},
+  {"name":"Lior Shadowlord","race":"Undead","className":"Priest","level":22},
+  {"name":"Lioren Aurelith","race":"Windshaper Skyborne","className":"Shaman","level":29,"profession":{"name":"Alchemy","skill":209}},
+  {"name":"Saar Oathwell","race":"Orc","className":"Warrior","level":22}
+]
