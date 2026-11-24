@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import roster from './roster.json';
-import story from './story-data.json';
 import { journeyMilestones, validTime } from './timeline.js';
 import { eventPainting, formations, heroPainting, painting } from './illustrations.js';
 import './style.css';
 
 const base = import.meta.env.BASE_URL;
-const labels = { legacy: 'Legacy unlock', boss: 'Matched boss kill', pvp: 'PvP milestone', level: 'Level reached', profession: 'Profession milestone' };
 const locale = { day: 'numeric', month: 'short', timeZone: 'Asia/Jerusalem' };
 const day = new Intl.DateTimeFormat('en-GB', locale);
 const clock = new Intl.DateTimeFormat('en-GB', {
@@ -51,8 +49,7 @@ function StoryArt({ art, alt = '', eager = false }) {
   </div>;
 }
 
-function Creation({ heroes }) {
-  const byName = new Map(heroes.map((hero) => [hero.name, hero]));
+function Creation() {
   return <section className="chapter chapter-creation" aria-labelledby="creation-title">
     <h2 id="creation-title" className="visually-hidden">Company roster</h2>
     {formations.map(({ art, race, members }, index) => <figure key={art}
@@ -60,14 +57,7 @@ function Creation({ heroes }) {
       <StoryArt art={painting(art)} eager={index === 0} />
       <figcaption className="formation-caption">
         <ul className="formation-members" style={{ '--party-size': members.length }}>
-          {members.map((name) => {
-            const hero = byName.get(name);
-            return <li className="arrival" key={name}>
-              <h3>{name}</h3>
-              {hero && <p>{hero.race} · {hero.className}</p>}
-              <EventTime event={{ at: story.creationTimes[name] ?? hero?.createdAt }} />
-            </li>;
-          })}
+          {members.map((name) => <li className="arrival" key={name}><h3>{name}</h3></li>)}
         </ul>
       </figcaption>
     </figure>)}
@@ -84,20 +74,11 @@ function Party({ event, portraits }) {
 }
 
 function EventDetails({ event, hasPainting }) {
-  if (event.kind === 'boss') return <>
+  if (event.kind === 'boss' || event.kind === 'legacy') return <>
+    {event.kind === 'legacy' && event.id !== 62031 && event.description && <p>{event.description}</p>}
     <Party event={event} portraits={!hasPainting} />
-    <p className="figure-note">{event.members.length} roster heroes with matching boss counters</p>
   </>;
-  if (event.kind === 'legacy') return <>
-    <p>{event.description}</p>
-    <Party event={event} portraits={!hasPainting} />
-    <p className="figure-note">Account-wide achievement</p>
-  </>;
-  if (event.kind === 'pvp') return <>
-    {hasPainting && <p className="figure-note">Illustrated encounter</p>}
-    {event.note && <p>{event.note}</p>}
-  </>;
-  if (event.kind === 'profession') return null;
+  if (event.kind !== 'level') return null;
   const gear = event.gear?.filter(({ slot }) => ['MAIN_HAND', 'OFF_HAND', 'CHEST'].includes(slot));
   return gear?.length > 0
     ? <p className="gear">Gear at sync · {gear.map(({ name }) => name).join(' · ')}</p>
@@ -111,7 +92,7 @@ function Scene({ event, roster }) {
   return <article className="milestone">
     <header className="milestone-heading">
       <EventTime event={event} />
-      <p className="eyebrow">{event.dungeon ?? labels[event.kind]}</p>
+      {event.dungeon && <p className="eyebrow">{event.dungeon}</p>}
       <h3>{event.title}</h3>
       {event.hero && <p className="milestone-hero">{event.hero.name}</p>}
     </header>
@@ -148,7 +129,7 @@ function App() {
   const heroes = snapshot?.heroes ?? roster;
   return <main className="journal">
     <h1 className="visually-hidden">Our Little Adventure</h1>
-    <Creation heroes={heroes} />
+    <Creation />
     <Timeline heroes={heroes} snapshot={snapshot} />
     <aside className="credits">Original character illustrations. Warcraft setting and background game imagery © Blizzard Entertainment. Historical data from Battle.net and the Forever Heroes roster.</aside>
   </main>;
