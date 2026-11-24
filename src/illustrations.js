@@ -35,8 +35,11 @@ export function heroPainting(name, level = 10) {
   return painting(key, panel);
 }
 
-function professionPainting(hero, skill) {
+function professionPainting(hero, skill, cap) {
   const key = 'work-' + slug(hero.name);
+  const progressionKey = key + '-progression';
+  const progression = artwork[progressionKey]?.ranks?.findIndex((rank) => rank.skill === skill && rank.cap === cap) ?? -1;
+  if (progression >= 0) return painting(progressionKey, progression);
   const panel = artwork[key]?.skills?.indexOf(skill) ?? -1;
   return panel < 0 ? undefined : painting(key, panel);
 }
@@ -48,10 +51,10 @@ export function eventPainting(event, roster) {
   }
   if (event.kind === 'pvp') return painting('pvp-' + slug(event.hero.name));
   if (event.kind === 'level') return heroPainting(event.hero.name, event.level);
-  if (event.kind === 'profession') return professionPainting(event.hero, event.skill);
+  if (event.kind === 'profession') return professionPainting(event.hero, event.skill, event.cap);
   if (event.id === 62031) return painting('spelunker');
   const heroes = event.members.map((name) => roster.get(name)).filter(Boolean);
-  if (event.skill) return heroes.map((hero) => professionPainting(hero, event.skill)).find(Boolean);
+  if (event.skill) return heroes.map((hero) => professionPainting(hero, event.skill, event.cap)).find(Boolean);
   const hero = heroes.find(({ className }) => className === event.className) ?? heroes[0];
   return hero && heroPainting(hero.name, event.level ?? 20);
 }

@@ -208,6 +208,27 @@
     ],
     "width": 1440
   },
+  "work-allison-burgerrs-progression": {
+    "columns": 2,
+    "height": 960,
+    "ranks": [
+      {
+        "cap": 150,
+        "skill": "Cooking"
+      },
+      {
+        "cap": 150,
+        "skill": "Fishing"
+      },
+      {
+        "cap": 225,
+        "skill": "Fishing"
+      }
+    ],
+    "revision": "53e83ad0d0",
+    "rows": 2,
+    "width": 1440
+  },
   "work-chipson-bomfrey": {
     "columns": 3,
     "height": 960,
@@ -219,6 +240,39 @@
       "Fishing",
       "First Aid"
     ],
+    "width": 1440
+  },
+  "work-chipson-bomfrey-progression": {
+    "columns": 3,
+    "height": 960,
+    "ranks": [
+      {
+        "cap": 150,
+        "skill": "Engineering"
+      },
+      {
+        "cap": 150,
+        "skill": "Cooking"
+      },
+      {
+        "cap": 150,
+        "skill": "Fishing"
+      },
+      {
+        "cap": 225,
+        "skill": "Fishing"
+      },
+      {
+        "cap": 150,
+        "skill": "Mining"
+      },
+      {
+        "cap": 225,
+        "skill": "Mining"
+      }
+    ],
+    "revision": "5ad0a81737",
+    "rows": 2,
     "width": 1440
   },
   "work-classic-schmosby": {
@@ -234,6 +288,23 @@
     ],
     "width": 1440
   },
+  "work-classic-schmosby-progression": {
+    "columns": 2,
+    "height": 720,
+    "ranks": [
+      {
+        "cap": 150,
+        "skill": "Cooking"
+      },
+      {
+        "cap": 150,
+        "skill": "Fishing"
+      }
+    ],
+    "revision": "02fae919cc",
+    "rows": 1,
+    "width": 1440
+  },
   "work-dargor-springhill": {
     "columns": 2,
     "height": 720,
@@ -242,6 +313,19 @@
       "Leatherworking",
       "Skinning"
     ],
+    "width": 1440
+  },
+  "work-dargor-springhill-progression": {
+    "columns": 1,
+    "height": 720,
+    "ranks": [
+      {
+        "cap": 150,
+        "skill": "Skinning"
+      }
+    ],
+    "revision": "309b9d31aa",
+    "rows": 1,
     "width": 1440
   },
   "work-edou-khil": {
@@ -255,6 +339,19 @@
       "Fishing",
       "First Aid"
     ],
+    "width": 1440
+  },
+  "work-edou-khil-progression": {
+    "columns": 1,
+    "height": 960,
+    "ranks": [
+      {
+        "cap": 150,
+        "skill": "Fishing"
+      }
+    ],
+    "revision": "ce816e821b",
+    "rows": 1,
     "width": 1440
   },
   "work-hehehehe-hahahaha": {
@@ -297,6 +394,23 @@
       "Herbalism",
       "Fishing"
     ],
+    "width": 1440
+  },
+  "work-lioren-aurelith-progression": {
+    "columns": 2,
+    "height": 720,
+    "ranks": [
+      {
+        "cap": 150,
+        "skill": "Alchemy"
+      },
+      {
+        "cap": 150,
+        "skill": "Herbalism"
+      }
+    ],
+    "revision": "573e97d523",
+    "rows": 1,
     "width": 1440
   },
   "work-saar-oathwell": {
