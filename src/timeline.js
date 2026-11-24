@@ -101,7 +101,7 @@ function powerMilestones(hero, snapshot, records, legacy) {
     if ((!historical && hero.level < level && !recorded) || coveredLevel(level)) continue;
     events.push({
       ...milestoneDate(historical, recorded),
-      key: hero.name + '/level/' + level, kind: 'level', hero, title: 'Level ' + level,
+      key: hero.name + '/level/' + level, kind: 'level', hero, level, title: 'Level ' + level,
       gear: recorded?.gear,
     });
   }

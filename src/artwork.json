@@ -1,0 +1,294 @@
+{
+  "allison-burgerrs": {
+    "columns": 2,
+    "height": 960,
+    "rows": 2,
+    "width": 1440
+  },
+  "aloy-cosem": {
+    "columns": 2,
+    "height": 960,
+    "rows": 2,
+    "width": 1440
+  },
+  "chipson-bomfrey": {
+    "columns": 2,
+    "height": 960,
+    "rows": 2,
+    "width": 1440
+  },
+  "chipson-level30": {
+    "columns": 1,
+    "height": 853,
+    "rows": 1,
+    "width": 1280
+  },
+  "classic-schmosby": {
+    "columns": 2,
+    "height": 960,
+    "rows": 2,
+    "width": 1440
+  },
+  "dargor-springhill": {
+    "columns": 2,
+    "height": 960,
+    "rows": 2,
+    "width": 1440
+  },
+  "deadmines": {
+    "columns": 1,
+    "height": 853,
+    "rows": 1,
+    "width": 1280
+  },
+  "edou-khil": {
+    "columns": 2,
+    "height": 960,
+    "rows": 2,
+    "width": 1440
+  },
+  "graag-gogkhilghak": {
+    "columns": 2,
+    "height": 960,
+    "rows": 2,
+    "width": 1440
+  },
+  "hehehehe-hahahaha": {
+    "columns": 2,
+    "height": 960,
+    "rows": 2,
+    "width": 1440
+  },
+  "lailah-primali": {
+    "columns": 2,
+    "height": 960,
+    "rows": 2,
+    "width": 1440
+  },
+  "lailah-shemesh": {
+    "columns": 2,
+    "height": 960,
+    "rows": 2,
+    "width": 1440
+  },
+  "lior-shadowlord": {
+    "columns": 2,
+    "height": 960,
+    "rows": 2,
+    "width": 1440
+  },
+  "lioren-aurelith": {
+    "columns": 2,
+    "height": 960,
+    "rows": 2,
+    "width": 1440
+  },
+  "lordaeron-1": {
+    "columns": 1,
+    "height": 853,
+    "rows": 1,
+    "width": 1280
+  },
+  "lordaeron-2": {
+    "columns": 1,
+    "height": 853,
+    "rows": 1,
+    "width": 1280
+  },
+  "orcs-trolls": {
+    "columns": 1,
+    "height": 853,
+    "rows": 1,
+    "width": 1280
+  },
+  "pvp-classic-schmosby": {
+    "columns": 1,
+    "height": 853,
+    "rows": 1,
+    "width": 1280
+  },
+  "pvp-lailah-shemesh": {
+    "columns": 1,
+    "height": 853,
+    "rows": 1,
+    "width": 1280
+  },
+  "pvp-lior-shadowlord": {
+    "columns": 1,
+    "height": 853,
+    "rows": 1,
+    "width": 1280
+  },
+  "pvp-saar-oathwell": {
+    "columns": 1,
+    "height": 853,
+    "rows": 1,
+    "width": 1280
+  },
+  "ragefire-1": {
+    "columns": 1,
+    "height": 853,
+    "rows": 1,
+    "width": 1280
+  },
+  "ragefire-2": {
+    "columns": 1,
+    "height": 853,
+    "rows": 1,
+    "width": 1280
+  },
+  "saar-oathwell": {
+    "columns": 2,
+    "height": 960,
+    "rows": 2,
+    "width": 1440
+  },
+  "shadowfang": {
+    "columns": 1,
+    "height": 853,
+    "rows": 1,
+    "width": 1280
+  },
+  "skyborne": {
+    "columns": 1,
+    "height": 853,
+    "rows": 1,
+    "width": 1280
+  },
+  "spelunker": {
+    "columns": 1,
+    "height": 853,
+    "rows": 1,
+    "width": 1280
+  },
+  "tauren": {
+    "columns": 1,
+    "height": 853,
+    "rows": 1,
+    "width": 1280
+  },
+  "undead": {
+    "columns": 1,
+    "height": 853,
+    "rows": 1,
+    "width": 1280
+  },
+  "wailing-caverns": {
+    "columns": 1,
+    "height": 853,
+    "rows": 1,
+    "width": 1280
+  },
+  "work-allison-burgerrs": {
+    "columns": 3,
+    "height": 960,
+    "rows": 2,
+    "skills": [
+      "Mining",
+      "Blacksmithing",
+      "Cooking",
+      "Fishing",
+      "First Aid"
+    ],
+    "width": 1440
+  },
+  "work-chipson-bomfrey": {
+    "columns": 3,
+    "height": 960,
+    "rows": 2,
+    "skills": [
+      "Mining",
+      "Engineering",
+      "Cooking",
+      "Fishing",
+      "First Aid"
+    ],
+    "width": 1440
+  },
+  "work-classic-schmosby": {
+    "columns": 3,
+    "height": 960,
+    "rows": 2,
+    "skills": [
+      "Tailoring",
+      "Enchanting",
+      "Cooking",
+      "Fishing",
+      "First Aid"
+    ],
+    "width": 1440
+  },
+  "work-dargor-springhill": {
+    "columns": 2,
+    "height": 720,
+    "rows": 1,
+    "skills": [
+      "Leatherworking",
+      "Skinning"
+    ],
+    "width": 1440
+  },
+  "work-edou-khil": {
+    "columns": 3,
+    "height": 960,
+    "rows": 2,
+    "skills": [
+      "Alchemy",
+      "Herbalism",
+      "Cooking",
+      "Fishing",
+      "First Aid"
+    ],
+    "width": 1440
+  },
+  "work-hehehehe-hahahaha": {
+    "columns": 2,
+    "height": 960,
+    "rows": 2,
+    "skills": [
+      "Skinning",
+      "Mining",
+      "First Aid"
+    ],
+    "width": 1440
+  },
+  "work-lailah-shemesh": {
+    "columns": 1,
+    "height": 720,
+    "rows": 1,
+    "skills": [
+      "Skinning"
+    ],
+    "width": 1280
+  },
+  "work-lior-shadowlord": {
+    "columns": 2,
+    "height": 720,
+    "rows": 1,
+    "skills": [
+      "Tailoring",
+      "Enchanting"
+    ],
+    "width": 1440
+  },
+  "work-lioren-aurelith": {
+    "columns": 2,
+    "height": 960,
+    "rows": 2,
+    "skills": [
+      "Alchemy",
+      "Herbalism",
+      "Fishing"
+    ],
+    "width": 1440
+  },
+  "work-saar-oathwell": {
+    "columns": 1,
+    "height": 720,
+    "rows": 1,
+    "skills": [
+      "Mining"
+    ],
+    "width": 1280
+  }
+}

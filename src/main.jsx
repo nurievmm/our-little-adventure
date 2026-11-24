@@ -3,17 +3,10 @@ import { createRoot } from 'react-dom/client';
 import roster from './roster.json';
 import story from './story-data.json';
 import { journeyMilestones, validTime } from './timeline.js';
+import { eventPainting, formations, heroPainting, painting } from './illustrations.js';
 import './style.css';
 
 const base = import.meta.env.BASE_URL;
-const classColors = {
-  Paladin: '#f0a6be', Mage: '#89dbe9', Rogue: '#f8d675', Priest: '#f1ebd9', Shaman: '#8fbaff',
-  Warlock: '#c9adff', Hunter: '#b9d38c', Druid: '#fbb079', Warrior: '#e8aa91',
-};
-const professions = {
-  Alchemy: '⚗', Blacksmithing: '⚒', Cooking: '♨', Enchanting: '✦', Engineering: '⚙',
-  'First Aid': '✚', Fishing: '♒', Herbalism: '❧', Leatherworking: '✂', Mining: '⛏', Skinning: '◇', Tailoring: '✂',
-};
 const labels = { legacy: 'Legacy unlock', boss: 'Matched boss kill', pvp: 'PvP milestone', level: 'Level reached', profession: 'Profession milestone' };
 const locale = { day: 'numeric', month: 'short', timeZone: 'Asia/Jerusalem' };
 const day = new Intl.DateTimeFormat('en-GB', locale);
@@ -43,80 +36,89 @@ function EventTime({ event }) {
   </div>;
 }
 
-function Portrait({ hero, full = false, labelled = false }) {
-  const [unavailable, setUnavailable] = useState([]);
-  const image = [full && hero.model, hero.portrait].find((url) => url && !unavailable.includes(url));
-  return <div className={'character-art' + (full ? ' character-art-full' : '')}
-    style={{ '--class-color': classColors[hero.className] }}>
-    {image
-      ? <img className={image === hero.model ? 'model' : 'avatar'} src={image}
-        alt={labelled ? hero.name : ''} loading="lazy" key={image}
-        onError={() => setUnavailable((old) => [...old, image])} />
-      : <span className="initials" aria-hidden="true">{hero.name.split(' ').map((word) => word[0]).join('')}</span>}
+function StoryArt({ art, alt = '', eager = false }) {
+  if (!art) return null;
+  const { key, width, height, panel, columns, rows } = art;
+  const ratio = (width / columns) / (height / rows);
+  return <div className="story-art" style={{
+    '--art-ratio': ratio, '--art-columns': columns, '--art-rows': rows,
+    '--art-x': panel % columns, '--art-y': Math.floor(panel / columns),
+  }}>
+    <img src={base + 'art/paint-' + key + '.webp'} alt={alt}
+      width={width} height={height} loading={eager ? 'eager' : 'lazy'}
+      fetchPriority={eager ? 'high' : undefined} decoding={eager ? 'auto' : 'async'} />
   </div>;
 }
 
 function Creation({ heroes }) {
+  const byName = new Map(heroes.map((hero) => [hero.name, hero]));
   return <section className="chapter chapter-creation" aria-labelledby="creation-title">
     <h2 id="creation-title" className="visually-hidden">Company roster</h2>
-    <div className="scene" aria-hidden="true"><img src={base + 'art/company.jpg'} alt="" fetchPriority="high" /></div>
-    <div className="chapter-details">
-      <ul className="story-grid arrivals">
-        {heroes.map((hero) => <li className="arrival" key={hero.name}>
-          <Portrait hero={hero} />
-          <div><h3>{hero.name}</h3><p>{hero.race} · {hero.className}</p>
-            <EventTime event={{ at: story.creationTimes[hero.name] ?? hero.createdAt }} />
-          </div>
-        </li>)}
-      </ul>
-    </div>
+    {formations.map(({ art, race, members }, index) => <figure key={art}
+      className={'formation formation-' + art} aria-label={race}>
+      <StoryArt art={painting(art)} eager={index === 0} />
+      <figcaption className="formation-caption">
+        <ul className="formation-members" style={{ '--party-size': members.length }}>
+          {members.map((name) => {
+            const hero = byName.get(name);
+            return <li className="arrival" key={name}>
+              <h3>{name}</h3>
+              {hero && <p>{hero.race} · {hero.className}</p>}
+              <EventTime event={{ at: story.creationTimes[name] ?? hero?.createdAt }} />
+            </li>;
+          })}
+        </ul>
+      </figcaption>
+    </figure>)}
   </section>;
 }
 
-function Party({ event, byName }) {
+function Party({ event, portraits }) {
   return <div className="story-party">
     {event.members.map((name) => <div key={name}>
-      {byName.has(name) && <Portrait hero={byName.get(name)} />}
+      {portraits && <StoryArt art={heroPainting(name, 20)} />}
       <span>{name}</span>
     </div>)}
   </div>;
 }
 
-function PvPIllustration({ hero }) {
-  const opponent = { HORDE: 'alliance', ALLIANCE: 'horde' }[hero.faction];
-  return <div className="timeline-duel">
-    <Portrait hero={hero} full labelled />
-    {opponent && <img className="opponent" loading="lazy" src={base + 'art/rival-' + opponent + '.png'}
-      alt={'Fictional ' + opponent + ' opponent'} />}
-  </div>;
-}
-
-function EventDetails({ event, byName }) {
+function EventDetails({ event, hasPainting }) {
   if (event.kind === 'boss') return <>
-    <Party event={event} byName={byName} />
+    <Party event={event} portraits={!hasPainting} />
     <p className="figure-note">{event.members.length} roster heroes with matching boss counters</p>
   </>;
   if (event.kind === 'legacy') return <>
     <p>{event.description}</p>
-    <Party event={event} byName={byName} />
+    <Party event={event} portraits={!hasPainting} />
     <p className="figure-note">Account-wide achievement</p>
   </>;
   if (event.kind === 'pvp') return <>
-    <PvPIllustration hero={event.hero} />
-    <p className="figure-note">Illustrated encounter</p>
+    {hasPainting && <p className="figure-note">Illustrated encounter</p>}
     {event.note && <p>{event.note}</p>}
   </>;
-  if (event.kind === 'profession') return <div className="skill-illustration">
-    <Portrait hero={event.hero} full />
-    <span aria-hidden="true">{professions[event.skill] ?? '✧'}</span>
-  </div>;
+  if (event.kind === 'profession') return null;
   const gear = event.gear?.filter(({ slot }) => ['MAIN_HAND', 'OFF_HAND', 'CHEST'].includes(slot));
-  return <div className="level-illustration">
-    <Portrait hero={event.hero} full />
-    <div><p className="figure-note">Current character render</p>
-      {gear?.length > 0 && <p className="gear">Gear at sync · {gear.map(({ name }) => name).join(' · ')}</p>}
+  return gear?.length > 0
+    ? <p className="gear">Gear at sync · {gear.map(({ name }) => name).join(' · ')}</p>
+    : null;
+}
+
+function Scene({ event, roster }) {
+  const painting = eventPainting(event, roster);
+  const art = painting ?? (event.hero && heroPainting(event.hero.name, event.hero.level));
+  const subject = event.hero?.name ?? event.title;
+  return <article className="milestone">
+    <header className="milestone-heading">
+      <EventTime event={event} />
+      <p className="eyebrow">{event.dungeon ?? labels[event.kind]}</p>
+      <h3>{event.title}</h3>
+      {event.hero && <p className="milestone-hero">{event.hero.name}</p>}
+    </header>
+    <div className="milestone-details">
+      <StoryArt art={art} alt={'Illustration of ' + subject} />
+      <EventDetails event={event} hasPainting={Boolean(painting)} />
     </div>
-  </div>;
+  </article>;
 }
 
 function Timeline({ heroes, snapshot }) {
@@ -126,17 +128,7 @@ function Timeline({ heroes, snapshot }) {
     <h2 id="timeline-title" className="visually-hidden">Adventure timeline</h2>
     <ol className="timeline-list">
       {milestones.map((event) => <li key={event.key} className={'timeline-entry entry-' + event.kind}>
-        <article className="milestone">
-          <header className="milestone-heading">
-            <EventTime event={event} />
-            <p className="eyebrow">{event.dungeon ?? labels[event.kind]}</p>
-            <h3>{event.title}</h3>
-            {event.hero && <p className="milestone-hero">{event.hero.name}</p>}
-          </header>
-          <div className="milestone-details">
-            <EventDetails event={event} byName={byName} />
-          </div>
-        </article>
+        <Scene event={event} roster={byName} />
       </li>)}
     </ol>
   </section>;
@@ -157,7 +149,7 @@ function App() {
     <h1 className="visually-hidden">Our Little Adventure</h1>
     <Creation heroes={heroes} />
     <Timeline heroes={heroes} snapshot={snapshot} />
-    <aside className="credits">Game imagery © Blizzard Entertainment. Historical data from Battle.net and the Forever Heroes roster.</aside>
+    <aside className="credits">Original character illustrations. Warcraft setting and background game imagery © Blizzard Entertainment. Historical data from Battle.net and the Forever Heroes roster.</aside>
   </main>;
 }
 
