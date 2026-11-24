@@ -9,6 +9,7 @@
   "aloy-cosem": {
     "columns": 2,
     "height": 960,
+    "revision": "d9132a16e4",
     "rows": 2,
     "width": 1440
   },
@@ -104,6 +105,7 @@
   "orcs-trolls": {
     "columns": 1,
     "height": 853,
+    "revision": "d882f7ab74",
     "rows": 1,
     "width": 1280
   },
@@ -142,6 +144,7 @@
   "ragefire-2": {
     "columns": 1,
     "height": 853,
+    "revision": "ed43171446",
     "rows": 1,
     "width": 1280
   },
