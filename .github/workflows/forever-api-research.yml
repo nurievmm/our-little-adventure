@@ -54,24 +54,19 @@ jobs:
             const rows=(response.data.categories??[]).flatMap(category=>[...(category.statistics??[]),...(category.sub_categories??[]).flatMap(sub=>sub.statistics??[])]);
             return {status:response.status,count:rows.length, matches:rows.map(row=>name(row.name)).filter(title=>title&&/pvp|honorable|highest level|dungeon|creation|time played/i.test(title)).slice(0,15)};
           }
-          const catalog=await get('/data/wow/achievement/index','static');
-          const entries=catalog.data.achievements??[];
-          const matched=entries.map(row=>name(row.name)).filter(title=>title&&/level|honor|rank|artisan|apprentice|expert|journeyman|wailing|dungeon|first blood/i.test(title));
-          console.log(JSON.stringify({catalog:{status:catalog.status,count:entries.length,examples:matched.slice(0,35)}}));
-          for(let offset=0;offset<roster.length;offset+=3){
-            await Promise.all(roster.slice(offset,offset+3).map(async hero=>{
-              const base='/profile/wow/character/'+encodeURIComponent(hero.name.toLowerCase().replaceAll(' ','-'));
-              const [ach,stats,profile,dungeons,pvp,quests,mounts,rep,titles]=await Promise.all(
-                ['/achievements','/achievements/statistics','','/encounters/dungeons','/pvp-summary','/quests/completed','/collections/mounts','/reputations','/titles'].map(suffix=>get(base+suffix)));
-              console.log(JSON.stringify({
-                hero:hero.name,
-                achievements:achievements(ach), statistics:statistics(stats),
-                profile:{status:profile.status,timeFields:fields(profile.data).filter(key=>/time|created|login/.test(key))},
-                dungeons:{status:dungeons.status,expansions:(dungeons.data.expansions??[]).length},
-                pvp:{status:pvp.status,kills:pvp.data.honorable_kills,fields:fields(pvp.data)},
-                quests:{status:quests.status,count:(quests.data.quests??[]).length},
-                collections:{mounts:(mounts.data.mounts??[]).length,reputations:(rep.data.reputations??[]).length,titles:(titles.data.titles??[]).length}
-              }));
-            }));
+          function criteriaSummary(value) {
+            if (Array.isArray(value)) return value.map(criteriaSummary);
+            if (!value || typeof value !== 'object') return value;
+            return Object.fromEntries(Object.entries(value)
+              .filter(([key])=>!['key','_links','media','parent'].includes(key))
+              .map(([key,entry])=>[key,criteriaSummary(entry)]));
           }
+          for(const id of [61997,62003,62021,62031]){
+            const response=await get('/data/wow/achievement/'+id,'static');
+            const data=response.data;
+            console.log(JSON.stringify({detail:{id,status:response.status,title:name(data.name),description:name(data.description),accountWide:data.is_account_wide,criteria:criteriaSummary(data.criteria)}}));
+          }
+          const profile=await get('/profile/wow/character/chipson-bomfrey/achievements');
+          const record=profile.data.achievements?.find(row=>row.id===62031);
+          console.log(JSON.stringify({spelunker:{id:record?.id,date:dated(record?.completed_timestamp),criteria:criteriaSummary(record?.criteria)},keys:Object.keys(record?.criteria??{})}));
           JS
