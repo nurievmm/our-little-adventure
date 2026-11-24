@@ -42,7 +42,7 @@
   "deadmines": {
     "columns": 1,
     "height": 853,
-    "revision": "b7f247f60e",
+    "revision": "d6846073d4",
     "rows": 1,
     "width": 1280
   },
@@ -430,7 +430,7 @@
   "work-chipson-bomfrey": {
     "columns": 3,
     "height": 960,
-    "revision": "afef22190a",
+    "revision": "af010eedd1",
     "rows": 2,
     "skills": [
       "Mining",
@@ -470,7 +470,7 @@
         "skill": "Mining"
       }
     ],
-    "revision": "3421b099f7",
+    "revision": "9ffb3a45d1",
     "rows": 2,
     "width": 1440
   },
@@ -499,7 +499,7 @@
         "skill": "Fishing"
       }
     ],
-    "revision": "80ec0d365e",
+    "revision": "e1e8a8af3f",
     "rows": 2,
     "width": 1440
   },
