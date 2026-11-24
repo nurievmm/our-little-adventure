@@ -61,14 +61,20 @@ function mergeTimed(source, current, keyOf) {
   return events;
 }
 
-function legacyMilestones(legacy) {
+function legacyMilestones(legacy, heroes) {
+  const classByName = new Map(heroes.map(({ name, className }) => [name, className]));
   const keyOf = (event) => {
     const at = timeKey(event.at);
     return at && [accountOf(event.members[0]), event.id, at].join('/');
   };
-  return [...mergeTimed(story.legacy, legacy, keyOf)].map(([key, event]) => ({
-    ...event, key: 'legacy/' + key, kind: 'legacy',
-  }));
+  return [...mergeTimed(story.legacy, legacy, keyOf)].map(([key, event]) => {
+    let members = event.members;
+    if (event.level === 25 && event.className) {
+      const matches = members.filter((name) => classByName.get(name) === event.className);
+      members = matches.length === 1 ? matches : [];
+    }
+    return { ...event, members, key: 'legacy/' + key, kind: 'legacy' };
+  });
 }
 
 function bossMilestones(bossMatches) {
@@ -139,7 +145,7 @@ function powerMilestones(hero, snapshot, records, legacy) {
 
 export function journeyMilestones(heroes, snapshot) {
   const records = new Map((snapshot?.milestones ?? []).map((event) => [event.key, event]));
-  const legacy = legacyMilestones(snapshot?.legacy);
+  const legacy = legacyMilestones(snapshot?.legacy, heroes);
   const bosses = bossMilestones(snapshot?.bossMatches);
   const events = [...legacy, ...bosses, ...heroes.flatMap((hero) => powerMilestones(hero, snapshot, records, legacy))];
   function order(event) {
