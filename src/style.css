@@ -18,12 +18,9 @@ p { margin: 0; }
   overflow: hidden; clip-path: inset(50%); white-space: nowrap;
 }
 .journal {
-  --frame-height: min(74svh, 780px);
-  --scene-gutter: clamp(12px, 3vw, 42px);
-  --scene-spacing: clamp(16px, 4svh, 44px);
-  --scene-blend: clamp(26px, 7svh, 76px);
-  --caption-gap: clamp(14px, 3svh, 30px);
-  --art-drift: clamp(4px, 1svh, 12px);
+  --frame-height: min(100svh, 960px);
+  --scene-blend: clamp(20px, 7svh, 72px);
+  --caption-inset: clamp(12px, 4vmin, 42px);
   isolation: isolate;
   overflow: clip;
   background: var(--night);
@@ -50,16 +47,41 @@ p { margin: 0; }
   grid-template-columns: min(100%, calc(var(--frame-ratio) * var(--frame-height)));
   justify-content: center;
   position: relative;
-  isolation: isolate;
   margin: 0;
-  padding: var(--scene-spacing) var(--scene-gutter) var(--scene-blend);
   text-shadow: var(--ink-shadow);
 }
 .formation-undead { --portrait-shade: #1b1615; }
 .formation-skyborne { --portrait-shade: #14212e; }
 .formation-tauren { --portrait-shade: #292018; }
 .formation-orcs-trolls { --portrait-shade: #2c1716; }
-.formation-caption { margin-block-start: var(--caption-gap); }
+.formation > .story-art,
+.milestone-frame > .story-art,
+.formation-caption,
+.milestone-copy {
+  grid-area: 1 / 1;
+  min-width: 0;
+}
+.formation > .story-art,
+.milestone-frame > .story-art {
+  align-self: start;
+  width: 100%;
+}
+.formation > .story-art::after,
+.milestone-frame > .story-art::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to bottom, #10151d80, transparent min(8%, 32px)),
+    linear-gradient(to top, #090d14e0, #090d1460 27%, transparent 58%);
+}
+.formation-caption,
+.milestone-copy {
+  position: relative;
+  align-self: end;
+  padding: var(--caption-inset);
+}
 .formation-members {
   display: grid;
   grid-template-columns: repeat(var(--party-size), minmax(0, 1fr));
@@ -91,13 +113,13 @@ p { margin: 0; }
   --accent: #e0d7ff;
   --scene-art: url('/art/valley.jpg');
   --scene-tint: #15152c;
-  isolation: isolate;
   position: relative;
 }
 .entry-profession { --accent: #ffd9ad; --scene-tint: #261910; --scene-art: url('/art/trades.jpg'); }
 .entry-boss { --accent: #bfece0; --scene-tint: #06211e; --scene-art: url('/art/valley.jpg'); }
 .entry-legacy { --accent: #ffe0a0; --scene-tint: #291c0d; --scene-art: url('/art/summit.jpg'); }
 .entry-pvp { --accent: #ffcbd5; --scene-tint: #250d21; --scene-art: url('/art/battleground.jpg'); }
+/* Keep the overlapping backdrops below every foreground illustration. */
 .scene-backdrop {
   position: absolute;
   z-index: -1;
@@ -141,16 +163,12 @@ p { margin: 0; }
 .milestone {
   display: grid;
   justify-items: center;
-  padding: var(--scene-spacing) var(--scene-gutter) var(--scene-blend);
   text-shadow: var(--ink-shadow);
 }
 .milestone-frame {
+  display: grid;
   width: min(100%, calc(var(--frame-ratio, 1.5) * var(--frame-height)));
   min-width: 0;
-}
-.milestone-copy { padding-inline: clamp(0px, 1.5vw, 20px); }
-.milestone-frame > .story-art + .milestone-copy {
-  margin-block-start: var(--caption-gap);
 }
 .milestone-heading .event-time { margin: 0 0 12px; color: #fff5e4; font-weight: 600; }
 .milestone-heading .eyebrow { font-size: .82rem; letter-spacing: .13em; }
@@ -170,8 +188,16 @@ p { margin: 0; }
 .story-party { display: flex; flex-wrap: wrap; gap: 8px 18px; }
 .story-party > div { display: flex; align-items: center; gap: 8px; font-size: .99rem; font-weight: 600; }
 .story-party .story-art { width: 46px; flex: 0 0 auto; }
-@media (max-width: 610px) {
-  .milestone-heading .event-time { margin-bottom: 8px; }
+@media (max-width: 610px), (max-height: 500px) {
+  .milestone h3 { font-size: clamp(1.5rem, 6vmin, 2.5rem); }
+  .milestone-heading .event-time { margin-bottom: 4px; }
+  .milestone-heading .eyebrow, .event-time, .gear { font-size: .73rem; }
+  .milestone-hero { margin-top: 4px; font-size: .95rem; }
+  .milestone-details { gap: 4px; margin-block-start: 5px; }
+  .milestone-details > p { font-size: .85rem; }
+  .story-party { gap: 3px 10px; }
+  .story-party > div { gap: 5px; font-size: .82rem; }
+  .story-party .story-art { width: 28px; }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -181,10 +207,6 @@ p { margin: 0; }
   .scene-backdrop > .story-art,
   .scene-backdrop:empty::before {
     transform: translateY(calc(var(--scene-offset) * 14%)) scale(1.18);
-  }
-  .formation > .story-art,
-  .milestone-frame > .story-art {
-    transform: translateY(calc(-2 * var(--scene-offset) * var(--art-drift)));
   }
   .formation-caption,
   .milestone-copy {
