@@ -58,12 +58,8 @@ function Portrait({ hero, full = false, labelled = false }) {
 
 function Creation({ heroes }) {
   return <section className="chapter chapter-creation" aria-labelledby="creation-title">
+    <h2 id="creation-title" className="visually-hidden">Company roster</h2>
     <div className="scene" aria-hidden="true"><img src={base + 'art/company.jpg'} alt="" fetchPriority="high" /></div>
-    <header className="chapter-heading">
-      <p className="eyebrow">Character creation</p>
-      <h2 id="creation-title">The company assembles</h2>
-      <p className="summary">{heroes.length} adventurers joined the Side Quest Company.</p>
-    </header>
     <div className="chapter-details">
       <ul className="story-grid arrivals">
         {heroes.map((hero) => <li className="arrival" key={hero.name}>
@@ -127,10 +123,7 @@ function Timeline({ heroes, snapshot }) {
   const byName = new Map(heroes.map((hero) => [hero.name, hero]));
   const milestones = journeyMilestones(heroes, snapshot);
   return <section className="timeline" aria-labelledby="timeline-title">
-    <header className="timeline-heading">
-      <h2 id="timeline-title">Milestones</h2>
-      <p>Israel time. Approximate dates are placed at the end of their known range.</p>
-    </header>
+    <h2 id="timeline-title" className="visually-hidden">Adventure timeline</h2>
     <ol className="timeline-list">
       {milestones.map((event) => <li key={event.key} className={'timeline-entry entry-' + event.kind}>
         <article className="milestone">
