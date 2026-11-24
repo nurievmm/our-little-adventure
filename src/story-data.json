@@ -1,6 +1,424 @@
 {
-  "levelSteps": [10, 20, 25, 30, 40, 45, 50, 60],
-  "professionCaps": [75, 150, 225, 300],
+  "levelSteps": [
+    10,
+    20,
+    30,
+    40,
+    50,
+    60
+  ],
+  "professionCaps": [
+    75,
+    150,
+    225,
+    300
+  ],
   "creationTimes": {},
-  "dungeonRuns": []
+  "dungeonRuns": [
+    {
+      "id": 15027,
+      "dungeon": "Ragefire Chasm",
+      "boss": "Bazzalan",
+      "at": "2026-11-12T22:38:55.000Z",
+      "members": [
+        "Edou Khil",
+        "Classic Schmosby",
+        "Graag Gogkhilghak",
+        "Lailah Shemesh"
+      ]
+    },
+    {
+      "id": 63570,
+      "dungeon": "The Deadmines",
+      "boss": "Edwin VanCleef",
+      "at": "2026-11-16T21:22:07.000Z",
+      "members": [
+        "Allison Burgerrs",
+        "Chipson Bomfrey",
+        "Classic Schmosby",
+        "Lioren Aurelith"
+      ]
+    },
+    {
+      "id": 15027,
+      "dungeon": "Ragefire Chasm",
+      "boss": "Bazzalan",
+      "at": "2026-11-19T20:00:56.000Z",
+      "members": [
+        "Aloy Cosem",
+        "Hehehehe Hahahaha",
+        "Lior Shadowlord"
+      ]
+    },
+    {
+      "id": 63571,
+      "dungeon": "Ruins of Lordaeron",
+      "boss": "Rath’mael",
+      "at": "2026-11-19T21:37:11.000Z",
+      "members": [
+        "Classic Schmosby",
+        "Hehehehe Hahahaha",
+        "Lailah Shemesh",
+        "Saar Oathwell"
+      ]
+    },
+    {
+      "id": 15028,
+      "dungeon": "Wailing Caverns",
+      "boss": "Mutanus the Devourer",
+      "at": "2026-11-20T22:42:26.000Z",
+      "members": [
+        "Allison Burgerrs",
+        "Dargor Springhill",
+        "Classic Schmosby",
+        "Lioren Aurelith"
+      ]
+    },
+    {
+      "id": 63571,
+      "dungeon": "Ruins of Lordaeron",
+      "boss": "Rath’mael",
+      "at": "2026-11-20T23:45:52.000Z",
+      "members": [
+        "Allison Burgerrs",
+        "Edou Khil",
+        "Graag Gogkhilghak"
+      ]
+    },
+    {
+      "id": 1092,
+      "dungeon": "Shadowfang Keep",
+      "boss": "Archmage Arugal",
+      "at": "2026-11-23T20:09:17.000Z",
+      "members": [
+        "Allison Burgerrs",
+        "Dargor Springhill",
+        "Classic Schmosby",
+        "Lioren Aurelith"
+      ]
+    }
+  ],
+  "accounts": [
+    [
+      "Allison Burgerrs",
+      "Hehehehe Hahahaha"
+    ],
+    [
+      "Dargor Springhill",
+      "Lior Shadowlord",
+      "Saar Oathwell"
+    ],
+    [
+      "Lailah Primali",
+      "Lailah Shemesh"
+    ]
+  ],
+  "archive": [
+    {
+      "at": "2026-11-15T10:36:50.882976+00:00",
+      "heroes": {
+        "Dargor Springhill": {
+          "level": 18,
+          "skills": {
+            "Leatherworking": 68,
+            "Skinning": 136,
+            "Cooking": 1
+          }
+        },
+        "Saar Oathwell": {
+          "level": 18,
+          "skills": {
+            "Mining": 94,
+            "Blacksmithing": 67,
+            "Cooking": 1
+          }
+        },
+        "Lior Shadowlord": {
+          "level": 15,
+          "skills": {
+            "Tailoring": 66,
+            "Enchanting": 11,
+            "Cooking": 1
+          }
+        },
+        "Lioren Aurelith": {
+          "level": 20,
+          "skills": {
+            "Alchemy": 107,
+            "Herbalism": 120,
+            "Cooking": 1,
+            "Fishing": 33
+          }
+        },
+        "Chipson Bomfrey": {
+          "level": 33,
+          "skills": {
+            "Mining": 171,
+            "Engineering": 190,
+            "Cooking": 150,
+            "Fishing": 131,
+            "First Aid": 140
+          }
+        },
+        "Lailah Shemesh": {
+          "level": 17,
+          "skills": {
+            "Leatherworking": 26,
+            "Skinning": 100,
+            "Cooking": 31,
+            "Fishing": 54,
+            "First Aid": 1
+          }
+        },
+        "Lailah Primali": {
+          "level": 10,
+          "skills": {
+            "Tailoring": 26,
+            "Enchanting": 4,
+            "Cooking": 1,
+            "First Aid": 1
+          }
+        }
+      }
+    },
+    {
+      "at": "2026-11-24T01:41:59.313136+00:00",
+      "heroes": {
+        "Dargor Springhill": {
+          "level": 26,
+          "skills": {
+            "Leatherworking": 110,
+            "Skinning": 182,
+            "Cooking": 1
+          }
+        },
+        "Saar Oathwell": {
+          "level": 22,
+          "skills": {
+            "Mining": 96,
+            "Blacksmithing": 74,
+            "Cooking": 5
+          }
+        },
+        "Lior Shadowlord": {
+          "level": 22,
+          "skills": {
+            "Tailoring": 92,
+            "Enchanting": 81,
+            "Cooking": 11,
+            "Fishing": 2
+          }
+        },
+        "Lioren Aurelith": {
+          "level": 29,
+          "skills": {
+            "Alchemy": 209,
+            "Herbalism": 201,
+            "Cooking": 1,
+            "Fishing": 80
+          }
+        },
+        "Chipson Bomfrey": {
+          "level": 43,
+          "skills": {
+            "Mining": 254,
+            "Engineering": 194,
+            "Cooking": 150,
+            "Fishing": 225,
+            "First Aid": 140
+          }
+        },
+        "Allison Burgerrs": {
+          "level": 26,
+          "skills": {
+            "Mining": 120,
+            "Blacksmithing": 106,
+            "Cooking": 150,
+            "Fishing": 225,
+            "First Aid": 144
+          }
+        },
+        "Hehehehe Hahahaha": {
+          "level": 23,
+          "skills": {
+            "Skinning": 146,
+            "Mining": 77,
+            "Cooking": 13,
+            "Fishing": 65,
+            "First Aid": 85
+          }
+        },
+        "Classic Schmosby": {
+          "level": 26,
+          "skills": {
+            "Tailoring": 95,
+            "Enchanting": 111,
+            "Cooking": 150,
+            "Fishing": 169,
+            "First Aid": 80
+          }
+        },
+        "Edou Khil": {
+          "level": 24,
+          "skills": {
+            "Alchemy": 135,
+            "Herbalism": 147,
+            "Cooking": 109,
+            "Fishing": 150,
+            "First Aid": 123
+          }
+        },
+        "Graag Gogkhilghak": {
+          "level": 19,
+          "skills": {
+            "Alchemy": 64,
+            "Herbalism": 73,
+            "Cooking": 20,
+            "Fishing": 1,
+            "First Aid": 63
+          }
+        },
+        "Lailah Shemesh": {
+          "level": 20,
+          "skills": {
+            "Leatherworking": 56,
+            "Skinning": 121,
+            "Cooking": 31,
+            "Fishing": 54,
+            "First Aid": 1
+          }
+        },
+        "Lailah Primali": {
+          "level": 10,
+          "skills": {
+            "Tailoring": 26,
+            "Enchanting": 4,
+            "Cooking": 1,
+            "First Aid": 1
+          }
+        },
+        "Aloy Cosem": {
+          "level": 15,
+          "skills": {
+            "Tailoring": 42,
+            "Enchanting": 27,
+            "Cooking": 1,
+            "First Aid": 1
+          }
+        }
+      }
+    }
+  ],
+  "pvpDates": {
+    "Lior Shadowlord": {
+      "at": "2026-11-20T23:11:50Z",
+      "approximate": true,
+      "note": "The world PvP counter records one kill, his only honorable kill in the checked data."
+    },
+    "Saar Oathwell": {
+      "after": "2026-11-15T10:36:50.882976+00:00",
+      "by": "2026-11-18T21:28:07Z",
+      "note": "The prior roster snapshot showed zero. The Warsong Gulch counter later recorded 77."
+    },
+    "Lailah Shemesh": {
+      "after": "2026-11-15T10:36:50.882976+00:00",
+      "by": "2026-11-19T22:40:53Z",
+      "note": "The prior roster snapshot showed zero. The Warsong Gulch counter later recorded 27."
+    },
+    "Classic Schmosby": {
+      "by": "2026-11-17T20:34:31Z",
+      "note": "The world PvP counter records one kill by this date."
+    }
+  },
+  "legacy": [
+    {
+      "id": 62003,
+      "title": "Novice Rogue",
+      "at": "2026-11-10T20:51:00Z",
+      "members": [
+        "Chipson Bomfrey"
+      ],
+      "description": "Level 25 on a Rogue.",
+      "level": 25,
+      "className": "Rogue"
+    },
+    {
+      "id": 62021,
+      "title": "Journeyman Engineer",
+      "at": "2026-11-11T21:54:00Z",
+      "members": [
+        "Chipson Bomfrey"
+      ],
+      "description": "Reached 150 skill in Engineering.",
+      "skill": "Engineering",
+      "cap": 150
+    },
+    {
+      "id": 62012,
+      "title": "Journeyman Alchemist",
+      "at": "2026-11-15T19:44:00Z",
+      "members": [
+        "Lioren Aurelith"
+      ],
+      "description": "Reached 150 skill in Alchemy.",
+      "skill": "Alchemy",
+      "cap": 150
+    },
+    {
+      "id": 62031,
+      "title": "Novice Spelunker",
+      "at": "2026-11-16T20:37:00Z",
+      "members": [
+        "Chipson Bomfrey"
+      ],
+      "description": "Completed the six-dungeon Legacy set."
+    },
+    {
+      "id": 62006,
+      "title": "Novice Shaman",
+      "at": "2026-11-18T18:13:00Z",
+      "members": [
+        "Lioren Aurelith"
+      ],
+      "description": "Level 25 on a Shaman.",
+      "level": 25,
+      "className": "Shaman"
+    },
+    {
+      "id": 61997,
+      "title": "Novice Paladin",
+      "at": "2026-11-21T21:21:00Z",
+      "members": [
+        "Allison Burgerrs",
+        "Hehehehe Hahahaha"
+      ],
+      "description": "Level 25 on a Paladin.",
+      "level": 25,
+      "className": "Paladin"
+    },
+    {
+      "id": 62006,
+      "title": "Novice Shaman",
+      "at": "2026-11-22T15:12:00Z",
+      "members": [
+        "Dargor Springhill",
+        "Lior Shadowlord",
+        "Saar Oathwell"
+      ],
+      "description": "Level 25 on a Shaman.",
+      "level": 25,
+      "className": "Shaman"
+    },
+    {
+      "id": 62000,
+      "title": "Novice Priest",
+      "at": "2026-11-23T18:58:00Z",
+      "members": [
+        "Classic Schmosby"
+      ],
+      "description": "Level 25 on a Priest.",
+      "level": 25,
+      "className": "Priest"
+    }
+  ]
 }

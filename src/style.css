@@ -27,17 +27,11 @@ p { margin: 0; }
   isolation: isolate;
   display: flow-root;
 }
-.chapter + .chapter { margin-top: calc(-1 * var(--overlap)); }
-.chapter-levels { --ink: #211b34; --panel: #32284b; --accent: #eaddff; --focus: 39% 44%; }
-.chapter-trades { --ink: #392519; --panel: #4c3325; --accent: #ffd29a; --focus: 61% 47%; }
-.chapter-pvp { --ink: #2b1527; --panel: #42233b; --accent: #ffbacd; --focus: 47% 53%; }
-.chapter-dungeons { --ink: #202738; --panel: #303952; --accent: #c8defd; }
 .scene {
   position: sticky; top: 0; z-index: -1; height: var(--scene-height);
   margin-bottom: calc(-1 * var(--scene-height)); overflow: clip; pointer-events: none;
   background: var(--ink);
 }
-.chapter + .chapter .scene { mask-image: linear-gradient(transparent, #000 var(--overlap)); }
 .scene img {
   position: absolute; inset: -14% 0; width: 100%; height: 128%;
   object-fit: cover; object-position: var(--focus);
@@ -85,7 +79,6 @@ p { margin: 0; }
   box-shadow: 0 16px 32px #08091035;
 }
 .story-card h3 { font: 600 clamp(1.25rem, 2.2vw, 1.9rem)/1.1 var(--display); margin: 0 0 .27em; overflow-wrap: anywhere; }
-.story-card p { line-height: 1.5; color: #f7e6de; }
 .event-time, .figure-note, .gear { color: var(--accent); font-size: .875rem; line-height: 1.45; }
 .event-time { margin-top: 5px; }
 .arrival { display: grid; align-items: center; grid-template-columns: 78px minmax(0, 1fr); gap: 16px; padding: 16px; }
@@ -102,35 +95,6 @@ p { margin: 0; }
 }
 .character-art-full img { position: absolute; object-fit: contain; }
 .character-art-full .avatar { width: 64px; height: 64px; border-radius: 50%; }
-.level-card { display: grid; grid-template-columns: 28% minmax(0, 1fr); }
-.level-copy, .craft-copy, .fight-copy, .run { padding: clamp(14px, 2.2vw, 26px); }
-.level-card .model { width: 133%; max-width: none; }
-.level-steps, .capstones, .party { list-style: none; margin: 12px 0 0; padding: 0; }
-.level-steps li { display: flex; align-items: baseline; gap: 9px; padding: 5px 0; border-top: 1px solid #ffffff25; }
-.level-number { color: var(--accent); min-width: 2ch; font-family: var(--display); font-size: 1.25rem; font-weight: 700; }
-.gear { display: block; margin-top: 3px; }
-.workshops { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.craft-scene {
-  position: relative; display: grid; align-items: end; min-height: 142px; padding: 0 12px 8px;
-  isolation: isolate; background: radial-gradient(ellipse at 60% 77%, #c5783b6b, transparent 72%), #261a26;
-}
-.craft-scene .character-art { position: absolute; inset: 0 auto 0 4%; width: 62%; z-index: -1; background: none; }
-.craft-prop {
-  position: absolute; right: 16%; top: 26%; font: 700 3rem/1 system-ui, sans-serif;
-  color: var(--accent); filter: drop-shadow(0 0 16px #f6a7478c);
-}
-.craft-scene .figure-note { text-shadow: 0 2px 8px #000; }
-.capstones { display: flex; gap: 8px; flex-wrap: wrap; }
-.capstones li { padding: 4px 8px; color: var(--accent); border: 1px solid #ffffff36; border-radius: 7px; }
-.capstones small { display: block; line-height: 1.4; }
-.duel {
-  position: relative; display: grid; grid-template-columns: 1fr 1fr; align-items: end; min-height: 195px;
-  background: radial-gradient(ellipse at 52% 85%, #e58e7270, transparent 65%), linear-gradient(125deg, #282647, #3c151a);
-}
-.duel .character-art-full { min-height: 195px; }
-.duel .opponent { object-fit: contain; object-position: bottom; width: 100%; height: 185px; }
-.party li { display: inline-flex; align-items: center; gap: 6px; margin: 0 10px 8px 0; }
-.party .character-art { width: 30px; }
 .credits { background: #171522; padding: 18px clamp(22px, 7vw, 105px); font-size: .875rem; color: #eee0d8; }
 
 @media (max-width: 700px) {
@@ -163,11 +127,6 @@ p { margin: 0; }
       animation-range: entry 0% entry 90%;
     }
     .story-card:nth-child(even) { --incoming: 34px; }
-    .craft-prop, .duel .opponent {
-      animation: approach linear both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 95%;
-    }
   }
 }
 @keyframes drift {
@@ -182,13 +141,99 @@ p { margin: 0; }
   from { opacity: .28; transform: translate(var(--incoming), 18px) scale(.97); }
   to { opacity: 1; transform: none; }
 }
-@keyframes approach {
-  from { opacity: .45; transform: translate(18px, 9px) scale(.9); }
-  to { opacity: 1; transform: none; }
-}
 @media (prefers-reduced-motion: reduce) {
   .chapter { background: var(--ink); }
-  .chapter + .chapter { margin-top: 0; }
   .scene { position: relative; }
-  .chapter + .chapter .scene { mask-image: none; }
+}
+
+.timeline {
+  --accent: #f9d69d;
+  isolation: isolate;
+  position: relative;
+  margin-top: -55px;
+  padding: 35px clamp(18px, 7vw, 105px) 75px;
+  background: linear-gradient(180deg, transparent, #171c25 145px);
+}
+.timeline-heading, .timeline-list { width: min(100%, 1120px); margin-inline: auto; }
+.timeline-heading h2 { margin: 0; font: 600 clamp(2.7rem, 6vw, 5rem)/1 var(--display); letter-spacing: -.05em; }
+.timeline-heading p { margin-top: 8px; color: #e6d9c9; line-height: 1.5; }
+.timeline-list { list-style: none; margin-block: 25px 0; padding: 0; }
+.timeline-entry {
+  --accent: #e0d7ff;
+  --panel: #282744;
+  --detail: #473764;
+  position: relative;
+  margin-bottom: 14px;
+}
+.entry-profession { --accent: #ffd39e; --panel: #372920; --detail: #62412a; }
+.entry-boss { --accent: #bfece0; --panel: #18352e; --detail: #214d47; }
+.entry-legacy { --accent: #ffe0a0; --panel: #382f1f; --detail: #624827; }
+.entry-pvp { --accent: #ffc1ce; --panel: #3d2539; --detail: #653248; }
+.milestone {
+  display: grid; grid-template-columns: minmax(215px, .8fr) minmax(0, 1.2fr);
+  align-items: stretch; gap: 0;
+  background: linear-gradient(110deg, var(--panel) 42%, var(--detail));
+  border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+  border-radius: 15px; overflow: clip;
+}
+.milestone-heading { display: grid; align-content: center; padding: clamp(17px, 3vw, 29px); }
+.milestone-heading .event-time { margin: 0 0 8px; }
+.milestone-heading .eyebrow { color: #fff4e4; font-size: .8rem; letter-spacing: .12em; }
+.milestone h3 { margin: 3px 0 2px; font: 600 clamp(1.65rem, 3.3vw, 2.8rem)/1.04 var(--display); overflow-wrap: anywhere; }
+.milestone-hero { margin-top: 6px; color: var(--accent); }
+.milestone-details {
+  display: grid; align-content: center; align-items: center; gap: 6px;
+  min-width: 0; min-height: 104px; position: relative;
+  padding: 9px clamp(14px, 2.7vw, 24px);
+}
+.milestone-details > p { line-height: 1.5; }
+.story-party { display: flex; flex-wrap: wrap; gap: 6px 13px; }
+.story-party > div { display: flex; align-items: center; gap: 6px; font-size: .9rem; }
+.story-party .character-art { width: 34px; }
+.skill-illustration, .level-illustration, .timeline-duel {
+  display: grid; height: 100%;
+  grid-template-columns: minmax(70px, 130px) minmax(0, 1fr); align-items: center;
+}
+.milestone-details .character-art-full { min-height: 100px; }
+.skill-illustration > span { color: var(--accent); font-size: 2.7rem; margin-left: 12px; }
+.timeline-duel {
+  justify-content: start;
+  grid-template-columns: repeat(2, minmax(0, 145px));
+  background: linear-gradient(90deg, #2b1836d1, #3b1b33aa), url('/art/battleground.jpg') center / cover;
+  border-radius: 8px;
+}
+.timeline-duel .opponent { width: 100%; height: 100px; object-fit: contain; }
+.entry-boss .milestone-details { min-height: 137px; }
+
+@media (max-width: 610px) {
+  .timeline { padding-top: 22px; }
+  .milestone { grid-template-columns: 1fr; }
+  .milestone-heading { padding-bottom: 10px; }
+  .milestone-details { padding-top: 0; }
+  .entry-boss .milestone-details { min-height: 112px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .timeline-entry { view-timeline-name: --entry; }
+    .milestone-heading {
+      animation: milestone-title-in linear both;
+      animation-timeline: --entry;
+      animation-range: entry 0% entry 65%;
+    }
+    .milestone-details {
+      --arrival: 22px;
+      animation: milestone-detail-in linear both;
+      animation-timeline: --entry;
+      animation-range: entry 35% entry 100%;
+    }
+    .timeline-entry:nth-child(even) .milestone-details { --arrival: -22px; }
+  }
+}
+@keyframes milestone-title-in {
+  from { opacity: .5; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes milestone-detail-in {
+  from { opacity: .18; transform: translateX(var(--arrival)); clip-path: inset(0 12% 0 12%); }
+  to { opacity: 1; transform: none; clip-path: inset(0); }
 }
