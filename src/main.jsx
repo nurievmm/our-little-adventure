@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import roster from './roster.json';
 import { journeyMilestones, validTime } from './timeline.js';
@@ -101,6 +101,31 @@ function EventDetails({ event, hasPainting }) {
     : null;
 }
 
+function MilestoneScreenshot({ screenshot, title }) {
+  const dialog = useRef(null);
+  const [viewed, setViewed] = useState(false);
+  const { file, alt, width, height } = screenshot;
+  const source = base + file;
+
+  function openScreenshot() {
+    setViewed(true);
+    dialog.current.showModal();
+  }
+
+  return <>
+    <button className="screenshot-trigger" type="button" aria-haspopup="dialog" onClick={openScreenshot}>
+      View screenshot
+    </button>
+    <dialog className="screenshot-dialog" ref={dialog} aria-label={'Screenshot after ' + title}>
+      <div className="screenshot-toolbar">
+        <form method="dialog"><button type="submit">Close</button></form>
+        <a href={source} target="_blank" rel="noopener">Open full size</a>
+      </div>
+      {viewed && <img src={source} alt={alt} width={width} height={height} />}
+    </dialog>
+  </>;
+}
+
 function Scene({ event, roster }) {
   const painting = eventPainting(event, roster);
   const art = painting ?? (event.hero && heroPainting(event.hero.name, event.hero.level));
@@ -120,6 +145,7 @@ function Scene({ event, roster }) {
         </header>
         <div className="milestone-details">
           <EventDetails event={event} hasPainting={Boolean(painting)} />
+          {event.screenshot && <MilestoneScreenshot screenshot={event.screenshot} title={event.title} />}
         </div>
       </div>
     </div>
