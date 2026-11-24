@@ -41,6 +41,9 @@ export function heroPainting(name, level = 10) {
 
 function professionPainting(hero, skill, cap) {
   const key = 'work-' + slug(hero.name);
+  const standalone = painting(key + '-' + slug(skill) + '-' + cap);
+  if (standalone) return standalone;
+
   for (const rankKey of [key + '-varied', key + '-progression']) {
     const panel = artwork[rankKey]?.ranks?.findIndex((rank) => rank.skill === skill && rank.cap === cap) ?? -1;
     if (panel >= 0) return painting(rankKey, panel);
