@@ -42,8 +42,8 @@ jobs:
           BATTLENET_CLIENT_SECRET: ${{ secrets.BATTLENET_CLIENT_SECRET }}
           PREVIOUS_SNAPSHOT_URL: ${{ steps.pages.outputs.base_url }}/characters.json
       - run: npm run build
-      - uses: actions/upload-pages-artifact@v4
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: dist
-      - uses: actions/deploy-pages@v4
+      - uses: actions/deploy-pages@v5
         id: deployment
