@@ -40,33 +40,32 @@ jobs:
             }
           }
           const name = (value) => typeof value==='string'?value:value?.en_GB??value?.en_US;
-          const dated = (timestamp) => Number.isFinite(timestamp)&&timestamp>0 ? new Date(timestamp<1e12?timestamp*1000:timestamp).toISOString():null;
-          const fields = (data) => Object.keys(data).filter(key=>!/links|character$/.test(key));
-          function achievements(response) {
-            const a=response.data;
-            const rows=a.achievements??[];
-            return {status:response.status, points:a.total_points, listed:rows.length,
-              dated:rows.filter(row=>dated(row.completed_timestamp)).map(row=>({id:row.id,title:name(row.achievement?.name),at:dated(row.completed_timestamp)})),
-              undated:rows.filter(row=>!dated(row.completed_timestamp)).slice(0,5).map(row=>({id:row.id,title:name(row.achievement?.name),completed:row.criteria?.is_completed})),
-              recent:(a.recent_events??[]).length};
+          function flatten(node, parent='') {
+            const path=[parent,name(node.name)].filter(Boolean).join(' / ');
+            return [...(node.statistics??[]).map(row=>({...row,path})),
+              ...[...(node.categories??[]),...(node.sub_categories??[])].flatMap(child=>flatten(child,path))];
           }
-          function statistics(response) {
-            const rows=(response.data.categories??[]).flatMap(category=>[...(category.statistics??[]),...(category.sub_categories??[]).flatMap(sub=>sub.statistics??[])]);
-            return {status:response.status,count:rows.length, matches:rows.map(row=>name(row.name)).filter(title=>title&&/pvp|honorable|highest level|dungeon|creation|time played/i.test(title)).slice(0,15)};
+          const groups=new Map();
+          let bossCounters=0, timestampedCounters=0;
+          for(let offset=0;offset<roster.length;offset+=3){
+            await Promise.all(roster.slice(offset,offset+3).map(async hero=>{
+              const slug=encodeURIComponent(hero.name.toLowerCase().replaceAll(' ','-'));
+              const stat=await get('/profile/wow/character/'+slug+'/achievements/statistics');
+              const rows=flatten(stat.data);
+              const boss=rows.filter(row=>/^.+? kills? \(.+\)$/i.test(name(row.name)??'') &&
+                typeof row.quantity==='number' && row.quantity>0);
+              bossCounters+=boss.length;
+              for(const row of boss){
+                if(!row.last_updated_timestamp)continue;
+                timestampedCounters++;
+                const id=row.id+'/'+row.last_updated_timestamp;
+                if(!groups.has(id)) groups.set(id,{title:name(row.name),stamp:row.last_updated_timestamp,heroes:[]});
+                groups.get(id).heroes.push(hero.name);
+              }
+              console.log(JSON.stringify({hero:hero.name,status:stat.status,boss:boss.slice(0,10).map(row=>({title:name(row.name),quantity:row.quantity,lastUpdated:row.last_updated_timestamp})),
+                dungeonCategories:[...new Set(rows.filter(row=>/dungeon|raid|boss/i.test(row.path)).map(row=>row.path))]}));
+            }));
           }
-          function criteriaSummary(value) {
-            if (Array.isArray(value)) return value.map(criteriaSummary);
-            if (!value || typeof value !== 'object') return value;
-            return Object.fromEntries(Object.entries(value)
-              .filter(([key])=>!['key','_links','media','parent'].includes(key))
-              .map(([key,entry])=>[key,criteriaSummary(entry)]));
-          }
-          for(const id of [61997,62003,62021,62031]){
-            const response=await get('/data/wow/achievement/'+id,'static');
-            const data=response.data;
-            console.log(JSON.stringify({detail:{id,status:response.status,title:name(data.name),description:name(data.description),accountWide:data.is_account_wide,criteria:criteriaSummary(data.criteria)}}));
-          }
-          const profile=await get('/profile/wow/character/chipson-bomfrey/achievements');
-          const record=profile.data.achievements?.find(row=>row.id===62031);
-          console.log(JSON.stringify({spelunker:{id:record?.id,date:dated(record?.completed_timestamp),criteria:criteriaSummary(record?.criteria)},keys:Object.keys(record?.criteria??{})}));
+          const shared=[...groups.values()].filter(row=>row.heroes.length>=2).sort((a,b)=>b.stamp-a.stamp);
+          console.log(JSON.stringify({bossCounters,timestampedCounters,sharedGroups:shared.length,threeOrMore:shared.filter(row=>row.heroes.length>=3),examples:shared.slice(0,5)}));
           JS
