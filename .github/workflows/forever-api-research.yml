@@ -39,29 +39,23 @@ jobs:
               return {status:'timeout or transport error',data:{}};
             }
           }
-          const name = (value) => typeof value==='string'?value:value?.en_GB??value?.en_US;
-          function flatten(node, parent='') {
-            const path=[parent,name(node.name)].filter(Boolean).join(' / ');
-            return [...(node.statistics??[]).map(row=>({...row,path})),
-              ...[...(node.categories??[]),...(node.sub_categories??[])].flatMap(child=>flatten(child,path))];
-          }
-          const timestamps=(entry) => Object.fromEntries(Object.entries(entry).filter(([k])=>/time|date/i.test(k)));
-          for(let offset=0;offset<roster.length;offset+=3){
-            await Promise.all(roster.slice(offset,offset+3).map(async hero=>{
-              const slug=encodeURIComponent(hero.name.toLowerCase().replaceAll(' ','-'));
-              const base='/profile/wow/character/'+slug;
-              const [stat,pvp,prof,mounts,quests]=await Promise.all(['/achievements/statistics','/pvp-summary','/professions','/collections/mounts','/quests/completed'].map(suffix=>get(base+suffix)));
-              const rows=flatten(stat.data);
-              const relevant=rows.filter(r=>/honorable kills$|highest.*(skill|level)|profession|character creation|created|time played/i.test(name(r.name)??''));
-              const training=[...(prof.data.primaries??[]),...(prof.data.secondaries??[])];
-              console.log(JSON.stringify({hero:hero.name,statuses:[stat.status,pvp.status,prof.status,mounts.status,quests.status],
-                honorableKills:pvp.data.honorable_kills,
-                stats:relevant.map(r=>({name:name(r.name),quantity:r.quantity,updated:r.last_updated_timestamp})),
-                pvpFields:Object.keys(pvp.data).filter(key=>key!=='_links'&&key!=='character'),pvpTimes:timestamps(pvp.data),
-                nonPvpTimes:{prof:training.flatMap(r=>Object.keys(timestamps(r))),
-                mount:(mounts.data.mounts??[]).flatMap(r=>Object.keys(timestamps(r))),
-                quest:(quests.data.quests??[]).flatMap(r=>Object.keys(timestamps(r)))}
-              }));
-            }));
+          const name=v=>typeof v==='string'?v:v?.en_GB??v?.en_US;
+          const stats=node=>[...(node.statistics??[]),...[...(node.categories??[]),...(node.sub_categories??[])].flatMap(stats)];
+          const groups=new Map();
+          for(let i=0;i<roster.length;i+=3) await Promise.all(roster.slice(i,i+3).map(async hero=>{
+            const slug=encodeURIComponent(hero.name.toLowerCase().replaceAll(' ','-'));
+            const result=await get('/profile/wow/character/'+slug+'/achievements/statistics');
+            const data=stats(result.data).filter(x=>x.quantity>0&&x.last_updated_timestamp&&/ kills? \(.+\)$/i.test(name(x.name)??''));
+            for(const s of data){
+              const key=s.id+'/'+s.last_updated_timestamp;
+              if(!groups.has(key))groups.set(key,{id:s.id,title:name(s.name),at:new Date(s.last_updated_timestamp).toISOString(),members:[]});
+              groups.get(key).members.push(hero.name);
+            }
+            console.log(JSON.stringify({hero:hero.name,status:result.status,counters:data.map(s=>[s.id,name(s.name),new Date(s.last_updated_timestamp).toISOString(),s.quantity])}));
+          }));
+          console.log(JSON.stringify({shared:[...groups.values()].filter(g=>g.members.length>=2)}));
+          for(const id of [61997,62021,62031,728]){
+            const d=await get('/data/wow/achievement/'+id,'static');
+            console.log(JSON.stringify({definition:{id,category:d.data.category,accountWide:d.data.is_account_wide,description:d.data.description,keys:Object.keys(d.data)}}));
           }
           JS
