@@ -2,6 +2,7 @@
   "allison-burgerrs": {
     "columns": 2,
     "height": 960,
+    "revision": "2984a198c4",
     "rows": 2,
     "width": 1440
   },
@@ -38,6 +39,7 @@
   "deadmines": {
     "columns": 1,
     "height": 853,
+    "revision": "353ecebdf6",
     "rows": 1,
     "width": 1280
   },
@@ -68,6 +70,7 @@
   "lailah-shemesh": {
     "columns": 2,
     "height": 960,
+    "revision": "78e3e03a19",
     "rows": 2,
     "width": 1440
   },
@@ -86,12 +89,14 @@
   "lordaeron-1": {
     "columns": 1,
     "height": 853,
+    "revision": "6bc4266d07",
     "rows": 1,
     "width": 1280
   },
   "lordaeron-2": {
     "columns": 1,
     "height": 853,
+    "revision": "b50694f7f1",
     "rows": 1,
     "width": 1280
   },
@@ -110,6 +115,7 @@
   "pvp-lailah-shemesh": {
     "columns": 1,
     "height": 853,
+    "revision": "9515dcd7a5",
     "rows": 1,
     "width": 1280
   },
@@ -128,6 +134,7 @@
   "ragefire-1": {
     "columns": 1,
     "height": 853,
+    "revision": "11cfa048fc",
     "rows": 1,
     "width": 1280
   },
@@ -146,12 +153,14 @@
   "shadowfang": {
     "columns": 1,
     "height": 853,
+    "revision": "4335743775",
     "rows": 1,
     "width": 1280
   },
   "skyborne": {
     "columns": 1,
     "height": 853,
+    "revision": "6f47e1f756",
     "rows": 1,
     "width": 1280
   },
@@ -170,18 +179,21 @@
   "undead": {
     "columns": 1,
     "height": 853,
+    "revision": "8e1e4ab6cc",
     "rows": 1,
     "width": 1280
   },
   "wailing-caverns": {
     "columns": 1,
     "height": 853,
+    "revision": "4c1e1fb594",
     "rows": 1,
     "width": 1280
   },
   "work-allison-burgerrs": {
     "columns": 3,
     "height": 960,
+    "revision": "6f5e6b9948",
     "rows": 2,
     "skills": [
       "Mining",
@@ -255,6 +267,7 @@
   "work-lailah-shemesh": {
     "columns": 1,
     "height": 720,
+    "revision": "0fb24d1941",
     "rows": 1,
     "skills": [
       "Skinning"

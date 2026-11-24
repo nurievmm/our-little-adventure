@@ -38,13 +38,14 @@ function EventTime({ event }) {
 
 function StoryArt({ art, alt = '', eager = false }) {
   if (!art) return null;
-  const { key, width, height, panel, columns, rows } = art;
+  const { key, width, height, panel, columns, rows, revision } = art;
+  const src = base + 'art/paint-' + key + '.webp';
   const ratio = (width / columns) / (height / rows);
   return <div className="story-art" style={{
     '--art-ratio': ratio, '--art-columns': columns, '--art-rows': rows,
     '--art-x': panel % columns, '--art-y': Math.floor(panel / columns),
   }}>
-    <img src={base + 'art/paint-' + key + '.webp'} alt={alt}
+    <img src={revision ? src + '?v=' + revision : src} alt={alt}
       width={width} height={height} loading={eager ? 'eager' : 'lazy'}
       fetchPriority={eager ? 'high' : undefined} decoding={eager ? 'auto' : 'async'} />
   </div>;
