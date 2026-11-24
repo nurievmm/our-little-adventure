@@ -219,8 +219,7 @@ p { margin: 0; }
 .story-party > div { display: flex; align-items: center; gap: 8px; font-size: .99rem; font-weight: 600; }
 .story-party .story-art { width: 46px; flex: 0 0 auto; }
 .screenshot-trigger,
-.screenshot-toolbar button,
-.screenshot-toolbar a {
+.screenshot-toolbar button {
   display: inline-flex;
   align-items: center;
   min-block-size: 44px;
@@ -235,11 +234,9 @@ p { margin: 0; }
 }
 .screenshot-trigger { justify-self: start; }
 .screenshot-trigger:hover,
-.screenshot-toolbar button:hover,
-.screenshot-toolbar a:hover { background: #28333b; }
+.screenshot-toolbar button:hover { background: #28333b; }
 .screenshot-trigger:focus-visible,
-.screenshot-toolbar button:focus-visible,
-.screenshot-toolbar a:focus-visible { outline: 2px solid #f9d69d; outline-offset: 3px; }
+.screenshot-toolbar button:focus-visible { outline: 2px solid #f9d69d; outline-offset: 3px; }
 .screenshot-dialog {
   max-inline-size: min(calc(100vw - 16px), 1440px);
   max-block-size: calc(100dvh - 16px);
@@ -253,9 +250,7 @@ p { margin: 0; }
 .screenshot-dialog::backdrop { background: #080b13e0; }
 .screenshot-toolbar {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 8px;
+  justify-content: flex-end;
   margin-block-end: 8px;
 }
 .screenshot-dialog img {
