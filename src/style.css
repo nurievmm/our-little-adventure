@@ -21,6 +21,8 @@ p { margin: 0; }
 }
 .journal {
   --frame-height: min(100svh, 960px);
+  --frame-ratio: 1.5;
+  --frame-width: min(100%, calc(var(--frame-ratio) * var(--frame-height)));
   --scene-blend: clamp(20px, 7svh, 72px);
   --caption-inset: clamp(12px, 4vmin, 42px);
   --seam-depth: clamp(13px, 5vmin, 44px);
@@ -48,7 +50,7 @@ p { margin: 0; }
   --portrait-shade: #151922;
   --scene-tint: var(--portrait-shade);
   display: grid;
-  grid-template-columns: min(100%, calc(var(--frame-ratio) * var(--frame-height)));
+  grid-template-columns: var(--frame-width);
   justify-content: center;
   position: relative;
   margin: 0;
@@ -65,11 +67,27 @@ p { margin: 0; }
   grid-area: 1 / 1;
   min-width: 0;
 }
+.formation::before,
+.milestone-frame::before {
+  content: '';
+  grid-area: 1 / 1;
+  inline-size: 100%;
+  aspect-ratio: var(--frame-ratio);
+}
 .formation > .story-art,
 .milestone-frame > .story-art {
-  align-self: start;
-  width: 100%;
+  aspect-ratio: auto;
+  container-type: size;
   isolation: isolate;
+}
+/* Fit one complete illustration panel within the shared frame. */
+.formation > .story-art > .story-art-panel,
+.milestone-frame > .story-art > .story-art-panel {
+  inset: 50% auto auto 50%;
+  width: min(100cqw, calc(100cqh * var(--art-ratio)));
+  height: min(100cqh, calc(100cqw / var(--art-ratio)));
+  transform: translate(-50%, -50%);
+  overflow: clip;
 }
 .formation > .story-art > .story-art-panel::after,
 .milestone-frame > .story-art > .story-art-panel::after {
@@ -197,7 +215,7 @@ p { margin: 0; }
 }
 .milestone-frame {
   display: grid;
-  width: min(100%, calc(var(--frame-ratio, 1.5) * var(--frame-height)));
+  width: var(--frame-width);
   min-width: 0;
 }
 .milestone-heading .event-time { margin: 0 0 12px; color: #fff5e4; font-weight: 600; }
@@ -260,6 +278,10 @@ p { margin: 0; }
   margin-inline: auto;
   object-fit: contain;
 }
+@media (max-width: 610px) {
+  .journal { --frame-ratio: 1; }
+}
+
 @media (max-width: 610px), (max-height: 500px) {
   .milestone h3 { font-size: clamp(1.5rem, 6vmin, 2.5rem); }
   .milestone-heading .event-time { margin-bottom: 4px; }
