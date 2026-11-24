@@ -553,6 +553,13 @@
     ],
     "width": 1440
   },
+  "work-classic-schmosby-fishing-150": {
+    "columns": 1,
+    "height": 480,
+    "revision": "274d90021e",
+    "rows": 1,
+    "width": 720
+  },
   "work-classic-schmosby-progression": {
     "columns": 2,
     "height": 720,
