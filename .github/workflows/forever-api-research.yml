@@ -45,27 +45,23 @@ jobs:
             return [...(node.statistics??[]).map(row=>({...row,path})),
               ...[...(node.categories??[]),...(node.sub_categories??[])].flatMap(child=>flatten(child,path))];
           }
-          const groups=new Map();
-          let bossCounters=0, timestampedCounters=0;
+          const timestamps=(entry) => Object.fromEntries(Object.entries(entry).filter(([k])=>/time|date/i.test(k)));
           for(let offset=0;offset<roster.length;offset+=3){
             await Promise.all(roster.slice(offset,offset+3).map(async hero=>{
               const slug=encodeURIComponent(hero.name.toLowerCase().replaceAll(' ','-'));
-              const stat=await get('/profile/wow/character/'+slug+'/achievements/statistics');
+              const base='/profile/wow/character/'+slug;
+              const [stat,pvp,prof,mounts,quests]=await Promise.all(['/achievements/statistics','/pvp-summary','/professions','/collections/mounts','/quests/completed'].map(suffix=>get(base+suffix)));
               const rows=flatten(stat.data);
-              const boss=rows.filter(row=>/^.+? kills? \(.+\)$/i.test(name(row.name)??'') &&
-                typeof row.quantity==='number' && row.quantity>0);
-              bossCounters+=boss.length;
-              for(const row of boss){
-                if(!row.last_updated_timestamp)continue;
-                timestampedCounters++;
-                const id=row.id+'/'+row.last_updated_timestamp;
-                if(!groups.has(id)) groups.set(id,{title:name(row.name),stamp:row.last_updated_timestamp,heroes:[]});
-                groups.get(id).heroes.push(hero.name);
-              }
-              console.log(JSON.stringify({hero:hero.name,status:stat.status,boss:boss.slice(0,10).map(row=>({title:name(row.name),quantity:row.quantity,lastUpdated:row.last_updated_timestamp})),
-                dungeonCategories:[...new Set(rows.filter(row=>/dungeon|raid|boss/i.test(row.path)).map(row=>row.path))]}));
+              const relevant=rows.filter(r=>/honorable kills$|highest.*(skill|level)|profession|character creation|created|time played/i.test(name(r.name)??''));
+              const training=[...(prof.data.primaries??[]),...(prof.data.secondaries??[])];
+              console.log(JSON.stringify({hero:hero.name,statuses:[stat.status,pvp.status,prof.status,mounts.status,quests.status],
+                honorableKills:pvp.data.honorable_kills,
+                stats:relevant.map(r=>({name:name(r.name),quantity:r.quantity,updated:r.last_updated_timestamp})),
+                pvpFields:Object.keys(pvp.data).filter(key=>key!=='_links'&&key!=='character'),pvpTimes:timestamps(pvp.data),
+                nonPvpTimes:{prof:training.flatMap(r=>Object.keys(timestamps(r))),
+                mount:(mounts.data.mounts??[]).flatMap(r=>Object.keys(timestamps(r))),
+                quest:(quests.data.quests??[]).flatMap(r=>Object.keys(timestamps(r)))}
+              }));
             }));
           }
-          const shared=[...groups.values()].filter(row=>row.heroes.length>=2).sort((a,b)=>b.stamp-a.stamp);
-          console.log(JSON.stringify({bossCounters,timestampedCounters,sharedGroups:shared.length,threeOrMore:shared.filter(row=>row.heroes.length>=3),examples:shared.slice(0,5)}));
           JS
