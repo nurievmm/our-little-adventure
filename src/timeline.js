@@ -127,7 +127,7 @@ function powerMilestones(hero, snapshot, records, legacy) {
       if (legacy.some((entry) => entry.skill === skill && entry.cap === cap && entry.members.includes(hero.name))) continue;
       events.push({
         ...milestoneDate(historical, recorded),
-        key: hero.name + '/' + skill + '/' + cap, kind: 'profession', hero, skill,
+        key: hero.name + '/' + skill + '/' + cap, kind: 'profession', hero, skill, cap,
         title: skill + ' ' + cap,
       });
     }
@@ -143,14 +143,52 @@ function powerMilestones(hero, snapshot, records, legacy) {
   return events;
 }
 
+function sortMilestones(events) {
+  const tracks = new Map();
+  const entries = events.map((event) => {
+    const date = event.at ?? event.by;
+    const order = validTime(date) ? dateValue(date) : Infinity;
+    const name = event.hero?.name ?? (event.members?.length === 1 ? event.members[0] : undefined);
+    const threshold = event.skill ? event.cap : event.level;
+    const track = name && Number.isFinite(threshold) ? JSON.stringify([name, event.skill ?? null]) : undefined;
+    const entry = { event, date, order, track, threshold };
+    if (track) {
+      if (!tracks.has(track)) tracks.set(track, []);
+      tracks.get(track).push(entry);
+    }
+    return entry;
+  });
+
+  // Reaching a higher threshold establishes a latest possible date for lower ones.
+  for (const track of tracks.values()) {
+    track.sort((a, b) => b.threshold - a.threshold);
+    let upperBound;
+    for (const entry of track) {
+      if (upperBound && !validTime(entry.event.at) && entry.order > upperBound.order) {
+        const { after } = entry.event;
+        entry.date = upperBound.date;
+        entry.order = upperBound.order;
+        entry.event = {
+          ...entry.event, by: entry.date,
+          after: validTime(after) && dateValue(after) < entry.order ? after : undefined,
+        };
+      }
+      if (entry.order < (upperBound?.order ?? Infinity)) upperBound = entry;
+    }
+  }
+
+  return entries.sort((a, b) =>
+    a.order - b.order ||
+    (a.track ?? a.event.title).localeCompare(b.track ?? b.event.title) ||
+    (a.threshold ?? 0) - (b.threshold ?? 0) ||
+    a.event.title.localeCompare(b.event.title)
+  ).map(({ event }) => event);
+}
+
 export function journeyMilestones(heroes, snapshot) {
   const records = new Map((snapshot?.milestones ?? []).map((event) => [event.key, event]));
   const legacy = legacyMilestones(snapshot?.legacy, heroes);
   const bosses = bossMilestones(snapshot?.bossMatches);
   const events = [...legacy, ...bosses, ...heroes.flatMap((hero) => powerMilestones(hero, snapshot, records, legacy))];
-  function order(event) {
-    const anchor = event.at ?? event.by;
-    return validTime(anchor) ? dateValue(anchor) : Infinity;
-  }
-  return events.sort((a, b) => order(a) - order(b) || a.title.localeCompare(b.title));
+  return sortMilestones(events);
 }
