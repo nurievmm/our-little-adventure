@@ -19,16 +19,27 @@ function archiveDate(archive, threshold, read) {
 function observationsFor(hero, fetchedAt) {
   const archive = story.archive.flatMap(({ at, heroes }) => heroes[hero.name] ? [{ at, profile: heroes[hero.name] }] : []);
   const observedAt = hero.observedAt ?? fetchedAt;
-  if (validTime(observedAt)) {
-    const skills = Object.fromEntries((hero.skills ?? (hero.profession ? [hero.profession] : [])).map(({ name, skill }) => [name, skill]));
-    archive.push({ at: observedAt, profile: { level: hero.level, skills } });
-  }
+  const skillsObservedAt = hero.skillsObservedAt ?? observedAt;
+  const skills = Object.fromEntries((hero.skills ?? (hero.profession ? [hero.profession] : [])).map(({ name, skill }) => [name, skill]));
+  if (validTime(observedAt)) archive.push({ at: observedAt, profile: { level: hero.level } });
+  if (validTime(skillsObservedAt)) archive.push({ at: skillsObservedAt, profile: { skills } });
   return archive.sort((a, b) => dateValue(a.at) - dateValue(b.at));
 }
 
 function observationDate(event) {
   if (!validTime(event?.observedAt)) return {};
   return { after: event.observedAfter, by: event.observedAt };
+}
+
+function milestoneDate(historical, recorded) {
+  const observed = observationDate(recorded);
+  if (!historical) return observed;
+  if (!observed.by) return historical;
+  const by = dateValue(historical.by) <= dateValue(observed.by) ? historical.by : observed.by;
+  const after = [historical.after, observed.after]
+    .filter((value) => validTime(value) && dateValue(value) < dateValue(by))
+    .sort((a, b) => dateValue(b) - dateValue(a))[0];
+  return { after, by };
 }
 
 function timeKey(value) {
@@ -89,12 +100,12 @@ function powerMilestones(hero, snapshot, records, legacy) {
     const historical = archiveDate(archive, level, (profile) => profile.level);
     if ((!historical && hero.level < level && !recorded) || coveredLevel(level)) continue;
     events.push({
-      ...(historical ?? observationDate(recorded)),
+      ...milestoneDate(historical, recorded),
       key: hero.name + '/level/' + level, kind: 'level', hero, title: 'Level ' + level,
       gear: recorded?.gear,
     });
   }
-  const skillNames = new Set(archive.flatMap(({ profile }) => Object.keys(profile.skills)));
+  const skillNames = new Set(archive.flatMap(({ profile }) => Object.keys(profile.skills ?? {})));
   for (const { name } of hero.skills ?? (hero.profession ? [hero.profession] : [])) skillNames.add(name);
   for (const event of records.values()) {
     if (!event.key.startsWith(prefix)) continue;
@@ -104,12 +115,12 @@ function powerMilestones(hero, snapshot, records, legacy) {
   for (const skill of skillNames) {
     for (const cap of story.professionCaps) {
       const recorded = records.get(prefix + skill + '-' + cap);
-      const historical = archiveDate(archive, cap, (profile) => profile.skills[skill]);
+      const historical = archiveDate(archive, cap, (profile) => profile.skills?.[skill]);
       const currentSkill = (hero.skills ?? (hero.profession ? [hero.profession] : [])).find((item) => item.name === skill)?.skill;
       if (!historical && !recorded && !(currentSkill >= cap)) continue;
       if (legacy.some((entry) => entry.skill === skill && entry.cap === cap && entry.members.includes(hero.name))) continue;
       events.push({
-        ...(historical ?? observationDate(recorded)),
+        ...milestoneDate(historical, recorded),
         key: hero.name + '/' + skill + '/' + cap, kind: 'profession', hero, skill,
         title: skill + ' ' + cap,
       });
@@ -119,7 +130,7 @@ function powerMilestones(hero, snapshot, records, legacy) {
   const backfill = story.pvpDates[hero.name];
   if (backfill || pvp || hero.honorableKills > 0) {
     events.push({
-      ...(backfill ?? (pvp ? observationDate(pvp) : { by: snapshot?.fetchedAt })),
+      ...(backfill ?? (pvp ? observationDate(pvp) : { by: hero.pvpObservedAt ?? snapshot?.fetchedAt })),
       key: hero.name + '/pvp', kind: 'pvp', hero, title: 'First honorable kill',
     });
   }
