@@ -43,7 +43,52 @@ jobs:
           PREVIOUS_SNAPSHOT_URL: ${{ steps.pages.outputs.base_url }}/characters.json
       - run: npm run build
       - uses: actions/upload-pages-artifact@v5
+        id: artifact
         with:
           path: dist
-      - uses: actions/deploy-pages@v5
+      - name: Deploy the uploaded Pages artifact
         id: deployment
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PAGES_ARTIFACT_ID: ${{ steps.artifact.outputs.artifact_id }}
+          PAGES_URL: ${{ steps.pages.outputs.base_url }}
+        run: |
+          node --input-type=module <<'JS'
+          import { appendFile } from 'node:fs/promises';
+          import { setTimeout } from 'node:timers/promises';
+
+          const env = process.env;
+          const endpoint = env.GITHUB_API_URL + '/repos/' + env.GITHUB_REPOSITORY + '/pages/deployments';
+          const artifactId = Number(env.PAGES_ARTIFACT_ID);
+          if (!Number.isSafeInteger(artifactId) || artifactId <= 0) throw new Error('Pages upload returned no artifact ID.');
+
+          async function request(url, token, body) {
+            const response = await fetch(url, {
+              method: body ? 'POST' : 'GET',
+              headers: { Authorization: 'Bearer ' + token, Accept: 'application/json', 'Content-Type': 'application/json' },
+              body: body ? JSON.stringify(body) : undefined,
+              redirect: 'error',
+              signal: AbortSignal.timeout(20_000),
+            });
+            if (!response.ok) throw new Error('GitHub returned HTTP ' + response.status + ' for ' + new URL(url).pathname);
+            return response.json();
+          }
+
+          const identity = await request(env.ACTIONS_ID_TOKEN_REQUEST_URL, env.ACTIONS_ID_TOKEN_REQUEST_TOKEN);
+          const release = await request(endpoint, env.GH_TOKEN, {
+            artifact_id: artifactId,
+            pages_build_version: env.GITHUB_SHA,
+            oidc_token: identity.value,
+          });
+          if (!release.id) throw new Error('GitHub Pages did not return a deployment ID.');
+          for (let attempt = 0; attempt < 45; attempt++) {
+            const { status } = await request(endpoint + '/' + encodeURIComponent(release.id), env.GH_TOKEN);
+            if (status === 'succeed') {
+              await appendFile(env.GITHUB_OUTPUT, 'page_url=' + env.PAGES_URL + '\n');
+              process.exit(0);
+            }
+            if (/fail|cancel|error|lost|not_found|invalid/.test(status)) throw new Error('Pages deployment ended with status ' + status);
+            await setTimeout(5_000);
+          }
+          throw new Error('Timed out waiting for Pages deployment.');
+          JS
