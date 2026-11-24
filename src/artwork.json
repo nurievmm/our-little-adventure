@@ -23,6 +23,7 @@
   "chipson-level30": {
     "columns": 1,
     "height": 853,
+    "revision": "d6f072aa4e",
     "rows": 1,
     "width": 1280
   },
@@ -121,7 +122,7 @@
       25,
       null
     ],
-    "revision": "27adf3d4d4",
+    "revision": "39ebef7c12",
     "rows": 2,
     "width": 1440
   },
@@ -132,7 +133,7 @@
       10,
       20
     ],
-    "revision": "10f9bebc7a",
+    "revision": "327183c049",
     "rows": 1,
     "width": 1920
   },
@@ -153,7 +154,7 @@
       10,
       20
     ],
-    "revision": "2ccd310ac3",
+    "revision": "e5b2b9f447",
     "rows": 1,
     "width": 1920
   },
@@ -174,7 +175,7 @@
       10,
       20
     ],
-    "revision": "3bd4e80bb1",
+    "revision": "d6ea5e560d",
     "rows": 1,
     "width": 1920
   },
@@ -198,7 +199,7 @@
       25,
       null
     ],
-    "revision": "785ea59a71",
+    "revision": "d05b7627b2",
     "rows": 2,
     "width": 1440
   },
@@ -209,7 +210,7 @@
       10,
       20
     ],
-    "revision": "1a3346be16",
+    "revision": "063783de3e",
     "rows": 1,
     "width": 1920
   },
@@ -269,25 +270,28 @@
   "pvp-classic-schmosby": {
     "columns": 1,
     "height": 853,
+    "revision": "9a8a9f9d09",
     "rows": 1,
     "width": 1280
   },
   "pvp-lailah-shemesh": {
     "columns": 1,
     "height": 853,
-    "revision": "084f15aad4",
+    "revision": "6c9112901f",
     "rows": 1,
     "width": 1280
   },
   "pvp-lior-shadowlord": {
     "columns": 1,
     "height": 853,
+    "revision": "613dcacda0",
     "rows": 1,
     "width": 1280
   },
   "pvp-saar-oathwell": {
     "columns": 1,
     "height": 853,
+    "revision": "be97481787",
     "rows": 1,
     "width": 1280
   },
@@ -328,13 +332,14 @@
   "skyborne": {
     "columns": 1,
     "height": 853,
-    "revision": "6f47e1f756",
+    "revision": "29c7968992",
     "rows": 1,
     "width": 1280
   },
   "spelunker": {
     "columns": 1,
     "height": 853,
+    "revision": "b1e652bc07",
     "rows": 1,
     "width": 1280
   },
@@ -361,7 +366,7 @@
   "work-allison-burgerrs": {
     "columns": 3,
     "height": 960,
-    "revision": "346d94f251",
+    "revision": "84415ea5de",
     "rows": 2,
     "skills": [
       "Mining",
@@ -418,13 +423,14 @@
         "skill": "Fishing"
       }
     ],
-    "revision": "5b6f14f740",
+    "revision": "ab58e2a6d6",
     "rows": 2,
     "width": 1440
   },
   "work-chipson-bomfrey": {
     "columns": 3,
     "height": 960,
+    "revision": "afef22190a",
     "rows": 2,
     "skills": [
       "Mining",
@@ -464,7 +470,7 @@
         "skill": "Mining"
       }
     ],
-    "revision": "5ad0a81737",
+    "revision": "6cd60754f2",
     "rows": 2,
     "width": 1440
   },
@@ -493,13 +499,14 @@
         "skill": "Fishing"
       }
     ],
-    "revision": "8464687a18",
+    "revision": "716acc3616",
     "rows": 2,
     "width": 1440
   },
   "work-classic-schmosby": {
     "columns": 3,
     "height": 960,
+    "revision": "4bad9e8dc3",
     "rows": 2,
     "skills": [
       "Tailoring",
@@ -548,7 +555,7 @@
         "skill": "Fishing"
       }
     ],
-    "revision": "815b103e6d",
+    "revision": "6825c240b9",
     "rows": 2,
     "width": 1440
   },
@@ -595,6 +602,7 @@
   "work-edou-khil": {
     "columns": 3,
     "height": 960,
+    "revision": "2ae72d0510",
     "rows": 2,
     "skills": [
       "Alchemy",
@@ -635,13 +643,14 @@
         "skill": "Fishing"
       }
     ],
-    "revision": "4ac1b6de1b",
+    "revision": "224de30f06",
     "rows": 2,
     "width": 1440
   },
   "work-hehehehe-hahahaha": {
     "columns": 2,
     "height": 960,
+    "revision": "2bf0f04d41",
     "rows": 2,
     "skills": [
       "Skinning",
@@ -653,7 +662,7 @@
   "work-lailah-shemesh": {
     "columns": 1,
     "height": 720,
-    "revision": "0fb24d1941",
+    "revision": "7053842b18",
     "rows": 1,
     "skills": [
       "Skinning"
@@ -663,6 +672,7 @@
   "work-lior-shadowlord": {
     "columns": 2,
     "height": 720,
+    "revision": "eb820cad79",
     "rows": 1,
     "skills": [
       "Tailoring",
@@ -673,6 +683,7 @@
   "work-lioren-aurelith": {
     "columns": 2,
     "height": 960,
+    "revision": "f0bd06aea9",
     "rows": 2,
     "skills": [
       "Alchemy",
@@ -694,7 +705,7 @@
         "skill": "Herbalism"
       }
     ],
-    "revision": "573e97d523",
+    "revision": "fc07b96be2",
     "rows": 1,
     "width": 1440
   },
@@ -707,13 +718,14 @@
         "skill": "Fishing"
       }
     ],
-    "revision": "114a934c8f",
+    "revision": "957a56bc73",
     "rows": 1,
     "width": 1440
   },
   "work-saar-oathwell": {
     "columns": 1,
     "height": 720,
+    "revision": "2ad832c1fc",
     "rows": 1,
     "skills": [
       "Mining"
