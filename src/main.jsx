@@ -1,112 +1,185 @@
 import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import roster from './roster.json';
+import story from './story-data.json';
 import './style.css';
 
 const base = import.meta.env.BASE_URL;
-const source = 'https://kochurovvs.github.io/forever-heroes/';
-const colors = { Paladin: '#f0a6be', Mage: '#89dbe9', Rogue: '#f8d675', Priest: '#f1ebd9', Shaman: '#8fbaff', Warlock: '#c9adff', Hunter: '#b9d38c', Druid: '#fbb079', Warrior: '#e8aa91' };
-const crafting = new Set(['Alchemy', 'Blacksmithing', 'Enchanting', 'Engineering', 'Leatherworking', 'Tailoring']);
-const dateLabel = (value) => new Intl.DateTimeFormat('en', {
-  dateStyle: 'medium', timeZone: 'UTC',
-}).format(new Date(value));
+const classColors = {
+  Paladin: '#f0a6be', Mage: '#89dbe9', Rogue: '#f8d675', Priest: '#f1ebd9', Shaman: '#8fbaff',
+  Warlock: '#c9adff', Hunter: '#b9d38c', Druid: '#fbb079', Warrior: '#e8aa91',
+};
+const professions = {
+  Alchemy: ['⚗', 'Brewing potions'], Blacksmithing: ['⚒', 'Working at the forge'],
+  Cooking: ['♨', 'Cooking over the fire'], Enchanting: ['✦', 'Weaving an enchantment'],
+  Engineering: ['⚙', 'Tinkering at the workbench'], 'First Aid': ['✚', 'Preparing bandages'],
+  Fishing: ['♒', 'Casting a line'], Herbalism: ['❧', 'Gathering herbs'],
+  Leatherworking: ['✂', 'Working a hide'], Mining: ['⛏', 'Breaking ore from stone'],
+  Skinning: ['◇', 'Preparing hides'], Tailoring: ['✂', 'Cutting and stitching cloth'],
+};
+const timeFormat = new Intl.DateTimeFormat('en-GB', {
+  day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit',
+  timeZone: 'Asia/Jerusalem', timeZoneName: 'short', hourCycle: 'h23',
+});
 
-function Expand({ id, label, children }) {
-  const [open, setOpen] = useState(false);
-  const buttonId = id + '-toggle';
-  return <>
-    <button type="button" className="expand" id={buttonId} aria-expanded={open} aria-controls={id} onClick={() => setOpen(!open)}>
-      {label}<span className="expand-icon" aria-hidden="true">{open ? '−' : '+'}</span>
-    </button>
-    <div id={id} className={'details' + (open ? ' is-open' : '')} role="region" aria-labelledby={buttonId} aria-hidden={!open} inert={!open}>
-      <div className="details-inner">{children}</div>
-    </div>
-  </>;
+function validTime(value) {
+  return typeof value === 'string' && /(?:Z|[+-]\d{2}:\d{2})$/.test(value) && Number.isFinite(Date.parse(value));
 }
 
-function Chapter({ id, title, subtitle, description, art, alt, children }) {
-  const first = id === 'company';
-  return <section id={id} className={'chapter chapter-' + id} aria-labelledby={id + '-title'}>
-    {art && <div className="chapter-visual">
-      <img src={base + 'art/' + art + '.jpg'} alt={alt} width="1040" height="585"
-        loading={first ? 'eager' : 'lazy'} fetchPriority={first ? 'high' : undefined} />
-    </div>}
-    <div className="chapter-copy">
-      <p className="chapter-label">{subtitle}</p>
-      <h2 id={id + '-title'}>{title}</h2>
-      {description && <p className="chapter-description">{description}</p>}
-      {children}
-    </div>
-  </section>;
+function EventTime({ value, observed = false, fallback = 'Date unavailable' }) {
+  return validTime(value)
+    ? <time dateTime={value}>{observed && 'First seen '}{timeFormat.format(new Date(value))}</time>
+    : <span>{fallback}</span>;
 }
 
-function Portrait({ hero }) {
-  const [failed, setFailed] = useState(false);
-  return <div className="portrait" style={{ '--class-color': colors[hero.className] }}>
-    {hero.portrait && !failed
-      ? <img src={hero.portrait} alt="" loading="lazy" onError={() => setFailed(true)} />
-      : <span aria-hidden="true">{hero.name.split(' ').map((word) => word[0]).join('')}</span>}
+function Portrait({ hero, full = false }) {
+  const [unavailable, setUnavailable] = useState([]);
+  const image = [full && hero.model, hero.portrait].find((url) => url && !unavailable.includes(url));
+  return <div className={'character-art' + (full ? ' character-art-full' : '')}
+    style={{ '--class-color': classColors[hero.className] }}>
+    {image
+      ? <img className={image === hero.model ? 'model' : 'avatar'} src={image} alt={hero.name}
+        loading="lazy" key={image} onError={() => setUnavailable([...unavailable, image])} />
+      : <span className="initials" aria-hidden="true">{hero.name.split(' ').map((word) => word[0]).join('')}</span>}
   </div>;
 }
 
-function Roster({ heroes }) {
-  return <ul className="roster">
-    {heroes.map((hero) => <li key={hero.name}>
-      <Portrait key={hero.portrait} hero={hero} />
-      <div><strong>{hero.name}</strong><small>{hero.race} · {hero.className}</small>
-      {hero.profession && <small>{hero.profession.name} · {hero.profession.skill}</small>}</div>
-      <span className="level" aria-label={'Level ' + hero.level}>{hero.level}</span>
-    </li>)}
-  </ul>;
-}
-
-function MilestoneDates({ events }) {
-  if (!events.length) return null;
-  return <ul className="milestones">{events.map((event) => (
-    <li key={event.key}><strong>{event.name}</strong> {event.text}
-      <small>First observed {dateLabel(event.observedAt)}</small>
-    </li>
-  ))}</ul>;
-}
-
-function Legacy({ heroes, milestones }) {
-  const reached = [25, 45, 60].map((level) => ({
-    level, qualifying: heroes.filter((hero) => hero.level >= level),
-  })).filter(({ qualifying }) => qualifying.length);
-  return <>
-    <div className="thresholds">
-      {reached.map(({ level, qualifying }) => <div key={level}>
-        <strong>{level}</strong><span>{qualifying.length} {qualifying.length === 1 ? 'hero' : 'heroes'} reached</span>
-      </div>)}
+function Chapter({ id, title, label, image, summary, children }) {
+  return <section className={'chapter chapter-' + id} aria-labelledby={id + '-title'}>
+    <div className="scene" aria-hidden="true">
+      <img src={base + 'art/' + image + '.jpg'} alt="" loading={id === 'creation' ? 'eager' : 'lazy'}
+        fetchPriority={id === 'creation' ? 'high' : undefined} />
     </div>
-    <Expand id="level-details" label="See who reached each milestone">
-      <ul className="milestones">{reached.map(({ level, qualifying }) => (
-        <li key={level}><strong>Level {level}</strong><small>{qualifying.map((hero) => hero.name).join(' · ')}</small></li>
-      ))}</ul>
-      <MilestoneDates events={milestones.filter((event) => event.key.includes('/level-'))} />
-      <a href="https://worldofwarcraft.blizzard.com/en-us/news/24307383">About Forever’s Legacy system</a>
-    </Expand>
-  </>;
+    <header className="chapter-heading">
+      <p className="eyebrow">{label}</p>
+      <h2 id={id + '-title'}>{title}</h2>
+      <p className="summary">{summary}</p>
+    </header>
+    <div className="chapter-details">{children}</div>
+  </section>;
 }
 
-function Trades({ heroes, milestones }) {
-  const achievements = new Map();
-  for (const hero of [...roster, ...heroes]) {
-    const skills = hero.skills ?? (hero.profession ? [hero.profession] : []);
-    for (const { name, skill } of skills) {
-      const key = hero.name + '/' + name;
-      if (crafting.has(name) && skill >= 150 && skill > (achievements.get(key)?.skill ?? 0)) {
-        achievements.set(key, { hero: hero.name, name, skill });
-      }
+function Creation({ heroes }) {
+  const arrivals = heroes.map((hero) => ({
+    hero, time: story.creationTimes[hero.name] ?? hero.createdAt,
+  })).sort((a, b) => (validTime(a.time) ? Date.parse(a.time) : Infinity) - (validTime(b.time) ? Date.parse(b.time) : Infinity));
+  return <Chapter id="creation" title="The company assembles" label="Character creation" image="company"
+    summary={heroes.length + ' adventurers joined the Side Quest Company.'}>
+    <ul className="story-grid arrivals">
+      {arrivals.map(({ hero, time }) => <li className="story-card arrival" key={hero.name}>
+        <Portrait hero={hero} />
+        <div><h3>{hero.name}</h3><p>{hero.race} · {hero.className}</p>
+          <div className="event-time"><EventTime value={time} fallback="Creation time unavailable" /></div>
+        </div>
+      </li>)}
+    </ul>
+  </Chapter>;
+}
+
+function Leveling({ heroes, eventFor }) {
+  return <Chapter id="levels" title="The road to 60" label="Level milestones" image="summit"
+    summary="Every ten levels, with the company’s Legacy milestones along the way.">
+    <div className="story-grid levelers">
+      {heroes.map((hero) => {
+        const reached = story.levelSteps.filter((level) => level <= hero.level || eventFor(hero, 'level-' + level));
+        if (!reached.length) return null;
+        return <article className="story-card level-card" key={hero.name}>
+          <Portrait hero={hero} full />
+          <div className="level-copy"><h3>{hero.name}</h3><p className="figure-note">Current character render</p>
+            <ul className="level-steps">
+              {reached.map((level) => {
+                const event = eventFor(hero, 'level-' + level);
+                const gear = event?.gear?.filter((item) => ['MAIN_HAND', 'OFF_HAND', 'CHEST'].includes(item.slot));
+                return <li key={level}>
+                  <span className="level-number">{level}</span>
+                  <div><strong>{[25, 45, 60].includes(level) ? 'Legacy milestone' : 'Level reached'}</strong>
+                    {event && <div className="event-time"><EventTime value={event.observedAt} observed /></div>}
+                    {gear?.length > 0 && <small className="gear">Gear at sync · {gear.map((item) => item.name).join(' · ')}</small>}
+                  </div>
+                </li>;
+              })}
+            </ul>
+          </div>
+        </article>;
+      })}
+    </div>
+  </Chapter>;
+}
+
+function Workbench({ heroes, eventFor, recorded }) {
+  const work = heroes.flatMap((hero) => {
+    const skills = new Map((hero.skills ?? (hero.profession ? [hero.profession] : [])).map((item) => [item.name, item.skill]));
+    for (const event of recorded.get(hero.characterId) ?? []) {
+      const match = /^(.+)-(75|150|225|300)$/.exec(event.kind);
+      if (match && professions[match[1]]) skills.set(match[1], Math.max(skills.get(match[1]) ?? 0, Number(match[2])));
     }
-  }
-  const makers = [...achievements.values()].sort((first, second) => second.skill - first.skill);
-  return <Expand id="craft-details" label="See crafting achievements">
-    <ul className="milestones">{makers.map(({ hero, name, skill }) => (
-      <li key={hero + name}><strong>{hero}</strong><small>{name} · {skill} skill</small></li>
-    ))}</ul>
-    <MilestoneDates events={milestones.filter((event) => crafting.has(event.key.split('/')[1]?.split('-')[0]))} />
-  </Expand>;
+    return [...skills].filter(([, skill]) => skill >= story.professionCaps[0])
+      .map(([name, skill]) => ({ hero, name, skill }));
+  });
+  if (!work.length) return null;
+  return <Chapter id="trades" title="At the workbench" label="Profession capstones" image="trades"
+    summary="The company’s gathering, crafting, and secondary professions reached these skill caps.">
+    <div className="story-grid workshops">
+      {work.map(({ hero, name, skill }) => {
+        const [symbol, action] = professions[name] ?? ['✧', name];
+        return <article className="story-card workshop" key={hero.name + '/' + name}>
+          <div className="craft-scene">
+            <Portrait hero={hero} full />
+            <span className="craft-prop" aria-hidden="true">{symbol}</span>
+            <span className="figure-note">{action} · Illustration</span>
+          </div>
+          <div className="craft-copy"><h3>{name}</h3><p>{hero.name}</p>
+            <ul className="capstones">{story.professionCaps.filter((cap) => cap <= skill).map((cap) => {
+              const event = eventFor(hero, name + '-' + cap);
+              return <li key={cap}><strong>{cap}</strong>{event && <small><EventTime value={event.observedAt} observed /></small>}</li>;
+            })}</ul>
+          </div>
+        </article>;
+      })}
+    </div>
+  </Chapter>;
+}
+
+function Dungeons({ heroes }) {
+  const party = new Map(heroes.map((hero) => [hero.name, hero]));
+  const runs = story.dungeonRuns.filter((run) => run.dungeon && validTime(run.completedAt) &&
+    new Set(run.members.filter((name) => party.has(name))).size >= 3)
+    .sort((a, b) => Date.parse(a.completedAt) - Date.parse(b.completedAt));
+  if (!runs.length) return null;
+  return <Chapter id="dungeons" title="Through the dungeon gates" label="Dungeon clears" image="trades"
+    summary="Completed runs with at least three heroes from the company.">
+    <div className="story-grid">
+      {runs.map((run) => <article className="story-card run" key={run.id}>
+        <h3>{run.dungeon}</h3><div className="event-time"><EventTime value={run.completedAt} /></div>
+        <ul className="party">{[...new Set(run.members)].map((name) => <li key={name}>{party.has(name) &&
+          <Portrait hero={party.get(name)} />}{name}</li>)}</ul>
+        {run.note && <p>{run.note}</p>}
+      </article>)}
+    </div>
+  </Chapter>;
+}
+
+function PvP({ heroes, eventFor }) {
+  const fighters = heroes.filter((hero) => hero.honorableKills > 0 || eventFor(hero, 'first-pvp'));
+  if (!fighters.length) return null;
+  return <Chapter id="pvp" title="First blood" label="First honorable kills" image="battleground"
+    summary="The first honorable PvP kill for each of these heroes. The duels are illustrated with fictional opponents.">
+    <div className="story-grid fights">
+      {fighters.map((hero) => {
+        const opponent = { HORDE: 'alliance', ALLIANCE: 'horde' }[hero.faction];
+        return <article className="story-card fight" key={hero.name}>
+          <div className="duel">
+            <Portrait hero={hero} full />
+            {opponent && <img className="opponent" loading="lazy" src={base + 'art/rival-' + opponent + '.png'}
+              alt={'Fictional ' + opponent + ' opponent'} />}
+          </div>
+          <div className="fight-copy"><h3>{hero.name}</h3><p>First honorable kill</p>
+            <div className="event-time"><EventTime value={eventFor(hero, 'first-pvp')?.observedAt} observed /></div>
+          </div>
+        </article>;
+      })}
+    </div>
+  </Chapter>;
 }
 
 function App() {
@@ -120,37 +193,32 @@ function App() {
     return () => controller.abort();
   }, []);
   const heroes = snapshot?.heroes ?? roster;
-  const lead = heroes.reduce((highest, hero) => hero.level > highest.level ? hero : highest);
+  const events = snapshot?.milestones ?? [];
+  const byKey = new Map(events.map((event) => [event.key, event]));
+  const recorded = new Map();
+  for (const event of events) {
+    const [characterId, kind] = event.key.split('/');
+    const id = Number(characterId);
+    if (!recorded.has(id)) recorded.set(id, []);
+    recorded.get(id).push({ ...event, kind });
+  }
+  const eventFor = (hero, kind) => byKey.get(hero.characterId + '/' + kind);
+  const mounts = events.filter((event) => event.key.endsWith('/first-mount'));
 
-  const mountMilestones = snapshot?.milestones.filter((event) => event.key.endsWith('/first-mount')) ?? [];
   return <main className="journal">
     <h1 className="visually-hidden">Our Little Adventure</h1>
-    <Chapter id="company" title="The company assembles" subtitle="The opening roster"
-      description="Thirteen heroes make up the Side Quest Company. Here’s who joined the adventure, from Undead and Tauren to the Skyborne."
-      art="company" alt="World of Warcraft: Forever characters gathered around a campfire">
-      <div className="inline-facts"><span>{heroes.length} heroes</span><span>{new Set(heroes.map((hero) => hero.className)).size} classes</span><span>EU region</span></div>
-      <Expand id="company-details" label="Meet the heroes">
-        <Roster heroes={heroes} />
-        <div className="chapter-sources">
-          <small>{snapshot?.fetchedAt ? 'Battle.net snapshot · ' + dateLabel(snapshot.fetchedAt) + ' · ' + snapshot.syncedCount + '/' + heroes.length + ' profiles refreshed' : 'Opening roster · Nov 23, 2026'}</small>
-          <a href={source + '#rows'}>Roster source</a>
-          <a href="https://blizzard.gamespress.com/wowforeverreveal">Screenshots by Blizzard Entertainment</a>
-        </div>
-      </Expand>
-    </Chapter>
-    <Chapter id="legacy" title="Level 25 and beyond" subtitle="Legacy progression"
-      description={lead.name + ' has reached level ' + lead.level + '. Level 25 marked the company’s first class Legacy threshold.'}
-      art="summit" alt="Mount Hyjal in World of Warcraft: Forever">
-      <Legacy heroes={heroes} milestones={snapshot?.milestones ?? []} />
-    </Chapter>
-    <Chapter id="trades" title="A craft worth keeping" subtitle="Profession milestones"
-      description="The company’s crafters have already reached 150 skill and beyond. Their workbenches tell another part of the story."
-      art="trades" alt="Orgrimmar in World of Warcraft: Forever">
-      <Trades heroes={heroes} milestones={snapshot?.milestones ?? []} />
-    </Chapter>
-    {mountMilestones.length > 0 && <Chapter id="mounts" title="First mounts" subtitle="Collection milestones">
-      <MilestoneDates events={mountMilestones} />
+    <Creation heroes={heroes} />
+    <Leveling heroes={heroes} eventFor={eventFor} />
+    <Dungeons heroes={heroes} />
+    <Workbench heroes={heroes} eventFor={eventFor} recorded={recorded} />
+    <PvP heroes={heroes} eventFor={eventFor} />
+    {mounts.length > 0 && <Chapter id="mounts" title="First mounts" label="Collection milestones" image="company"
+      summary="A first mount for these adventurers.">
+      <div className="story-grid">{mounts.map((event) => <article className="story-card run" key={event.key}>
+        <h3>{event.name}</h3><p>{event.text}</p><div className="event-time"><EventTime value={event.observedAt} observed /></div>
+      </article>)}</div>
     </Chapter>}
+    <aside className="credits">Game screenshots and character renders © Blizzard Entertainment. PvP opponents are fictional illustrations.</aside>
   </main>;
 }
 
