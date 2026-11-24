@@ -8,6 +8,7 @@ on:
     - cron: '27 4 * * *'
 
 permissions:
+  actions: read
   contents: read
   pages: write
   id-token: write
