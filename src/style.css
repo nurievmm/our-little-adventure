@@ -95,7 +95,6 @@ p { margin: 0; }
 }
 .event-time, .gear { color: var(--accent); font-size: .875rem; line-height: 1.45; }
 .event-time { margin-top: 4px; font-variant-numeric: tabular-nums; }
-.credits { background: #171522; padding: 18px var(--gutter); font-size: .875rem; color: #eee0d8; }
 
 @media (max-width: 600px) {
   .journal { --formation-blend: clamp(34px, 11vw, 64px); }

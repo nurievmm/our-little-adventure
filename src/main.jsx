@@ -147,7 +147,6 @@ function App() {
     <h1 className="visually-hidden">Our Little Adventure</h1>
     <Creation />
     <Timeline heroes={heroes} snapshot={snapshot} />
-    <aside className="credits">Original character illustrations. Warcraft setting and background game imagery © Blizzard Entertainment. Historical data from Battle.net and the Forever Heroes roster.</aside>
   </main>;
 }
 
