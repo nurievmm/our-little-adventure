@@ -62,6 +62,29 @@ jobs:
           const artifactId = Number(env.PAGES_ARTIFACT_ID);
           if (!Number.isSafeInteger(artifactId) || artifactId <= 0) throw new Error('Pages upload returned no artifact ID.');
 
+          // Confirm the uploaded archive is readable before Pages tries to pull it.
+          const archive = env.GITHUB_API_URL + '/repos/' + env.GITHUB_REPOSITORY + '/actions/artifacts/' + artifactId + '/zip';
+          async function archiveReady() {
+            const response = await fetch(archive, {
+              headers: { Authorization: 'Bearer ' + env.GH_TOKEN },
+              redirect: 'manual',
+              signal: AbortSignal.timeout(10_000),
+            });
+            const location = response.headers.get('location');
+            if (response.status !== 302 || !location) return false;
+            const stored = await fetch(location, {
+              headers: { Range: 'bytes=0-3' },
+              signal: AbortSignal.timeout(10_000),
+            });
+            if (!stored.ok) return false;
+            const bytes = new Uint8Array(await stored.arrayBuffer());
+            return bytes[0] === 0x50 && bytes[1] === 0x4b;
+          }
+          for (let attempt = 0; !(await archiveReady()); attempt++) {
+            if (attempt === 8) throw new Error('The uploaded Pages archive never became readable.');
+            await setTimeout(5_000);
+          }
+
           async function request(url, token, body) {
             const response = await fetch(url, {
               method: body ? 'POST' : 'GET',
@@ -81,6 +104,7 @@ jobs:
             oidc_token: identity.value,
           });
           if (!release.id) throw new Error('GitHub Pages did not return a deployment ID.');
+          console.log('Pages deployment ID: ' + release.id);
           for (let attempt = 0; attempt < 45; attempt++) {
             const { status } = await request(endpoint + '/' + encodeURIComponent(release.id), env.GH_TOKEN);
             if (status === 'succeed') {
