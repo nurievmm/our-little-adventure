@@ -2,7 +2,7 @@
   "allison-burgerrs": {
     "columns": 2,
     "height": 960,
-    "revision": "1847b9381f",
+    "revision": "af02bcaa3f",
     "rows": 2,
     "width": 1440
   },
@@ -41,7 +41,7 @@
   "deadmines": {
     "columns": 1,
     "height": 853,
-    "revision": "f735ecd0a8",
+    "revision": "2ef4562c78",
     "rows": 1,
     "width": 1280
   },
@@ -72,7 +72,7 @@
       25,
       null
     ],
-    "revision": "e838e81203",
+    "revision": "f563f41f36",
     "rows": 2,
     "width": 1440
   },
@@ -248,14 +248,14 @@
   "lordaeron-2": {
     "columns": 1,
     "height": 853,
-    "revision": "a5d6a8063b",
+    "revision": "7d2ca69dee",
     "rows": 1,
     "width": 1280
   },
   "lordaeron-2-varied": {
     "columns": 1,
     "height": 960,
-    "revision": "caa9e396bf",
+    "revision": "558d6d5d1c",
     "rows": 1,
     "width": 1440
   },
@@ -294,7 +294,7 @@
   "ragefire-1": {
     "columns": 1,
     "height": 853,
-    "revision": "7c66185bc5",
+    "revision": "542581069e",
     "rows": 1,
     "width": 1280
   },
@@ -321,7 +321,7 @@
   "shadowfang": {
     "columns": 1,
     "height": 853,
-    "revision": "5d85a5eadb",
+    "revision": "f211617352",
     "rows": 1,
     "width": 1280
   },
@@ -347,21 +347,21 @@
   "undead": {
     "columns": 1,
     "height": 853,
-    "revision": "0259c9693c",
+    "revision": "ac2f270b5a",
     "rows": 1,
     "width": 1280
   },
   "wailing-caverns": {
     "columns": 1,
     "height": 853,
-    "revision": "55f12b4999",
+    "revision": "8ab0949e2e",
     "rows": 1,
     "width": 1280
   },
   "work-allison-burgerrs": {
     "columns": 3,
     "height": 960,
-    "revision": "2e4fcf36d6",
+    "revision": "e125194f8b",
     "rows": 2,
     "skills": [
       "Mining",
@@ -389,7 +389,7 @@
         "skill": "Fishing"
       }
     ],
-    "revision": "53e83ad0d0",
+    "revision": "207e99918d",
     "rows": 2,
     "width": 1440
   },
@@ -418,7 +418,7 @@
         "skill": "Fishing"
       }
     ],
-    "revision": "a86051272f",
+    "revision": "420489910c",
     "rows": 2,
     "width": 1440
   },
