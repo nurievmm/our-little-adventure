@@ -61,7 +61,7 @@ function Creation() {
     {formations.map(({ art, race, members }, index) => {
       const portrait = painting(art);
       return <figure key={art} data-reading-stop={'formation/' + art}
-        className={'formation formation-' + art} style={{ '--frame-ratio': panelRatio(portrait) }} aria-label={race}>
+        className={'formation formation-' + art} aria-label={race}>
         <div className="scene-backdrop" aria-hidden="true"><StoryArt art={portrait} /></div>
         <StoryArt art={portrait} eager={index === 0} />
         <figcaption className="formation-caption">
@@ -143,7 +143,7 @@ function Scene({ event, roster }) {
   const painting = eventPainting(event, roster);
   const art = painting ?? (event.hero && heroPainting(event.hero.name, event.hero.level));
   const subject = event.hero?.name ?? event.title;
-  return <article className="milestone" style={art && { '--frame-ratio': panelRatio(art) }}>
+  return <article className="milestone">
     <div className="scene-backdrop" aria-hidden="true">
       <StoryArt art={art} />
     </div>
