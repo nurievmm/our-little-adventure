@@ -227,7 +227,14 @@
     "rows": 2,
     "width": 1440
   },
-  "lior-shadowlord": {
+
+  "lailah-shemesh-level20": {
+    "columns": 1,
+    "height": 800,
+    "revision": "7d63f99458",
+    "rows": 1,
+    "width": 1200
+  },  "lior-shadowlord": {
     "columns": 2,
     "height": 960,
     "rows": 2,

@@ -29,6 +29,9 @@ export function heroPainting(name, level = 10) {
   const key = slug(name);
   const journeyKey = 'journey-' + key;
   const journeyPanel = artwork[journeyKey]?.levels?.indexOf(level) ?? -1;
+  const artLevel = journeyPanel >= 0 ? level : Math.floor(level / 10) * 10;
+  const standalone = painting(key + '-level' + artLevel);
+  if (standalone) return standalone;
   if (journeyPanel >= 0) return painting(journeyKey, journeyPanel);
 
   if (key === 'chipson-bomfrey' && level >= 30 && level < 40) {
