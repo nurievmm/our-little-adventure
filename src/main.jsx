@@ -85,10 +85,14 @@ function Party({ event, portraits }) {
 }
 
 function EventDetails({ event, hasPainting }) {
-  if (event.kind === 'boss' || event.kind === 'legacy') return <>
-    {event.kind === 'legacy' && event.id !== 62031 && event.description && <p>{event.description}</p>}
-    <Party event={event} portraits={!hasPainting} />
-  </>;
+  if (event.kind === 'boss' || event.kind === 'legacy') {
+    const showDescription = event.kind === 'legacy' && event.id !== 62031
+      && event.description && !/^Reached \d+ skill in /i.test(event.description);
+    return <>
+      {showDescription && <p>{event.description}</p>}
+      <Party event={event} portraits={!hasPainting} />
+    </>;
+  }
   if (event.kind !== 'level') return null;
   const gear = event.gear?.filter(({ slot }) => ['MAIN_HAND', 'OFF_HAND', 'CHEST'].includes(slot));
   return gear?.length > 0
