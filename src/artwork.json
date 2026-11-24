@@ -441,6 +441,13 @@
     ],
     "width": 1440
   },
+  "work-chipson-bomfrey-cooking-150": {
+    "columns": 1,
+    "height": 960,
+    "revision": "f361ea19a7",
+    "rows": 1,
+    "width": 960
+  },
   "work-chipson-bomfrey-progression": {
     "columns": 3,
     "height": 960,
