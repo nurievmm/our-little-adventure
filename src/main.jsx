@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import roster from './roster.json';
 import { journeyMilestones, validTime } from './timeline.js';
 import { eventPainting, formations, heroPainting, painting } from './illustrations.js';
+import { useReadingPosition } from './useReadingPosition.js';
 import './style.css';
 
 const base = import.meta.env.BASE_URL;
@@ -52,7 +53,7 @@ function StoryArt({ art, alt = '', eager = false }) {
 function Creation() {
   return <section className="chapter chapter-creation" aria-labelledby="creation-title">
     <h2 id="creation-title" className="visually-hidden">Company roster</h2>
-    {formations.map(({ art, race, members }, index) => <figure key={art}
+    {formations.map(({ art, race, members }, index) => <figure key={art} data-reading-stop={'formation/' + art}
       className={'formation formation-' + art} aria-label={race}>
       <StoryArt art={painting(art)} eager={index === 0} />
       <figcaption className="formation-caption">
@@ -109,7 +110,7 @@ function Timeline({ heroes, snapshot }) {
   return <section className="timeline" aria-labelledby="timeline-title">
     <h2 id="timeline-title" className="visually-hidden">Adventure timeline</h2>
     <ol className="timeline-list">
-      {milestones.map((event) => <li key={event.key} className={'timeline-entry entry-' + event.kind}>
+      {milestones.map((event) => <li key={event.key} data-reading-stop={event.key} className={'timeline-entry entry-' + event.kind}>
         <Scene event={event} roster={byName} />
       </li>)}
     </ol>
@@ -117,17 +118,24 @@ function Timeline({ heroes, snapshot }) {
 }
 
 function App() {
-  const [snapshot, setSnapshot] = useState(null);
+  const [snapshot, setSnapshot] = useState(undefined);
+  const journal = useReadingPosition(snapshot !== undefined);
   useEffect(() => {
     const controller = new AbortController();
+    let active = true;
     fetch(base + 'characters.json', { signal: controller.signal })
       .then((response) => response.ok ? response.json() : null)
-      .then((data) => { if (Array.isArray(data?.heroes) && data.heroes.length) setSnapshot(data); })
-      .catch(() => { /* The archived milestone data remains available. */ });
-    return () => controller.abort();
+      .catch(() => null)
+      .then((data) => {
+        if (active) setSnapshot(Array.isArray(data?.heroes) && data.heroes.length ? data : null);
+      });
+    return () => {
+      active = false;
+      controller.abort();
+    };
   }, []);
   const heroes = snapshot?.heroes ?? roster;
-  return <main className="journal">
+  return <main className="journal" ref={journal}>
     <h1 className="visually-hidden">Our Little Adventure</h1>
     <Creation />
     <Timeline heroes={heroes} snapshot={snapshot} />
