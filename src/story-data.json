@@ -144,6 +144,12 @@
       "dungeon": "Shadowfang Keep",
       "boss": "Archmage Arugal",
       "at": "2026-11-23T20:09:17.000Z",
+      "screenshot": {
+        "file": "screenshots/after-arugal.webp",
+        "alt": "The party stands beside the defeated Archmage Arugal in Shadowfang Keep.",
+        "width": 3456,
+        "height": 2234
+      },
       "members": [
         "Allison Burgerrs",
         "Dargor Springhill",
