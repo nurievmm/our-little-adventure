@@ -71,7 +71,7 @@
   "lailah-shemesh": {
     "columns": 2,
     "height": 960,
-    "revision": "78e3e03a19",
+    "revision": "c5a0f24956",
     "rows": 2,
     "width": 1440
   },
@@ -90,7 +90,7 @@
   "lordaeron-1": {
     "columns": 1,
     "height": 853,
-    "revision": "6bc4266d07",
+    "revision": "5f8d9a2565",
     "rows": 1,
     "width": 1280
   },
@@ -116,7 +116,7 @@
   "pvp-lailah-shemesh": {
     "columns": 1,
     "height": 853,
-    "revision": "9515dcd7a5",
+    "revision": "084f15aad4",
     "rows": 1,
     "width": 1280
   },
@@ -135,7 +135,7 @@
   "ragefire-1": {
     "columns": 1,
     "height": 853,
-    "revision": "11cfa048fc",
+    "revision": "3413fdd083",
     "rows": 1,
     "width": 1280
   },
