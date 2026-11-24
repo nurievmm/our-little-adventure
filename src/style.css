@@ -20,6 +20,7 @@ p { margin: 0; }
 }
 .journal {
   --formation-blend: clamp(52px, 13svh, 130px);
+  --frame-height: clamp(240px, 74svh, 780px);
   isolation: isolate;
   overflow: clip;
   background: var(--night);
@@ -42,33 +43,37 @@ p { margin: 0; }
 .formation {
   --portrait-shade: #151922;
   --name-inset: 7%;
+  --scene-tint: var(--portrait-shade);
+  --scene-blend: var(--formation-blend);
+  --backdrop-drift: 2%;
+  display: grid;
+  grid-template-columns: min(100%, calc(var(--frame-ratio) * var(--frame-height)));
+  justify-content: center;
   position: relative;
   isolation: isolate;
   margin: 0;
-  min-height: min(67vw, 76svh);
-  overflow: clip;
+  padding-block: var(--formation-blend) calc(var(--formation-blend) + 12px);
   text-shadow: var(--ink-shadow);
 }
+.formation:first-of-type { padding-block-start: 0; }
 .formation + .formation {
   margin-block-start: calc(-1 * var(--formation-blend));
-  mask-image: linear-gradient(to bottom, transparent, #0008 calc(var(--formation-blend) * .48), black var(--formation-blend));
 }
 .formation-undead { --portrait-shade: #1b1615; }
 .formation-skyborne { --portrait-shade: #14212e; }
 .formation-tauren { --portrait-shade: #292018; }
 .formation-orcs-trolls { --portrait-shade: #2c1716; }
-.formation > .story-art { position: absolute; inset: 0; z-index: -2; aspect-ratio: auto; }
-.formation > .story-art img { object-position: center 23%; }
-.formation::after {
-  content: ''; position: absolute; inset: 0; z-index: -1;
-  background: linear-gradient(to bottom, transparent 38%,
-    color-mix(in srgb, var(--portrait-shade) 76%, transparent) 70%,
-    color-mix(in srgb, var(--portrait-shade) 25%, transparent));
+.formation > .story-art, .formation-caption { grid-area: 1 / 1; }
+.formation > .story-art::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 68%, #080b13ca 100%);
 }
 .formation-caption {
-  position: absolute;
-  inset-inline: var(--name-inset);
-  bottom: max(calc(var(--formation-blend) + 12px), 25%);
+  position: relative;
+  align-self: end;
+  margin: 0 var(--name-inset) clamp(14px, 3.5vw, 44px);
 }
 .formation-members {
   display: grid;
@@ -88,7 +93,6 @@ p { margin: 0; }
 .formation-skyborne .arrival h3, .formation-tauren .arrival h3 {
   font-size: clamp(1.12rem, 3.9vw, 3.5rem);
 }
-.formation-tauren { min-height: min(62vw, 68svh); }
 .eyebrow {
   color: var(--accent); font-size: .875rem; font-weight: 700;
   letter-spacing: .16em; text-transform: uppercase;
@@ -98,8 +102,7 @@ p { margin: 0; }
 
 @media (max-width: 600px) {
   .journal { --formation-blend: clamp(34px, 11vw, 64px); }
-  .formation { min-height: 68vw; }
-  .formation-caption { inset-inline: 3%; }
+  .formation { --name-inset: 3%; }
 }
 .timeline {
   --accent: #f9d69d;
@@ -111,6 +114,7 @@ p { margin: 0; }
 .timeline-list { list-style: none; margin: 0; padding: 0; }
 .timeline-entry {
   --accent: #e0d7ff;
+  --scene-blend: var(--blend);
   --scene-art: url('/art/valley.jpg');
   --scene-tint: #15152c;
   --direction: 1;
@@ -125,7 +129,6 @@ p { margin: 0; }
 .entry-legacy { --accent: #ffe0a0; --scene-tint: #291c0d; --scene-art: url('/art/summit.jpg'); }
 .entry-pvp { --accent: #ffcbd5; --scene-tint: #250d21; --scene-art: url('/art/battleground.jpg'); }
 .scene-backdrop {
-  --scene-blend: var(--blend);
   position: absolute;
   z-index: -1;
   inset: 0;
@@ -146,8 +149,9 @@ p { margin: 0; }
   inset: 0;
   aspect-ratio: auto;
   container-type: size;
+  filter: blur(24px);
 }
-/* Cover the scene using only the selected panel of a multi-image sheet. */
+/* Fill the ambient layer with the same panel without exposing its neighbors. */
 .scene-backdrop .story-art-panel {
   inset: 35% auto auto 50%;
   width: max(100cqw, calc(100cqh * var(--art-ratio)));
@@ -157,11 +161,10 @@ p { margin: 0; }
 }
 .scene-backdrop::after {
   background:
-    linear-gradient(to bottom, transparent 26%,
-      color-mix(in srgb, var(--scene-tint) 42%, transparent) 59%, #080b13e8 100%),
-    linear-gradient(to right, #080b1373, transparent 75%);
+    linear-gradient(to bottom, transparent 28%, #080b13d9 100%),
+    color-mix(in srgb, var(--scene-tint) 58%, transparent);
 }
-.timeline-entry:first-child .scene-backdrop {
+.timeline-entry:first-child {
   --scene-blend: var(--formation-blend);
 }
 .timeline-entry:last-child .scene-backdrop {
@@ -171,15 +174,29 @@ p { margin: 0; }
 .milestone {
   position: relative;
   display: grid;
+  justify-items: center;
   align-items: end;
-  min-block-size: clamp(410px, 68svh, 690px);
-  padding: clamp(155px, 28svh, 245px) var(--gutter) calc(var(--blend) + 28px);
+  min-block-size: clamp(360px, 63svh, 570px);
+  padding-block: calc(var(--scene-blend) + 4px) calc(var(--blend) + 28px);
   text-shadow: var(--ink-shadow);
 }
-.entry-boss .milestone, .entry-pvp .milestone, .entry-legacy .milestone {
-  min-block-size: clamp(460px, 76svh, 780px);
+.milestone-frame {
+  width: min(100%, calc(var(--frame-ratio, 1.5) * var(--frame-height)));
+  min-width: 0;
 }
-.milestone-copy { width: min(100%, 52rem); }
+.milestone-frame > .story-art::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 82%, #080b13bd 100%);
+}
+.milestone-copy {
+  position: relative;
+  padding-inline: clamp(20px, 4vw, 52px);
+}
+.milestone-frame > .story-art + .milestone-copy {
+  margin-block-start: calc(-1 * clamp(30px, 6svh, 52px));
+}
 .milestone-heading .event-time { margin: 0 0 12px; color: #fff5e4; font-weight: 600; }
 .milestone-heading .eyebrow { font-size: .82rem; letter-spacing: .13em; }
 .milestone h3 {
@@ -201,23 +218,15 @@ p { margin: 0; }
 @media (max-width: 610px) {
   .timeline { --blend: clamp(38px, 13vw, 76px); }
   .timeline-entry { --backdrop-drift: calc(1.25% * var(--direction)); }
-  .milestone {
-    min-block-size: clamp(330px, 51svh, 460px);
-    padding-block: clamp(145px, 26svh, 200px) calc(var(--blend) + 20px);
-  }
-  .entry-boss .milestone, .entry-pvp .milestone, .entry-legacy .milestone {
-    min-block-size: clamp(380px, 58svh, 540px);
-  }
-  .scene-backdrop::after {
-    background: linear-gradient(to bottom, transparent 22%, #080b1359 44%, #080b13f2 100%);
-  }
+  .milestone { padding-block-end: calc(var(--blend) + 20px); }
+  .milestone-frame > .story-art + .milestone-copy { margin-block-start: -30px; }
   .milestone-heading .event-time { margin-bottom: 8px; }
 }
 @media (prefers-reduced-motion: no-preference) {
   @supports (view-timeline-name: --scene) and (animation-range: entry 0% entry 100%) {
     .formation { view-timeline-name: --formation; }
-    .formation > .story-art img {
-      animation: portrait-parallax linear both;
+    .formation .scene-backdrop > .story-art {
+      animation: backdrop-parallax linear both;
       animation-timeline: --formation;
       animation-range: cover;
     }
@@ -234,7 +243,7 @@ p { margin: 0; }
       animation-timeline: --scene;
       animation-range: entry 0% entry 85%;
     }
-    .scene-backdrop > .story-art, .scene-backdrop:empty::before {
+    .timeline-entry .scene-backdrop > .story-art, .scene-backdrop:empty::before {
       animation: backdrop-parallax linear both;
       animation-timeline: --scene;
       animation-range: cover;
@@ -266,10 +275,6 @@ p { margin: 0; }
       animation-range: entry calc(43% + 6% * var(--arrival-order)) entry calc(76% + 6% * var(--arrival-order));
     }
   }
-}
-@keyframes portrait-parallax {
-  from { transform: translateY(-4%) scale(1.13); }
-  to { transform: translateY(4%) scale(1.13); }
 }
 @keyframes backdrop-blend {
   from { opacity: .63; }

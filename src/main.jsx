@@ -35,13 +35,14 @@ function EventTime({ event }) {
   </div>;
 }
 
+const panelRatio = ({ width, height, columns, rows }) => (width / columns) / (height / rows);
+
 function StoryArt({ art, alt = '', eager = false }) {
   if (!art) return null;
   const { key, width, height, panel, columns, rows, revision } = art;
   const src = base + 'art/paint-' + key + '.webp';
-  const ratio = (width / columns) / (height / rows);
   return <div className="story-art" style={{
-    '--art-ratio': ratio, '--art-columns': columns, '--art-rows': rows,
+    '--art-ratio': panelRatio(art), '--art-columns': columns, '--art-rows': rows,
     '--art-x': panel % columns, '--art-y': Math.floor(panel / columns),
   }}>
     <div className="story-art-panel">
@@ -55,17 +56,21 @@ function StoryArt({ art, alt = '', eager = false }) {
 function Creation() {
   return <section className="chapter chapter-creation" aria-labelledby="creation-title">
     <h2 id="creation-title" className="visually-hidden">Company roster</h2>
-    {formations.map(({ art, race, members }, index) => <figure key={art} data-reading-stop={'formation/' + art}
-      className={'formation formation-' + art} aria-label={race}>
-      <StoryArt art={painting(art)} eager={index === 0} />
-      <figcaption className="formation-caption">
-        <ul className="formation-members" style={{ '--party-size': members.length }}>
-          {members.map((name, index) => <li className="arrival" key={name} style={{ '--arrival-order': index }}>
-            <h3>{name}</h3>
-          </li>)}
-        </ul>
-      </figcaption>
-    </figure>)}
+    {formations.map(({ art, race, members }, index) => {
+      const portrait = painting(art);
+      return <figure key={art} data-reading-stop={'formation/' + art}
+        className={'formation formation-' + art} style={{ '--frame-ratio': panelRatio(portrait) }} aria-label={race}>
+        <div className="scene-backdrop" aria-hidden="true"><StoryArt art={portrait} /></div>
+        <StoryArt art={portrait} eager={index === 0} />
+        <figcaption className="formation-caption">
+          <ul className="formation-members" style={{ '--party-size': members.length }}>
+            {members.map((name, index) => <li className="arrival" key={name} style={{ '--arrival-order': index }}>
+              <h3>{name}</h3>
+            </li>)}
+          </ul>
+        </figcaption>
+      </figure>;
+    })}
   </section>;
 }
 
@@ -94,19 +99,22 @@ function Scene({ event, roster }) {
   const painting = eventPainting(event, roster);
   const art = painting ?? (event.hero && heroPainting(event.hero.name, event.hero.level));
   const subject = event.hero?.name ?? event.title;
-  return <article className="milestone">
-    <div className="scene-backdrop">
-      <StoryArt art={art} alt={'Illustration of ' + subject} />
+  return <article className="milestone" style={art && { '--frame-ratio': panelRatio(art) }}>
+    <div className="scene-backdrop" aria-hidden="true">
+      <StoryArt art={art} />
     </div>
-    <div className="milestone-copy">
-      <header className="milestone-heading">
-        <EventTime event={event} />
-        {event.dungeon && <p className="eyebrow">{event.dungeon}</p>}
-        <h3>{event.title}</h3>
-        {event.hero && <p className="milestone-hero">{event.hero.name}</p>}
-      </header>
-      <div className="milestone-details">
-        <EventDetails event={event} hasPainting={Boolean(painting)} />
+    <div className="milestone-frame">
+      <StoryArt art={art} alt={'Illustration of ' + subject} />
+      <div className="milestone-copy">
+        <header className="milestone-heading">
+          <EventTime event={event} />
+          {event.dungeon && <p className="eyebrow">{event.dungeon}</p>}
+          <h3>{event.title}</h3>
+          {event.hero && <p className="milestone-hero">{event.hero.name}</p>}
+        </header>
+        <div className="milestone-details">
+          <EventDetails event={event} hasPainting={Boolean(painting)} />
+        </div>
       </div>
     </div>
   </article>;
