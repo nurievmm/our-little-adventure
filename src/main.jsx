@@ -5,55 +5,11 @@ import './style.css';
 
 const base = import.meta.env.BASE_URL;
 const source = 'https://kochurovvs.github.io/forever-heroes/';
-const chapters = [
-  { id: 'company', label: 'The company', icon: '✦' },
-  { id: 'legacy', label: 'Level milestones', icon: '✧' },
-  { id: 'trades', label: 'Crafting milestones', icon: '✿' },
-];
 const colors = { Paladin: '#f0a6be', Mage: '#89dbe9', Rogue: '#f8d675', Priest: '#f1ebd9', Shaman: '#8fbaff', Warlock: '#c9adff', Hunter: '#b9d38c', Druid: '#fbb079', Warrior: '#e8aa91' };
 const crafting = new Set(['Alchemy', 'Blacksmithing', 'Enchanting', 'Engineering', 'Leatherworking', 'Tailoring']);
 const dateLabel = (value) => new Intl.DateTimeFormat('en', {
   dateStyle: 'medium', timeZone: 'UTC',
 }).format(new Date(value));
-
-function useJourney() {
-  const [active, setActive] = useState('');
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    const hero = document.querySelector('.hero');
-    const sections = chapters.map(({ id }) => document.getElementById(id));
-    let frame = 0;
-    function update() {
-      frame = 0;
-      const distance = document.documentElement.scrollHeight - window.innerHeight;
-      setProgress(distance > 0 ? Math.min(1, Math.max(0, window.scrollY / distance)) : 0);
-      hero.style.setProperty('--hero-scroll', Math.min(80, window.scrollY * 0.14) + 'px');
-      const readingLine = window.innerHeight * 0.45;
-      const current = sections.findLast((section) => section.getBoundingClientRect().top <= readingLine);
-      setActive(current?.id ?? '');
-      for (const section of sections) {
-        const bounds = section.getBoundingClientRect();
-        section.classList.toggle('in-view', bounds.top < window.innerHeight * 0.88 && bounds.bottom > window.innerHeight * 0.13);
-      }
-    }
-    function schedule() {
-      if (!frame) frame = requestAnimationFrame(update);
-    }
-    const resize = new ResizeObserver(schedule);
-    resize.observe(document.body);
-    window.addEventListener('scroll', schedule, { passive: true });
-    window.addEventListener('resize', schedule);
-    update();
-    return () => {
-      resize.disconnect();
-      window.removeEventListener('scroll', schedule);
-      window.removeEventListener('resize', schedule);
-      cancelAnimationFrame(frame);
-    };
-  }, []);
-  return { active, progress };
-}
 
 function Expand({ id, label, children }) {
   const [open, setOpen] = useState(false);
@@ -68,17 +24,18 @@ function Expand({ id, label, children }) {
   </>;
 }
 
-function Chapter({ id, index, title, subtitle, description, art, alt, children }) {
+function Chapter({ id, title, subtitle, description, art, alt, children }) {
+  const first = id === 'company';
   return <section id={id} className={'chapter chapter-' + id} aria-labelledby={id + '-title'}>
-    <div className="chapter-marker" aria-hidden="true">{chapters[index].icon}</div>
-    <div className="chapter-card">
-      <div className="chapter-art"><img src={base + 'art/' + art + '.jpg'} alt={alt} loading="lazy" width="960" height="540" /></div>
-      <div className="chapter-copy">
-        <p className="eyebrow chapter-label">{subtitle}</p>
-        <h3 id={id + '-title'}>{title}</h3>
-        <p className="chapter-description">{description}</p>
-        {children}
-      </div>
+    {art && <div className="chapter-visual">
+      <img src={base + 'art/' + art + '.jpg'} alt={alt} width="1040" height="585"
+        loading={first ? 'eager' : 'lazy'} fetchPriority={first ? 'high' : undefined} />
+    </div>}
+    <div className="chapter-copy">
+      <p className="chapter-label">{subtitle}</p>
+      <h2 id={id + '-title'}>{title}</h2>
+      {description && <p className="chapter-description">{description}</p>}
+      {children}
     </div>
   </section>;
 }
@@ -154,7 +111,6 @@ function Trades({ heroes, milestones }) {
 
 function App() {
   const [snapshot, setSnapshot] = useState(null);
-  const { active, progress } = useJourney();
   useEffect(() => {
     const controller = new AbortController();
     fetch(base + 'characters.json', { signal: controller.signal })
@@ -166,64 +122,36 @@ function App() {
   const heroes = snapshot?.heroes ?? roster;
   const lead = heroes.reduce((highest, hero) => hero.level > highest.level ? hero : highest);
 
-  return <>
-    <a href="#journey" className="skip">Skip to the journey</a>
-    <header className="topbar">
-      <div className="topbar-content">
-        <a href="#top" className="wordmark"><span aria-hidden="true">✦</span> Our Little Adventure</a>
-        <nav aria-label="Chapter navigation">
-          {chapters.map((chapter) => <a key={chapter.id} href={'#' + chapter.id} aria-current={chapter.id === active ? 'location' : undefined}>{chapter.label}</a>)}
-        </nav>
-      </div>
-      <div className="scroll-progress" aria-hidden="true" style={{ transform: 'scaleX(' + progress + ')' }} />
-    </header>
-
-    <main id="top">
-      <section className="hero" aria-labelledby="page-title">
-        <img className="hero-art" src={base + 'art/valley.jpg'} alt="" fetchPriority="high" />
-        <div className="hero-shade" />
-        <div className="hero-inner">
-          <p className="eyebrow hero-label"><span aria-hidden="true">✦</span> Side Quest Company <span className="divider" aria-hidden="true"></span> WoW Forever</p>
-          <h1 id="page-title">Our little<br/><em>adventure.</em></h1>
-          <p>Thirteen heroes and a long road through Azeroth. This is the story of the milestones we’ve reached together.</p>
-          <a className="start" href="#journey">Start the journey</a>
+  const mountMilestones = snapshot?.milestones.filter((event) => event.key.endsWith('/first-mount')) ?? [];
+  return <main className="journal">
+    <h1 className="visually-hidden">Our Little Adventure</h1>
+    <Chapter id="company" title="The company assembles" subtitle="The opening roster"
+      description="Thirteen heroes make up the Side Quest Company. Here’s who joined the adventure, from Undead and Tauren to the Skyborne."
+      art="company" alt="World of Warcraft: Forever characters gathered around a campfire">
+      <div className="inline-facts"><span>{heroes.length} heroes</span><span>{new Set(heroes.map((hero) => hero.className)).size} classes</span><span>EU region</span></div>
+      <Expand id="company-details" label="Meet the heroes">
+        <Roster heroes={heroes} />
+        <div className="chapter-sources">
+          <small>{snapshot?.fetchedAt ? 'Battle.net snapshot · ' + dateLabel(snapshot.fetchedAt) + ' · ' + snapshot.syncedCount + '/' + heroes.length + ' profiles refreshed' : 'Opening roster · Nov 23, 2026'}</small>
+          <a href={source + '#rows'}>Roster source</a>
+          <a href="https://blizzard.gamespress.com/wowforeverreveal">Screenshots by Blizzard Entertainment</a>
         </div>
-        <span className="hero-note" aria-hidden="true">✦ &nbsp; AZEROTH, EU</span>
-      </section>
-
-      <div className="journal" id="journey">
-        <div className="journal-heading"><p className="eyebrow">The company journal</p><h2>Along the way</h2></div>
-        <div className="chapters">
-          <Chapter id="company" index={0} title="The company assembles" subtitle="The opening roster"
-            description="Thirteen heroes make up the Side Quest Company. Here’s who joined the adventure, from Undead and Tauren to the Skyborne."
-            art="company" alt="World of Warcraft: Forever characters gathered around a campfire">
-            <div className="inline-facts"><span>{heroes.length} heroes</span><span>{new Set(heroes.map((hero) => hero.className)).size} classes</span><span>EU region</span></div>
-            <Expand id="company-details" label="Meet the heroes"><Roster heroes={heroes} /></Expand>
-          </Chapter>
-          <Chapter id="legacy" index={1} title="Level 25 and beyond" subtitle="Legacy progression"
-            description={lead.name + ' has reached level ' + lead.level + '. Level 25 marked the company’s first class Legacy threshold.'}
-            art="summit" alt="Mount Hyjal in World of Warcraft: Forever">
-            <Legacy heroes={heroes} milestones={snapshot?.milestones ?? []} />
-          </Chapter>
-          <Chapter id="trades" index={2} title="A craft worth keeping" subtitle="Profession milestones"
-            description="The company’s crafters have already reached 150 skill and beyond. Their workbenches tell another part of the story."
-            art="trades" alt="Orgrimmar in World of Warcraft: Forever">
-            <Trades heroes={heroes} milestones={snapshot?.milestones ?? []} />
-          </Chapter>
-        </div>
-        {snapshot?.milestones.some((event) => event.key.endsWith('/first-mount')) && (
-          <section className="journal-notes" aria-labelledby="mount-notes">
-            <h2 id="mount-notes">First mounts</h2>
-            <MilestoneDates events={snapshot.milestones.filter((event) => event.key.endsWith('/first-mount'))} />
-          </section>
-        )}
-      </div>
-    </main>
-    <footer>
-      <div><span aria-hidden="true">✦</span> Side Quest Company <span>·</span> An unofficial WoW Forever journal <a href="https://blizzard.gamespress.com/wowforeverreveal">Screenshots by Blizzard Entertainment</a></div>
-      <div>{snapshot?.fetchedAt ? 'Battle.net snapshot · ' + dateLabel(snapshot.fetchedAt) + ' · ' + snapshot.syncedCount + '/' + heroes.length + ' profiles refreshed' : 'Opening roster · Nov 23, 2026'} <a href={source + '#rows'}>Roster source</a></div>
-    </footer>
-  </>;
+      </Expand>
+    </Chapter>
+    <Chapter id="legacy" title="Level 25 and beyond" subtitle="Legacy progression"
+      description={lead.name + ' has reached level ' + lead.level + '. Level 25 marked the company’s first class Legacy threshold.'}
+      art="summit" alt="Mount Hyjal in World of Warcraft: Forever">
+      <Legacy heroes={heroes} milestones={snapshot?.milestones ?? []} />
+    </Chapter>
+    <Chapter id="trades" title="A craft worth keeping" subtitle="Profession milestones"
+      description="The company’s crafters have already reached 150 skill and beyond. Their workbenches tell another part of the story."
+      art="trades" alt="Orgrimmar in World of Warcraft: Forever">
+      <Trades heroes={heroes} milestones={snapshot?.milestones ?? []} />
+    </Chapter>
+    {mountMilestones.length > 0 && <Chapter id="mounts" title="First mounts" subtitle="Collection milestones">
+      <MilestoneDates events={mountMilestones} />
+    </Chapter>}
+  </main>;
 }
 
 createRoot(document.getElementById('root')).render(<App />);
