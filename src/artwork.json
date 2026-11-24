@@ -49,7 +49,7 @@
   "deadmines": {
     "columns": 1,
     "height": 853,
-    "revision": "d18465580b",
+    "revision": "429629ad3e",
     "rows": 1,
     "width": 1280
   },
@@ -80,7 +80,7 @@
       25,
       null
     ],
-    "revision": "bfe30cb658",
+    "revision": "4af85cf9cb",
     "rows": 2,
     "width": 1440
   },
@@ -270,7 +270,7 @@
   "lordaeron-2-varied": {
     "columns": 1,
     "height": 960,
-    "revision": "59f4018d9c",
+    "revision": "dfb76b12e9",
     "rows": 1,
     "width": 1440
   },
@@ -312,7 +312,7 @@
   "ragefire-1": {
     "columns": 1,
     "height": 853,
-    "revision": "302bcd6a0f",
+    "revision": "9f692a14d1",
     "rows": 1,
     "width": 1280
   },
@@ -339,7 +339,7 @@
   "shadowfang": {
     "columns": 1,
     "height": 853,
-    "revision": "6f8ce9417d",
+    "revision": "a5ad775b87",
     "rows": 1,
     "width": 1280
   },
@@ -367,14 +367,14 @@
   "undead": {
     "columns": 1,
     "height": 853,
-    "revision": "a7609f6bd3",
+    "revision": "339c93f503",
     "rows": 1,
     "width": 1280
   },
   "wailing-caverns": {
     "columns": 1,
     "height": 853,
-    "revision": "f554599bb8",
+    "revision": "8a7a8b884e",
     "rows": 1,
     "width": 1280
   },
@@ -438,7 +438,7 @@
         "skill": "Fishing"
       }
     ],
-    "revision": "e5b4e7a90e",
+    "revision": "9844ca8816",
     "rows": 2,
     "width": 1440
   },
