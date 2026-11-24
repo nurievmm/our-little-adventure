@@ -2,7 +2,7 @@
   "allison-burgerrs": {
     "columns": 2,
     "height": 960,
-    "revision": "2984a198c4",
+    "revision": "863ecbd13c",
     "rows": 2,
     "width": 1440
   },
@@ -40,7 +40,7 @@
   "deadmines": {
     "columns": 1,
     "height": 853,
-    "revision": "353ecebdf6",
+    "revision": "b46e604d4f",
     "rows": 1,
     "width": 1280
   },
@@ -97,7 +97,7 @@
   "lordaeron-2": {
     "columns": 1,
     "height": 853,
-    "revision": "b50694f7f1",
+    "revision": "6ee79fbc06",
     "rows": 1,
     "width": 1280
   },
@@ -154,7 +154,7 @@
   "shadowfang": {
     "columns": 1,
     "height": 853,
-    "revision": "4335743775",
+    "revision": "ab51b33460",
     "rows": 1,
     "width": 1280
   },
@@ -180,21 +180,21 @@
   "undead": {
     "columns": 1,
     "height": 853,
-    "revision": "8e1e4ab6cc",
+    "revision": "66c4f02cad",
     "rows": 1,
     "width": 1280
   },
   "wailing-caverns": {
     "columns": 1,
     "height": 853,
-    "revision": "4c1e1fb594",
+    "revision": "ed1c118b0d",
     "rows": 1,
     "width": 1280
   },
   "work-allison-burgerrs": {
     "columns": 3,
     "height": 960,
-    "revision": "6f5e6b9948",
+    "revision": "47cb4af455",
     "rows": 2,
     "skills": [
       "Mining",
