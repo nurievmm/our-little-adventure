@@ -21,6 +21,8 @@ p { margin: 0; }
   --frame-height: min(100svh, 960px);
   --scene-blend: clamp(20px, 7svh, 72px);
   --caption-inset: clamp(12px, 4vmin, 42px);
+  --seam-depth: clamp(13px, 5vmin, 44px);
+  --seam-blur: clamp(2px, .8vmin, 7px);
   isolation: isolate;
   overflow: clip;
   background: var(--night);
@@ -65,17 +67,43 @@ p { margin: 0; }
 .milestone-frame > .story-art {
   align-self: start;
   width: 100%;
+  isolation: isolate;
 }
-.formation > .story-art::after,
-.milestone-frame > .story-art::after {
+.formation > .story-art > .story-art-panel::after,
+.milestone-frame > .story-art > .story-art-panel::after {
   content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background:
-    linear-gradient(to bottom, #10151d80, transparent min(8%, 32px)),
-    linear-gradient(to top, #090d14e0, #090d1460 27%, transparent 58%);
+  background: linear-gradient(to top, #090d14b8, #090d1460 27%, transparent 58%);
 }
+/* Match both sides of each join and keep the blur off the picture's center. */
+.formation > .story-art::before,
+.formation > .story-art::after,
+.milestone-frame > .story-art::before,
+.milestone-frame > .story-art::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  inset-inline: 0;
+  block-size: min(var(--seam-depth), 13%);
+  pointer-events: none;
+  background: color-mix(in srgb, var(--night) 88%, transparent);
+  -webkit-backdrop-filter: blur(var(--seam-blur));
+  backdrop-filter: blur(var(--seam-blur));
+  mask-image: linear-gradient(var(--seam-direction), black, #000b 25%, #0004 65%, transparent);
+}
+.formation > .story-art::before,
+.milestone-frame > .story-art::before {
+  --seam-direction: to bottom;
+  inset-block-start: 0;
+}
+.formation > .story-art::after,
+.milestone-frame > .story-art::after {
+  --seam-direction: to top;
+  inset-block-end: 0;
+}
+.formation:first-of-type > .story-art::before { content: none; }
 .formation-caption,
 .milestone-copy {
   position: relative;
