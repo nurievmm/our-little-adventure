@@ -23,7 +23,7 @@
   "chipson-level30": {
     "columns": 1,
     "height": 853,
-    "revision": "d6f072aa4e",
+    "revision": "ffa2f08bd3",
     "rows": 1,
     "width": 1280
   },
@@ -36,7 +36,7 @@
   "classic-schmosby-level10": {
     "columns": 1,
     "height": 480,
-    "revision": "8947bd476f",
+    "revision": "a4ca784d90",
     "rows": 1,
     "width": 720
   },
@@ -49,7 +49,7 @@
   "deadmines": {
     "columns": 1,
     "height": 853,
-    "revision": "429629ad3e",
+    "revision": "52d5f9845f",
     "rows": 1,
     "width": 1280
   },
@@ -80,7 +80,7 @@
       25,
       null
     ],
-    "revision": "4af85cf9cb",
+    "revision": "834b8a19a4",
     "rows": 2,
     "width": 1440
   },
@@ -103,7 +103,7 @@
       25,
       40
     ],
-    "revision": "95f677e2aa",
+    "revision": "a645556d18",
     "rows": 2,
     "width": 1440
   },
@@ -116,7 +116,7 @@
       25,
       null
     ],
-    "revision": "6b85b59bc5",
+    "revision": "272ad51a57",
     "rows": 2,
     "width": 1440
   },
@@ -171,7 +171,7 @@
     "levels": [
       10
     ],
-    "revision": "f4b89aded0",
+    "revision": "0171b710ab",
     "rows": 1,
     "width": 1440
   },
@@ -193,7 +193,7 @@
       10,
       20
     ],
-    "revision": "a734dea297",
+    "revision": "654d6c375c",
     "rows": 1,
     "width": 1920
   },
@@ -256,7 +256,7 @@
   "lordaeron-1": {
     "columns": 1,
     "height": 853,
-    "revision": "6bda079ba0",
+    "revision": "e79866e5c0",
     "rows": 1,
     "width": 1280
   },
@@ -270,7 +270,7 @@
   "lordaeron-2-varied": {
     "columns": 1,
     "height": 960,
-    "revision": "0533e51faa",
+    "revision": "f7aec8f63c",
     "rows": 1,
     "width": 1440
   },
@@ -284,7 +284,7 @@
   "pvp-classic-schmosby": {
     "columns": 1,
     "height": 853,
-    "revision": "9a8a9f9d09",
+    "revision": "92d42a6cdb",
     "rows": 1,
     "width": 1280
   },
@@ -298,7 +298,7 @@
   "pvp-lior-shadowlord": {
     "columns": 1,
     "height": 853,
-    "revision": "1f2d9bd8d0",
+    "revision": "f12973a5f5",
     "rows": 1,
     "width": 1280
   },
@@ -312,7 +312,7 @@
   "ragefire-1": {
     "columns": 1,
     "height": 853,
-    "revision": "08a2f8c5b9",
+    "revision": "a7f46b2e19",
     "rows": 1,
     "width": 1280
   },
@@ -326,7 +326,7 @@
   "ragefire-2-varied": {
     "columns": 1,
     "height": 960,
-    "revision": "a7b572035b",
+    "revision": "0b0a01a9e0",
     "rows": 1,
     "width": 1440
   },
@@ -346,7 +346,7 @@
   "shadowfang": {
     "columns": 1,
     "height": 853,
-    "revision": "0f3d8fce2f",
+    "revision": "ef33bd04a0",
     "rows": 1,
     "width": 1280
   },
@@ -360,7 +360,7 @@
   "spelunker": {
     "columns": 1,
     "height": 853,
-    "revision": "b1e652bc07",
+    "revision": "8b2e194494",
     "rows": 1,
     "width": 1280
   },
@@ -374,14 +374,14 @@
   "undead": {
     "columns": 1,
     "height": 853,
-    "revision": "339c93f503",
+    "revision": "fa685f2055",
     "rows": 1,
     "width": 1280
   },
   "wailing-caverns": {
     "columns": 1,
     "height": 853,
-    "revision": "761dacbe2d",
+    "revision": "f309758381",
     "rows": 1,
     "width": 1280
   },
@@ -402,14 +402,14 @@
   "work-allison-burgerrs-fishing-150": {
     "columns": 1,
     "height": 480,
-    "revision": "c8deaf2051",
+    "revision": "ffed66baeb",
     "rows": 1,
     "width": 480
   },
   "work-allison-burgerrs-fishing-225": {
     "columns": 1,
     "height": 480,
-    "revision": "d29ea6f6ad",
+    "revision": "d95908d303",
     "rows": 1,
     "width": 480
   },
@@ -459,7 +459,7 @@
         "skill": "Fishing"
       }
     ],
-    "revision": "9844ca8816",
+    "revision": "a47f4203b3",
     "rows": 2,
     "width": 1440
   },
@@ -480,14 +480,14 @@
   "work-chipson-bomfrey-cooking-150": {
     "columns": 1,
     "height": 960,
-    "revision": "f361ea19a7",
+    "revision": "bf0dd5cdea",
     "rows": 1,
     "width": 960
   },
   "work-chipson-bomfrey-engineering-150": {
     "columns": 1,
     "height": 480,
-    "revision": "b19e34f3b6",
+    "revision": "50c182db43",
     "rows": 1,
     "width": 480
   },
@@ -520,7 +520,7 @@
         "skill": "Mining"
       }
     ],
-    "revision": "9ffb3a45d1",
+    "revision": "d73fea94a7",
     "rows": 2,
     "width": 1440
   },
@@ -549,7 +549,7 @@
         "skill": "Fishing"
       }
     ],
-    "revision": "e1e8a8af3f",
+    "revision": "868c563ef7",
     "rows": 2,
     "width": 1440
   },
@@ -570,7 +570,7 @@
   "work-classic-schmosby-fishing-150": {
     "columns": 1,
     "height": 480,
-    "revision": "274d90021e",
+    "revision": "c0cee09d3d",
     "rows": 1,
     "width": 720
   },
@@ -612,7 +612,7 @@
         "skill": "Fishing"
       }
     ],
-    "revision": "6825c240b9",
+    "revision": "f92d6b0245",
     "rows": 2,
     "width": 1440
   },
