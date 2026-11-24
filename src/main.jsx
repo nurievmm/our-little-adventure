@@ -19,6 +19,7 @@ const firstVisibleDate = Date.parse('2026-11-15T18:00:00+02:00');
 const isVisibleDate = (value) => validTime(value) && Date.parse(value) >= firstVisibleDate;
 
 function EventTime({ event }) {
+  if (event.hideDate) return null;
   if (validTime(event.at)) {
     if (!isVisibleDate(event.at)) return null;
     const format = event.kind === 'boss' ? precise : clock;

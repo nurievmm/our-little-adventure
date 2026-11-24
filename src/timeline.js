@@ -61,20 +61,14 @@ function mergeTimed(source, current, keyOf) {
   return events;
 }
 
-function legacyMilestones(legacy, heroes) {
-  const classByName = new Map(heroes.map(({ name, className }) => [name, className]));
+function legacyMilestones(legacy) {
   const keyOf = (event) => {
     const at = timeKey(event.at);
     return at && [accountOf(event.members[0]), event.id, at].join('/');
   };
-  return [...mergeTimed(story.legacy, legacy, keyOf)].map(([key, event]) => {
-    let members = event.members;
-    if (event.level === 25 && event.className) {
-      const matches = members.filter((name) => classByName.get(name) === event.className);
-      members = matches.length === 1 ? matches : [];
-    }
-    return { ...event, members, key: 'legacy/' + key, kind: 'legacy' };
-  });
+  return [...mergeTimed(story.legacy, legacy, keyOf)]
+    .filter(([, event]) => event.level !== 25 && event.cap !== 75)
+    .map(([key, event]) => ({ ...event, key: 'legacy/' + key, kind: 'legacy' }));
 }
 
 function bossMilestones(bossMatches) {
@@ -115,8 +109,11 @@ function powerMilestones(hero, snapshot, records, legacy) {
   for (const { name } of hero.skills ?? (hero.profession ? [hero.profession] : [])) skillNames.add(name);
   for (const event of records.values()) {
     if (!event.key.startsWith(prefix)) continue;
-    const match = /^(.+)-(75|150|225|300)$/.exec(event.key.slice(prefix.length));
-    if (match) skillNames.add(match[1]);
+    const suffix = event.key.slice(prefix.length);
+    const separator = suffix.lastIndexOf('-');
+    if (separator > 0 && story.professionCaps.includes(Number(suffix.slice(separator + 1)))) {
+      skillNames.add(suffix.slice(0, separator));
+    }
   }
   for (const skill of skillNames) {
     for (const cap of story.professionCaps) {
@@ -187,8 +184,20 @@ function sortMilestones(events) {
 
 export function journeyMilestones(heroes, snapshot) {
   const records = new Map((snapshot?.milestones ?? []).map((event) => [event.key, event]));
-  const legacy = legacyMilestones(snapshot?.legacy, heroes);
+  const legacy = legacyMilestones(snapshot?.legacy);
   const bosses = bossMilestones(snapshot?.bossMatches);
   const events = [...legacy, ...bosses, ...heroes.flatMap((hero) => powerMilestones(hero, snapshot, records, legacy))];
-  return sortMilestones(events);
+  const ordered = new Map(sortMilestones(events).map((event) => [event.key, event]));
+  const curated = [];
+  for (const { key, by, hideDate } of story.timelineOrder) {
+    const event = ordered.get(key);
+    if (!event) continue;
+    ordered.delete(key);
+    curated.push({
+      ...event,
+      ...(by && { by, after: undefined }),
+      ...(hideDate && { hideDate }),
+    });
+  }
+  return [...curated, ...ordered.values()];
 }
