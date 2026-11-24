@@ -1,0 +1,77 @@
+name: Inspect public Forever milestone data
+on:
+  push:
+    branches: [codex/forever-api-research]
+    paths: [.github/workflows/forever-api-research.yml]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Summarize public roster endpoints
+        env:
+          BATTLENET_CLIENT_ID: ${{ secrets.BATTLENET_CLIENT_ID }}
+          BATTLENET_CLIENT_SECRET: ${{ secrets.BATTLENET_CLIENT_SECRET }}
+        run: |
+          node --input-type=module <<'JS'
+          import {readFile} from 'node:fs/promises';
+          const roster = JSON.parse(await readFile('src/roster.json','utf8'));
+          const tokenResponse = await fetch('https://oauth.battle.net/token', {
+            method:'POST', redirect:'error', signal:AbortSignal.timeout(15000),
+            headers:{Authorization:'Basic '+Buffer.from(process.env.BATTLENET_CLIENT_ID+':'+process.env.BATTLENET_CLIENT_SECRET).toString('base64')},
+            body:new URLSearchParams({grant_type:'client_credentials'})
+          });
+          if (!tokenResponse.ok) throw new Error('Battle.net token request returned '+tokenResponse.status);
+          const {access_token:token}=await tokenResponse.json();
+          async function get(path, scope='profile') {
+            const url=new URL(path,'https://eu.api.blizzard.com');
+            url.searchParams.set('namespace',scope+'-forever-eu');
+            url.searchParams.set('locale','en_GB');
+            try {
+              const res=await fetch(url,{headers:{Authorization:'Bearer '+token},redirect:'error',signal:AbortSignal.timeout(12000)});
+              return {status:res.status,data:res.ok?await res.json():{}};
+            } catch {
+              return {status:'timeout or transport error',data:{}};
+            }
+          }
+          const name = (value) => typeof value==='string'?value:value?.en_GB??value?.en_US;
+          const dated = (timestamp) => Number.isFinite(timestamp)&&timestamp>0 ? new Date(timestamp<1e12?timestamp*1000:timestamp).toISOString():null;
+          const fields = (data) => Object.keys(data).filter(key=>!/links|character$/.test(key));
+          function achievements(response) {
+            const a=response.data;
+            const rows=a.achievements??[];
+            return {status:response.status, points:a.total_points, listed:rows.length,
+              dated:rows.filter(row=>dated(row.completed_timestamp)).map(row=>({id:row.id,title:name(row.achievement?.name),at:dated(row.completed_timestamp)})),
+              undated:rows.filter(row=>!dated(row.completed_timestamp)).slice(0,5).map(row=>({id:row.id,title:name(row.achievement?.name),completed:row.criteria?.is_completed})),
+              recent:(a.recent_events??[]).length};
+          }
+          function statistics(response) {
+            const rows=(response.data.categories??[]).flatMap(category=>[...(category.statistics??[]),...(category.sub_categories??[]).flatMap(sub=>sub.statistics??[])]);
+            return {status:response.status,count:rows.length, matches:rows.map(row=>name(row.name)).filter(title=>title&&/pvp|honorable|highest level|dungeon|creation|time played/i.test(title)).slice(0,15)};
+          }
+          const catalog=await get('/data/wow/achievement/index','static');
+          const entries=catalog.data.achievements??[];
+          const matched=entries.map(row=>name(row.name)).filter(title=>title&&/level|honor|rank|artisan|apprentice|expert|journeyman|wailing|dungeon|first blood/i.test(title));
+          console.log(JSON.stringify({catalog:{status:catalog.status,count:entries.length,examples:matched.slice(0,35)}}));
+          for(let offset=0;offset<roster.length;offset+=3){
+            await Promise.all(roster.slice(offset,offset+3).map(async hero=>{
+              const base='/profile/wow/character/'+encodeURIComponent(hero.name.toLowerCase().replaceAll(' ','-'));
+              const [ach,stats,profile,dungeons,pvp,quests,mounts,rep,titles]=await Promise.all(
+                ['/achievements','/achievements/statistics','','/encounters/dungeons','/pvp-summary','/quests/completed','/collections/mounts','/reputations','/titles'].map(suffix=>get(base+suffix)));
+              console.log(JSON.stringify({
+                hero:hero.name,
+                achievements:achievements(ach), statistics:statistics(stats),
+                profile:{status:profile.status,timeFields:fields(profile.data).filter(key=>/time|created|login/.test(key))},
+                dungeons:{status:dungeons.status,expansions:(dungeons.data.expansions??[]).length},
+                pvp:{status:pvp.status,kills:pvp.data.honorable_kills,fields:fields(pvp.data)},
+                quests:{status:quests.status,count:(quests.data.quests??[]).length},
+                collections:{mounts:(mounts.data.mounts??[]).length,reputations:(rep.data.reputations??[]).length,titles:(titles.data.titles??[]).length}
+              }));
+            }));
+          }
+          JS
