@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 
+const clampProgress = (value) => Math.min(1, Math.max(0, value));
+
 export function useSceneMotion(journal, ready) {
   useEffect(() => {
     if (!ready || !('IntersectionObserver' in window)) return;
@@ -12,10 +14,13 @@ export function useSceneMotion(journal, ready) {
     function render() {
       frame = 0;
       const height = window.innerHeight;
+      const revealDistance = Math.min(160, Math.max(64, height * .18));
       const positions = Array.from(nearby, (scene) => [scene, scene.getBoundingClientRect()]);
       for (const [scene, bounds] of positions) {
         const progress = (height - bounds.top) / (height + bounds.height);
-        scene.style.setProperty('--scene-progress', Math.min(1, Math.max(0, progress)));
+        const captionProgress = (height - bounds.bottom) / revealDistance + .85;
+        scene.style.setProperty('--scene-progress', clampProgress(progress));
+        scene.style.setProperty('--caption-progress', clampProgress(captionProgress));
       }
     }
 
