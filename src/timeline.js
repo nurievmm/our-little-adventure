@@ -68,7 +68,12 @@ function legacyMilestones(legacy) {
   };
   return [...mergeTimed(story.legacy, legacy, keyOf)]
     .filter(([, event]) => event.level !== 25 && event.cap !== 75)
-    .map(([key, event]) => ({ ...event, key: 'legacy/' + key, kind: 'legacy' }));
+    .map(([key, event]) => ({
+      ...event,
+      title: event.cap === 150 && event.skill ? event.skill + ' ' + event.cap : event.title,
+      key: 'legacy/' + key,
+      kind: 'legacy',
+    }));
 }
 
 function bossMilestones(bossMatches) {
