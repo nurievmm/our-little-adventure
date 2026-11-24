@@ -15,6 +15,7 @@
   "chipson-bomfrey": {
     "columns": 2,
     "height": 960,
+    "revision": "fd4411456e",
     "rows": 2,
     "width": 1440
   },
