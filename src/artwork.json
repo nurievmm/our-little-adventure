@@ -49,7 +49,7 @@
   "deadmines": {
     "columns": 1,
     "height": 853,
-    "revision": "52d5f9845f",
+    "revision": "491666ab8e",
     "rows": 1,
     "width": 1280
   },
@@ -206,7 +206,7 @@
       25,
       null
     ],
-    "revision": "879c457087",
+    "revision": "a3c567a666",
     "rows": 2,
     "width": 1440
   },
@@ -353,7 +353,7 @@
   "skyborne": {
     "columns": 1,
     "height": 853,
-    "revision": "f56b034af4",
+    "revision": "ccf586cb90",
     "rows": 1,
     "width": 1280
   },
@@ -381,7 +381,7 @@
   "wailing-caverns": {
     "columns": 1,
     "height": 853,
-    "revision": "3d8ab486ee",
+    "revision": "bf0354c80c",
     "rows": 1,
     "width": 1280
   },
