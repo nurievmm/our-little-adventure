@@ -280,15 +280,45 @@ p { margin: 0; }
 @media (prefers-reduced-motion: no-preference) {
   [data-reading-stop] {
     --scene-offset: calc(var(--scene-progress, .5) - .5);
+    --scene-light: min(calc(var(--scene-progress, 0) * 2), calc((1 - var(--scene-progress, 0)) * 2));
   }
+  .formation:nth-of-type(even),
+  .timeline-entry:nth-child(even) { --scene-direction: -1; }
   .scene-backdrop > .story-art,
   .scene-backdrop:empty::before {
-    transform: translateY(calc(var(--scene-offset) * 14%)) scale(1.18);
+    transform: translate(
+      calc(var(--scene-offset) * 9% * var(--scene-direction, 1)),
+      calc(var(--scene-offset) * 14%)
+    ) scale(1.18);
   }
-  .formation-caption,
-  .milestone-copy {
-    --arrival: clamp(0, calc(var(--scene-progress, .5) * 2.6), 1);
-    transform: translateY(calc((1 - var(--arrival)) * 8px));
-    opacity: calc(.78 + var(--arrival) * .22);
+
+  .formation > .story-art > .story-art-panel,
+  .milestone-frame > .story-art > .story-art-panel { isolation: isolate; }
+  .formation > .story-art > .story-art-panel::before,
+  .milestone-frame > .story-art > .story-art-panel::before {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center,
+      color-mix(in srgb, var(--accent, #f9d69d) 18%, transparent), transparent 67%);
+    opacity: calc(var(--scene-light) * .8);
+    transform: translateX(calc(var(--scene-offset) * 120% * var(--scene-direction, 1)));
   }
+  .formation > .story-art > .story-art-panel::after,
+  .milestone-frame > .story-art > .story-art-panel::after { z-index: 2; }
+
+  :is(.arrival, .milestone-heading > *, .milestone-details > p, .story-party > div) {
+    --reveal: clamp(0, calc((var(--caption-progress, 1) - var(--entry-delay, 0)) * 1.7), 1);
+    opacity: calc(.58 + var(--reveal) * .42);
+    transform: translateY(calc((1 - var(--reveal)) * clamp(6px, 1.7vmin, 16px)));
+  }
+  .milestone-heading > h3 { --entry-delay: .12; }
+  .milestone-heading > .milestone-hero,
+  .arrival:nth-child(2) { --entry-delay: .22; }
+  .milestone-details > p,
+  .story-party > div,
+  .arrival:nth-child(3) { --entry-delay: .3; }
+  .story-party > div:nth-child(n + 3) { --entry-delay: .39; }
 }
