@@ -4,6 +4,7 @@ import roster from './roster.json';
 import { journeyMilestones, validTime } from './timeline.js';
 import { eventPainting, formations, heroPainting, painting } from './illustrations.js';
 import { useReadingPosition } from './useReadingPosition.js';
+import { useSceneMotion } from './useSceneMotion.js';
 import './style.css';
 
 const base = import.meta.env.BASE_URL;
@@ -65,7 +66,7 @@ function Creation() {
         <StoryArt art={portrait} eager={index === 0} />
         <figcaption className="formation-caption">
           <ul className="formation-members" style={{ '--party-size': members.length }}>
-            {members.map((name, index) => <li className="arrival" key={name} style={{ '--arrival-order': index }}>
+            {members.map((name) => <li className="arrival" key={name}>
               <h3>{name}</h3>
             </li>)}
           </ul>
@@ -77,7 +78,7 @@ function Creation() {
 
 function Party({ event, portraits }) {
   return <div className="story-party">
-    {event.members.map((name, index) => <div key={name} style={{ '--arrival-order': index }}>
+    {event.members.map((name) => <div key={name}>
       {portraits && <StoryArt art={heroPainting(name, 20)} />}
       <span>{name}</span>
     </div>)}
@@ -140,7 +141,9 @@ function Timeline({ heroes, snapshot }) {
 
 function App() {
   const [snapshot, setSnapshot] = useState(undefined);
-  const journal = useReadingPosition(snapshot !== undefined);
+  const ready = snapshot !== undefined;
+  const journal = useReadingPosition(ready);
+  useSceneMotion(journal, ready);
   useEffect(() => {
     const controller = new AbortController();
     let active = true;
