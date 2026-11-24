@@ -23,23 +23,24 @@ const clock = new Intl.DateTimeFormat('en-GB', {
 const precise = new Intl.DateTimeFormat('en-GB', {
   ...locale, hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23',
 });
+const firstVisibleDate = Date.parse('2026-11-15T18:00:00+02:00');
+const isVisibleDate = (value) => validTime(value) && Date.parse(value) >= firstVisibleDate;
 
-function EventTime({ event, fallback = 'Date unavailable' }) {
+function EventTime({ event }) {
   if (validTime(event.at)) {
+    if (!isVisibleDate(event.at)) return null;
     const format = event.kind === 'boss' ? precise : clock;
-    return <span>{event.approximate && 'Around '}<time dateTime={event.at}>{format.format(new Date(event.at))}</time></span>;
+    return <div className="event-time">{event.approximate && 'Around '}<time dateTime={event.at}>{format.format(new Date(event.at))}</time></div>;
   }
-  if (validTime(event.by)) {
-    const end = day.format(new Date(event.by));
-    const start = validTime(event.after) ? day.format(new Date(event.after)) : '';
-    if (start && start === end) {
-      return <span>Around <time dateTime={event.by}>{end}</time></span>;
-    }
-    return start
-      ? <span><time dateTime={event.after}>{start}</time>–<time dateTime={event.by}>{end}</time></span>
-      : <span>By <time dateTime={event.by}>{end}</time></span>;
-  }
-  return <span>{fallback}</span>;
+  if (!isVisibleDate(event.by)) return null;
+  const end = day.format(new Date(event.by));
+  const start = isVisibleDate(event.after) ? day.format(new Date(event.after)) : '';
+  return <div className="event-time">
+    {start && start !== end
+      ? <><time dateTime={event.after}>{start}</time>–</>
+      : start ? 'Around ' : 'By '}
+    <time dateTime={event.by}>{end}</time>
+  </div>;
 }
 
 function Portrait({ hero, full = false, labelled = false }) {
@@ -68,9 +69,7 @@ function Creation({ heroes }) {
         {heroes.map((hero) => <li className="arrival" key={hero.name}>
           <Portrait hero={hero} />
           <div><h3>{hero.name}</h3><p>{hero.race} · {hero.className}</p>
-            <div className="event-time">
-              <EventTime event={{ at: story.creationTimes[hero.name] ?? hero.createdAt }} fallback="Creation time unavailable" />
-            </div>
+            <EventTime event={{ at: story.creationTimes[hero.name] ?? hero.createdAt }} />
           </div>
         </li>)}
       </ul>
@@ -136,7 +135,7 @@ function Timeline({ heroes, snapshot }) {
       {milestones.map((event) => <li key={event.key} className={'timeline-entry entry-' + event.kind}>
         <article className="milestone">
           <header className="milestone-heading">
-            <div className="event-time"><EventTime event={event} /></div>
+            <EventTime event={event} />
             <p className="eyebrow">{event.dungeon ?? labels[event.kind]}</p>
             <h3>{event.title}</h3>
             {event.hero && <p className="milestone-hero">{event.hero.name}</p>}
