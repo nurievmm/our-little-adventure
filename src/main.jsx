@@ -103,6 +103,7 @@ function EventDetails({ event, hasPainting }) {
 
 function MilestoneScreenshot({ screenshot, title }) {
   const dialog = useRef(null);
+  const startedOnBackdrop = useRef(false);
   const [viewed, setViewed] = useState(false);
   const { file, alt, width, height } = screenshot;
   const source = base + file;
@@ -112,14 +113,26 @@ function MilestoneScreenshot({ screenshot, title }) {
     dialog.current.showModal();
   }
 
+  function isBackdrop(event) {
+    if (event.target !== event.currentTarget) return false;
+    const { left, right, top, bottom } = event.currentTarget.getBoundingClientRect();
+    return event.clientX < left || event.clientX > right || event.clientY < top || event.clientY > bottom;
+  }
+
+  function closeOnBackdrop(event) {
+    if (startedOnBackdrop.current && isBackdrop(event)) event.currentTarget.close();
+    startedOnBackdrop.current = false;
+  }
+
   return <>
     <button className="screenshot-trigger" type="button" aria-haspopup="dialog" onClick={openScreenshot}>
       View screenshot
     </button>
-    <dialog className="screenshot-dialog" ref={dialog} aria-label={'Screenshot after ' + title}>
+    <dialog className="screenshot-dialog" ref={dialog} aria-label={'Screenshot after ' + title}
+      onPointerDown={(event) => { startedOnBackdrop.current = isBackdrop(event); }}
+      onClick={closeOnBackdrop}>
       <div className="screenshot-toolbar">
         <form method="dialog"><button type="submit">Close</button></form>
-        <a href={source} target="_blank" rel="noopener">Open full size</a>
       </div>
       {viewed && <img src={source} alt={alt} width={width} height={height} />}
     </dialog>
