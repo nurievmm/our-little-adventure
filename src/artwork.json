@@ -122,7 +122,7 @@
       25,
       null
     ],
-    "revision": "8d3f35ceb2",
+    "revision": "828eba790a",
     "rows": 2,
     "width": 1440
   },
@@ -353,6 +353,7 @@
   "tauren": {
     "columns": 1,
     "height": 853,
+    "revision": "f7cdddbe29",
     "rows": 1,
     "width": 1280
   },
