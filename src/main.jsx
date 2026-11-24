@@ -58,7 +58,9 @@ function Creation() {
       <StoryArt art={painting(art)} eager={index === 0} />
       <figcaption className="formation-caption">
         <ul className="formation-members" style={{ '--party-size': members.length }}>
-          {members.map((name) => <li className="arrival" key={name}><h3>{name}</h3></li>)}
+          {members.map((name, index) => <li className="arrival" key={name} style={{ '--arrival-order': index }}>
+            <h3>{name}</h3>
+          </li>)}
         </ul>
       </figcaption>
     </figure>)}
@@ -67,7 +69,7 @@ function Creation() {
 
 function Party({ event, portraits }) {
   return <div className="story-party">
-    {event.members.map((name) => <div key={name}>
+    {event.members.map((name, index) => <div key={name} style={{ '--arrival-order': index }}>
       {portraits && <StoryArt art={heroPainting(name, 20)} />}
       <span>{name}</span>
     </div>)}
@@ -111,6 +113,7 @@ function Timeline({ heroes, snapshot }) {
     <h2 id="timeline-title" className="visually-hidden">Adventure timeline</h2>
     <ol className="timeline-list">
       {milestones.map((event) => <li key={event.key} data-reading-stop={event.key} className={'timeline-entry entry-' + event.kind}>
+        <div className="scene-backdrop" aria-hidden="true" />
         <Scene event={event} roster={byName} />
       </li>)}
     </ol>

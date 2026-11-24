@@ -50,7 +50,7 @@ p { margin: 0; }
 }
 .formation + .formation {
   margin-block-start: calc(-1 * var(--formation-blend));
-  mask-image: linear-gradient(to bottom, transparent, black var(--formation-blend));
+  mask-image: linear-gradient(to bottom, transparent, #0008 calc(var(--formation-blend) * .48), black var(--formation-blend));
 }
 .formation-undead { --portrait-shade: #1b1615; }
 .formation-skyborne { --portrait-shade: #14212e; }
@@ -101,20 +101,6 @@ p { margin: 0; }
   .formation { min-height: 68vw; }
   .formation-caption { inset-inline: 3%; }
 }
-@media (prefers-reduced-motion: no-preference) {
-  @supports (animation-timeline: view()) {
-    .formation > .story-art img {
-      animation: formation-drift linear both;
-      animation-timeline: view();
-      animation-range: entry 10% exit 100%;
-    }
-  }
-}
-@keyframes formation-drift {
-  from { transform: scale(1.035) translateY(-1%); }
-  to { transform: scale(1.08) translateY(1%); }
-}
-
 .timeline {
   --accent: #f9d69d;
   --blend: clamp(65px, 14svh, 130px);
@@ -127,35 +113,47 @@ p { margin: 0; }
   --accent: #e0d7ff;
   --scene-art: url('/art/valley.jpg');
   --scene-tint: #15152c;
-  --pan: 18px;
+  --direction: 1;
+  --backdrop-drift: calc(2.5% * var(--direction));
+  --art-arrival: calc(24px * var(--direction));
   isolation: isolate;
   position: relative;
 }
 .timeline-entry + .timeline-entry { margin-top: calc(-1 * var(--blend)); }
-.timeline-entry:nth-child(even) { --pan: -18px; }
+.timeline-entry:nth-child(even) { --direction: -1; }
 .entry-profession { --accent: #ffd9ad; --scene-tint: #261910; --scene-art: url('/art/trades.jpg'); }
 .entry-boss { --accent: #bfece0; --scene-tint: #06211e; --scene-art: url('/art/valley.jpg'); }
 .entry-legacy { --accent: #ffe0a0; --scene-tint: #291c0d; --scene-art: url('/art/summit.jpg'); }
 .entry-pvp { --accent: #ffcbd5; --scene-tint: #250d21; --scene-art: url('/art/battleground.jpg'); }
-.timeline-entry::before {
-  content: ''; position: absolute; z-index: -1; inset: 0;
+.scene-backdrop {
+  --scene-blend: var(--blend);
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  overflow: clip;
+  pointer-events: none;
+  mask-image: linear-gradient(to bottom, transparent, #0008 calc(var(--scene-blend) * .48), black var(--scene-blend));
+}
+.scene-backdrop::before {
+  content: '';
+  position: absolute;
+  inset: 0;
   background:
     linear-gradient(105deg, color-mix(in srgb, var(--scene-tint) 88%, transparent) 6%,
       color-mix(in srgb, var(--scene-tint) 71%, transparent) 62%,
       color-mix(in srgb, var(--scene-tint) 76%, transparent)),
-    var(--scene-art) center var(--scene-position, 50%) / cover;
-  mask-image: linear-gradient(to bottom, transparent, black var(--blend));
+    var(--scene-art) center / cover;
 }
-.timeline-entry:first-child::before {
-  mask-image: linear-gradient(to bottom, transparent, black var(--formation-blend));
+.timeline-entry:first-child .scene-backdrop {
+  --scene-blend: var(--formation-blend);
 }
-.timeline-entry:last-child::before {
-  mask-image: linear-gradient(to bottom, transparent, black var(--blend),
+.timeline-entry:last-child .scene-backdrop {
+  mask-image: linear-gradient(to bottom, transparent, black var(--scene-blend),
     black calc(100% - var(--blend)), transparent);
 }
 .milestone {
   position: relative; display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, .95fr); align-items: center;
+  grid-template-columns: minmax(0, 1fr) minmax(0, .95fr); align-items: start;
   gap: clamp(24px, 6vw, 90px);
   width: min(100%, 1370px); margin-inline: auto;
   padding: max(var(--blend), clamp(62px, 9vw, 110px)) var(--gutter);
@@ -173,6 +171,7 @@ p { margin: 0; }
 .milestone-details {
   display: grid; align-content: center; align-items: center; gap: 12px;
   min-width: 0;
+  margin-block-start: 32px;
 }
 .milestone-details > p { max-width: 46ch; line-height: 1.5; }
 .story-party { display: flex; flex-wrap: wrap; gap: 8px 18px; }
@@ -184,47 +183,102 @@ p { margin: 0; }
 }
 @media (max-width: 610px) {
   .timeline { --blend: clamp(38px, 13vw, 76px); }
+  .timeline-entry {
+    --art-arrival: calc(10px * var(--direction));
+    --backdrop-drift: calc(1.25% * var(--direction));
+  }
   .milestone { grid-template-columns: minmax(0, 1fr); gap: 18px; }
-  .timeline-entry::before { background-position: center, 66% var(--scene-position, 50%); }
+  .milestone-details { margin-block-start: 0; }
+  .scene-backdrop::before { background-position: center, 66% 50%; }
   .milestone-heading .event-time { margin-bottom: 8px; }
 }
 @media (prefers-reduced-motion: no-preference) {
-  @supports (animation-timeline: view()) {
-    .timeline-entry { view-timeline-name: --entry; }
-    .timeline-entry::before {
-      animation: scene-pan linear both;
-      animation-timeline: --entry;
-      animation-range: entry 0% exit 100%;
-      background-position: center, calc(50% + var(--pan)) var(--scene-position);
+  @supports (view-timeline-name: --scene) and (animation-range: entry 0% entry 100%) {
+    .formation { view-timeline-name: --formation; }
+    .formation > .story-art img {
+      animation: portrait-parallax linear both;
+      animation-timeline: --formation;
+      animation-range: cover;
     }
-    .milestone-heading {
-      animation: milestone-title-in linear both;
-      animation-timeline: --entry;
-      animation-range: entry 0% entry 65%;
+    .formation + .formation .arrival {
+      --text-rise: 16px;
+      animation: text-arrival ease-out both;
+      animation-timeline: --formation;
+      animation-range: entry calc(61% + 6% * var(--arrival-order)) entry calc(90% + 6% * var(--arrival-order));
     }
-    .milestone-details {
-      --arrival: 18px;
-      animation: milestone-detail-in linear both;
-      animation-timeline: --entry;
-      animation-range: entry 35% entry 100%;
+
+    .timeline-entry { view-timeline-name: --scene; }
+    .scene-backdrop {
+      animation: backdrop-blend linear both;
+      animation-timeline: --scene;
+      animation-range: entry 0% entry 85%;
     }
-    .timeline-entry:nth-child(even) .milestone-details { --arrival: -18px; }
+    .scene-backdrop::before {
+      animation: backdrop-parallax linear both;
+      animation-timeline: --scene;
+      animation-range: cover;
+    }
+
+    .milestone-heading { view-timeline-name: --heading; }
+    .milestone-heading > * {
+      --text-rise: 12px;
+      animation: text-arrival ease-out both;
+      animation-timeline: --heading;
+      animation-range: entry 18px entry 136px;
+    }
+    .milestone-heading > h3 {
+      --text-rise: 24px;
+      animation-range: entry 0px entry 100px;
+    }
+    .milestone-heading > .milestone-hero {
+      animation-range: entry 44px entry 162px;
+    }
+
+    .milestone-details { view-timeline-name: --details; }
+    .milestone-details > .story-art {
+      animation: painting-arrival cubic-bezier(.18, .74, .25, 1) both;
+      animation-timeline: --details;
+      animation-range: entry 18% entry 90%;
+    }
+    .milestone-details > p, .story-party > div {
+      --text-rise: 14px;
+      animation: text-arrival ease-out both;
+      animation-timeline: --details;
+      animation-range: entry 35% entry 95%;
+    }
+    .story-party > div {
+      animation-range: entry calc(43% + 6% * var(--arrival-order)) entry calc(76% + 6% * var(--arrival-order));
+    }
+    @media (min-width: 611px) {
+      :is(.entry-boss, .entry-pvp, .entry-legacy) .milestone-details > .story-art {
+        animation: painting-arrival cubic-bezier(.18, .74, .25, 1) both, painting-parallax linear both;
+        animation-timeline: --details, --scene;
+        animation-range: entry 18% entry 90%, cover;
+      }
+    }
   }
 }
-@property --scene-position {
-  syntax: '<percentage>';
-  inherits: false;
-  initial-value: 50%;
+@keyframes portrait-parallax {
+  from { transform: translateY(-4%) scale(1.13); }
+  to { transform: translateY(4%) scale(1.13); }
 }
-@keyframes scene-pan {
-  from { --scene-position: 28%; }
-  to { --scene-position: 72%; }
+@keyframes backdrop-blend {
+  from { opacity: .63; }
+  to { opacity: 1; }
 }
-@keyframes milestone-title-in {
-  from { opacity: .88; transform: translateY(12px); }
+@keyframes backdrop-parallax {
+  from { transform: translate(calc(-1 * var(--backdrop-drift)), -4%) scale(1.12); }
+  to { transform: translate(var(--backdrop-drift), 4%) scale(1.12); }
+}
+@keyframes text-arrival {
+  from { opacity: .22; transform: translateY(var(--text-rise)); }
   to { opacity: 1; transform: none; }
 }
-@keyframes milestone-detail-in {
-  from { opacity: .88; transform: translateX(var(--arrival)); }
+@keyframes painting-arrival {
+  from { opacity: .15; transform: translateX(var(--art-arrival)) scale(.96); }
   to { opacity: 1; transform: none; }
+}
+@keyframes painting-parallax {
+  from { translate: 0 14px; }
+  to { translate: 0 -14px; }
 }
