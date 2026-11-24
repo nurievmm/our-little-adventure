@@ -336,6 +336,13 @@
     "rows": 2,
     "width": 1440
   },
+  "saar-oathwell-level10": {
+    "columns": 1,
+    "height": 640,
+    "revision": "cee3620c19",
+    "rows": 1,
+    "width": 960
+  },
   "shadowfang": {
     "columns": 1,
     "height": 853,
