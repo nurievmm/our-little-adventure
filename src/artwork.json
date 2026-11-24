@@ -63,6 +63,156 @@
     "rows": 2,
     "width": 1440
   },
+  "journey-allison-burgerrs": {
+    "columns": 2,
+    "height": 960,
+    "levels": [
+      10,
+      20,
+      25,
+      null
+    ],
+    "revision": "e838e81203",
+    "rows": 2,
+    "width": 1440
+  },
+  "journey-aloy-cosem": {
+    "columns": 1,
+    "height": 960,
+    "levels": [
+      10
+    ],
+    "revision": "f99407fd15",
+    "rows": 1,
+    "width": 1440
+  },
+  "journey-chipson-bomfrey": {
+    "columns": 2,
+    "height": 960,
+    "levels": [
+      10,
+      20,
+      25,
+      40
+    ],
+    "revision": "95f677e2aa",
+    "rows": 2,
+    "width": 1440
+  },
+  "journey-classic-schmosby": {
+    "columns": 2,
+    "height": 960,
+    "levels": [
+      10,
+      20,
+      25,
+      null
+    ],
+    "revision": "6b85b59bc5",
+    "rows": 2,
+    "width": 1440
+  },
+  "journey-dargor-springhill": {
+    "columns": 2,
+    "height": 960,
+    "levels": [
+      10,
+      20,
+      25,
+      null
+    ],
+    "revision": "27adf3d4d4",
+    "rows": 2,
+    "width": 1440
+  },
+  "journey-edou-khil": {
+    "columns": 2,
+    "height": 640,
+    "levels": [
+      10,
+      20
+    ],
+    "revision": "10f9bebc7a",
+    "rows": 1,
+    "width": 1920
+  },
+  "journey-graag-gogkhilghak": {
+    "columns": 1,
+    "height": 960,
+    "levels": [
+      10
+    ],
+    "revision": "1352c10804",
+    "rows": 1,
+    "width": 1440
+  },
+  "journey-hehehehe-hahahaha": {
+    "columns": 2,
+    "height": 640,
+    "levels": [
+      10,
+      20
+    ],
+    "revision": "2ccd310ac3",
+    "rows": 1,
+    "width": 1920
+  },
+  "journey-lailah-primali": {
+    "columns": 1,
+    "height": 960,
+    "levels": [
+      10
+    ],
+    "revision": "f4b89aded0",
+    "rows": 1,
+    "width": 1440
+  },
+  "journey-lailah-shemesh": {
+    "columns": 2,
+    "height": 640,
+    "levels": [
+      10,
+      20
+    ],
+    "revision": "3bd4e80bb1",
+    "rows": 1,
+    "width": 1920
+  },
+  "journey-lior-shadowlord": {
+    "columns": 2,
+    "height": 640,
+    "levels": [
+      10,
+      20
+    ],
+    "revision": "a734dea297",
+    "rows": 1,
+    "width": 1920
+  },
+  "journey-lioren-aurelith": {
+    "columns": 2,
+    "height": 960,
+    "levels": [
+      10,
+      20,
+      25,
+      null
+    ],
+    "revision": "785ea59a71",
+    "rows": 2,
+    "width": 1440
+  },
+  "journey-saar-oathwell": {
+    "columns": 2,
+    "height": 640,
+    "levels": [
+      10,
+      20
+    ],
+    "revision": "1a3346be16",
+    "rows": 1,
+    "width": 1920
+  },
   "lailah-primali": {
     "columns": 2,
     "height": 960,
@@ -101,6 +251,13 @@
     "revision": "a5d6a8063b",
     "rows": 1,
     "width": 1280
+  },
+  "lordaeron-2-varied": {
+    "columns": 1,
+    "height": 960,
+    "revision": "caa9e396bf",
+    "rows": 1,
+    "width": 1440
   },
   "orcs-trolls": {
     "columns": 1,
@@ -147,6 +304,13 @@
     "revision": "ed43171446",
     "rows": 1,
     "width": 1280
+  },
+  "ragefire-2-varied": {
+    "columns": 1,
+    "height": 960,
+    "revision": "3d1fa6ef46",
+    "rows": 1,
+    "width": 1440
   },
   "saar-oathwell": {
     "columns": 2,
@@ -229,6 +393,35 @@
     "rows": 2,
     "width": 1440
   },
+  "work-allison-burgerrs-varied": {
+    "columns": 3,
+    "height": 960,
+    "ranks": [
+      {
+        "cap": 75,
+        "skill": "Cooking"
+      },
+      {
+        "cap": 150,
+        "skill": "Cooking"
+      },
+      {
+        "cap": 75,
+        "skill": "Fishing"
+      },
+      {
+        "cap": 150,
+        "skill": "Fishing"
+      },
+      {
+        "cap": 225,
+        "skill": "Fishing"
+      }
+    ],
+    "revision": "a86051272f",
+    "rows": 2,
+    "width": 1440
+  },
   "work-chipson-bomfrey": {
     "columns": 3,
     "height": 960,
@@ -275,6 +468,35 @@
     "rows": 2,
     "width": 1440
   },
+  "work-chipson-bomfrey-varied": {
+    "columns": 3,
+    "height": 960,
+    "ranks": [
+      {
+        "cap": 75,
+        "skill": "Cooking"
+      },
+      {
+        "cap": 150,
+        "skill": "Cooking"
+      },
+      {
+        "cap": 75,
+        "skill": "Fishing"
+      },
+      {
+        "cap": 150,
+        "skill": "Fishing"
+      },
+      {
+        "cap": 225,
+        "skill": "Fishing"
+      }
+    ],
+    "revision": "8464687a18",
+    "rows": 2,
+    "width": 1440
+  },
   "work-classic-schmosby": {
     "columns": 3,
     "height": 960,
@@ -305,6 +527,31 @@
     "rows": 1,
     "width": 1440
   },
+  "work-classic-schmosby-varied": {
+    "columns": 2,
+    "height": 960,
+    "ranks": [
+      {
+        "cap": 75,
+        "skill": "Cooking"
+      },
+      {
+        "cap": 150,
+        "skill": "Cooking"
+      },
+      {
+        "cap": 75,
+        "skill": "Fishing"
+      },
+      {
+        "cap": 150,
+        "skill": "Fishing"
+      }
+    ],
+    "revision": "815b103e6d",
+    "rows": 2,
+    "width": 1440
+  },
   "work-dargor-springhill": {
     "columns": 2,
     "height": 720,
@@ -327,6 +574,23 @@
     "revision": "309b9d31aa",
     "rows": 1,
     "width": 1440
+  },
+  "work-dargor-springhill-varied": {
+    "columns": 2,
+    "height": 640,
+    "ranks": [
+      {
+        "cap": 75,
+        "skill": "Skinning"
+      },
+      {
+        "cap": 150,
+        "skill": "Skinning"
+      }
+    ],
+    "revision": "4ccdb44ce1",
+    "rows": 1,
+    "width": 1920
   },
   "work-edou-khil": {
     "columns": 3,
@@ -352,6 +616,27 @@
     ],
     "revision": "ce816e821b",
     "rows": 1,
+    "width": 1440
+  },
+  "work-edou-khil-varied": {
+    "columns": 2,
+    "height": 960,
+    "ranks": [
+      {
+        "cap": 75,
+        "skill": "Cooking"
+      },
+      {
+        "cap": 75,
+        "skill": "Fishing"
+      },
+      {
+        "cap": 150,
+        "skill": "Fishing"
+      }
+    ],
+    "revision": "4ac1b6de1b",
+    "rows": 2,
     "width": 1440
   },
   "work-hehehehe-hahahaha": {
@@ -410,6 +695,19 @@
       }
     ],
     "revision": "573e97d523",
+    "rows": 1,
+    "width": 1440
+  },
+  "work-lioren-aurelith-varied": {
+    "columns": 1,
+    "height": 960,
+    "ranks": [
+      {
+        "cap": 75,
+        "skill": "Fishing"
+      }
+    ],
+    "revision": "114a934c8f",
     "rows": 1,
     "width": 1440
   },

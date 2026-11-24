@@ -10,10 +10,10 @@ export const formations = [
 const dungeonPaintings = {
   '15027/2026-11-12T22:38:55.000Z': 'ragefire-1',
   '63570/2026-11-16T21:22:07.000Z': 'deadmines',
-  '15027/2026-11-19T20:00:56.000Z': 'ragefire-2',
+  '15027/2026-11-19T20:00:56.000Z': 'ragefire-2-varied',
   '63571/2026-11-19T21:37:11.000Z': 'lordaeron-1',
   '15028/2026-11-20T22:42:26.000Z': 'wailing-caverns',
-  '63571/2026-11-20T23:45:52.000Z': 'lordaeron-2',
+  '63571/2026-11-20T23:45:52.000Z': 'lordaeron-2-varied',
   '1092/2026-11-23T20:09:17.000Z': 'shadowfang',
 };
 
@@ -27,6 +27,10 @@ export function painting(key, panel = 0) {
 
 export function heroPainting(name, level = 10) {
   const key = slug(name);
+  const journeyKey = 'journey-' + key;
+  const journeyPanel = artwork[journeyKey]?.levels?.indexOf(level) ?? -1;
+  if (journeyPanel >= 0) return painting(journeyKey, journeyPanel);
+
   if (key === 'chipson-bomfrey' && level >= 30 && level < 40) {
     const intermediate = painting('chipson-level30');
     if (intermediate) return intermediate;
@@ -37,9 +41,10 @@ export function heroPainting(name, level = 10) {
 
 function professionPainting(hero, skill, cap) {
   const key = 'work-' + slug(hero.name);
-  const progressionKey = key + '-progression';
-  const progression = artwork[progressionKey]?.ranks?.findIndex((rank) => rank.skill === skill && rank.cap === cap) ?? -1;
-  if (progression >= 0) return painting(progressionKey, progression);
+  for (const rankKey of [key + '-varied', key + '-progression']) {
+    const panel = artwork[rankKey]?.ranks?.findIndex((rank) => rank.skill === skill && rank.cap === cap) ?? -1;
+    if (panel >= 0) return painting(rankKey, panel);
+  }
   const panel = artwork[key]?.skills?.indexOf(skill) ?? -1;
   return panel < 0 ? undefined : painting(key, panel);
 }
