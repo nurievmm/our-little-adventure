@@ -42,7 +42,7 @@
   "deadmines": {
     "columns": 1,
     "height": 853,
-    "revision": "2679a9f0fe",
+    "revision": "b7f247f60e",
     "rows": 1,
     "width": 1280
   },
@@ -122,7 +122,7 @@
       25,
       null
     ],
-    "revision": "39ebef7c12",
+    "revision": "8d3f35ceb2",
     "rows": 2,
     "width": 1440
   },
@@ -133,7 +133,7 @@
       10,
       20
     ],
-    "revision": "327183c049",
+    "revision": "f45e6e6da3",
     "rows": 1,
     "width": 1920
   },
@@ -154,7 +154,7 @@
       10,
       20
     ],
-    "revision": "e5b2b9f447",
+    "revision": "0c205190ed",
     "rows": 1,
     "width": 1920
   },
@@ -175,7 +175,7 @@
       10,
       20
     ],
-    "revision": "d6ea5e560d",
+    "revision": "f7a1b10180",
     "rows": 1,
     "width": 1920
   },
@@ -199,7 +199,7 @@
       25,
       null
     ],
-    "revision": "d05b7627b2",
+    "revision": "879c457087",
     "rows": 2,
     "width": 1440
   },
@@ -210,7 +210,7 @@
       10,
       20
     ],
-    "revision": "063783de3e",
+    "revision": "1727b462c1",
     "rows": 1,
     "width": 1920
   },
@@ -242,7 +242,7 @@
   "lordaeron-1": {
     "columns": 1,
     "height": 853,
-    "revision": "5f8d9a2565",
+    "revision": "6bda079ba0",
     "rows": 1,
     "width": 1280
   },
@@ -256,7 +256,7 @@
   "lordaeron-2-varied": {
     "columns": 1,
     "height": 960,
-    "revision": "e8ce2c7f11",
+    "revision": "768c5b2864",
     "rows": 1,
     "width": 1440
   },
@@ -277,28 +277,28 @@
   "pvp-lailah-shemesh": {
     "columns": 1,
     "height": 853,
-    "revision": "6c9112901f",
+    "revision": "d025459923",
     "rows": 1,
     "width": 1280
   },
   "pvp-lior-shadowlord": {
     "columns": 1,
     "height": 853,
-    "revision": "613dcacda0",
+    "revision": "1f2d9bd8d0",
     "rows": 1,
     "width": 1280
   },
   "pvp-saar-oathwell": {
     "columns": 1,
     "height": 853,
-    "revision": "be97481787",
+    "revision": "b9691bd883",
     "rows": 1,
     "width": 1280
   },
   "ragefire-1": {
     "columns": 1,
     "height": 853,
-    "revision": "824e94332e",
+    "revision": "d8a886c0e0",
     "rows": 1,
     "width": 1280
   },
@@ -312,7 +312,7 @@
   "ragefire-2-varied": {
     "columns": 1,
     "height": 960,
-    "revision": "3d1fa6ef46",
+    "revision": "db453841e0",
     "rows": 1,
     "width": 1440
   },
@@ -325,14 +325,14 @@
   "shadowfang": {
     "columns": 1,
     "height": 853,
-    "revision": "15f8864888",
+    "revision": "a0eff8f487",
     "rows": 1,
     "width": 1280
   },
   "skyborne": {
     "columns": 1,
     "height": 853,
-    "revision": "29c7968992",
+    "revision": "f56b034af4",
     "rows": 1,
     "width": 1280
   },
@@ -359,14 +359,14 @@
   "wailing-caverns": {
     "columns": 1,
     "height": 853,
-    "revision": "7262007626",
+    "revision": "6e6db8b19d",
     "rows": 1,
     "width": 1280
   },
   "work-allison-burgerrs": {
     "columns": 3,
     "height": 960,
-    "revision": "84415ea5de",
+    "revision": "babb3931b4",
     "rows": 2,
     "skills": [
       "Mining",
@@ -470,7 +470,7 @@
         "skill": "Mining"
       }
     ],
-    "revision": "6cd60754f2",
+    "revision": "3421b099f7",
     "rows": 2,
     "width": 1440
   },
@@ -499,14 +499,14 @@
         "skill": "Fishing"
       }
     ],
-    "revision": "716acc3616",
+    "revision": "80ec0d365e",
     "rows": 2,
     "width": 1440
   },
   "work-classic-schmosby": {
     "columns": 3,
     "height": 960,
-    "revision": "4bad9e8dc3",
+    "revision": "29aa4dce0d",
     "rows": 2,
     "skills": [
       "Tailoring",
@@ -602,7 +602,7 @@
   "work-edou-khil": {
     "columns": 3,
     "height": 960,
-    "revision": "2ae72d0510",
+    "revision": "823cc1546f",
     "rows": 2,
     "skills": [
       "Alchemy",
@@ -643,14 +643,14 @@
         "skill": "Fishing"
       }
     ],
-    "revision": "224de30f06",
+    "revision": "85646dc347",
     "rows": 2,
     "width": 1440
   },
   "work-hehehehe-hahahaha": {
     "columns": 2,
     "height": 960,
-    "revision": "2bf0f04d41",
+    "revision": "0c046e641d",
     "rows": 2,
     "skills": [
       "Skinning",
@@ -662,7 +662,7 @@
   "work-lailah-shemesh": {
     "columns": 1,
     "height": 720,
-    "revision": "7053842b18",
+    "revision": "3cba6ca686",
     "rows": 1,
     "skills": [
       "Skinning"
@@ -672,7 +672,7 @@
   "work-lior-shadowlord": {
     "columns": 2,
     "height": 720,
-    "revision": "eb820cad79",
+    "revision": "58ff04bd49",
     "rows": 1,
     "skills": [
       "Tailoring",
@@ -683,7 +683,7 @@
   "work-lioren-aurelith": {
     "columns": 2,
     "height": 960,
-    "revision": "f0bd06aea9",
+    "revision": "8885fb9827",
     "rows": 2,
     "skills": [
       "Alchemy",
@@ -705,7 +705,7 @@
         "skill": "Herbalism"
       }
     ],
-    "revision": "fc07b96be2",
+    "revision": "1855e9a378",
     "rows": 1,
     "width": 1440
   },
@@ -725,7 +725,7 @@
   "work-saar-oathwell": {
     "columns": 1,
     "height": 720,
-    "revision": "2ad832c1fc",
+    "revision": "cc23ffc2bd",
     "rows": 1,
     "skills": [
       "Mining"
