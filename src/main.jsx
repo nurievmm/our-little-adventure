@@ -65,7 +65,7 @@ function Creation({ heroes }) {
     </header>
     <div className="chapter-details">
       <ul className="story-grid arrivals">
-        {heroes.map((hero) => <li className="story-card arrival" key={hero.name}>
+        {heroes.map((hero) => <li className="arrival" key={hero.name}>
           <Portrait hero={hero} />
           <div><h3>{hero.name}</h3><p>{hero.race} · {hero.className}</p>
             <div className="event-time">
