@@ -44,9 +44,11 @@ function StoryArt({ art, alt = '', eager = false }) {
     '--art-ratio': ratio, '--art-columns': columns, '--art-rows': rows,
     '--art-x': panel % columns, '--art-y': Math.floor(panel / columns),
   }}>
-    <img src={revision ? src + '?v=' + revision : src} alt={alt}
-      width={width} height={height} loading={eager ? 'eager' : 'lazy'}
-      fetchPriority={eager ? 'high' : undefined} decoding={eager ? 'auto' : 'async'} />
+    <div className="story-art-panel">
+      <img src={revision ? src + '?v=' + revision : src} alt={alt}
+        width={width} height={height} loading={eager ? 'eager' : 'lazy'}
+        fetchPriority={eager ? 'high' : undefined} decoding={eager ? 'auto' : 'async'} />
+    </div>
   </div>;
 }
 
@@ -93,15 +95,19 @@ function Scene({ event, roster }) {
   const art = painting ?? (event.hero && heroPainting(event.hero.name, event.hero.level));
   const subject = event.hero?.name ?? event.title;
   return <article className="milestone">
-    <header className="milestone-heading">
-      <EventTime event={event} />
-      {event.dungeon && <p className="eyebrow">{event.dungeon}</p>}
-      <h3>{event.title}</h3>
-      {event.hero && <p className="milestone-hero">{event.hero.name}</p>}
-    </header>
-    <div className="milestone-details">
+    <div className="scene-backdrop">
       <StoryArt art={art} alt={'Illustration of ' + subject} />
-      <EventDetails event={event} hasPainting={Boolean(painting)} />
+    </div>
+    <div className="milestone-copy">
+      <header className="milestone-heading">
+        <EventTime event={event} />
+        {event.dungeon && <p className="eyebrow">{event.dungeon}</p>}
+        <h3>{event.title}</h3>
+        {event.hero && <p className="milestone-hero">{event.hero.name}</p>}
+      </header>
+      <div className="milestone-details">
+        <EventDetails event={event} hasPainting={Boolean(painting)} />
+      </div>
     </div>
   </article>;
 }
@@ -113,7 +119,6 @@ function Timeline({ heroes, snapshot }) {
     <h2 id="timeline-title" className="visually-hidden">Adventure timeline</h2>
     <ol className="timeline-list">
       {milestones.map((event) => <li key={event.key} data-reading-stop={event.key} className={'timeline-entry entry-' + event.kind}>
-        <div className="scene-backdrop" aria-hidden="true" />
         <Scene event={event} roster={byName} />
       </li>)}
     </ol>

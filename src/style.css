@@ -29,6 +29,7 @@ p { margin: 0; }
   aspect-ratio: var(--art-ratio);
   overflow: clip;
 }
+.story-art-panel { position: absolute; inset: 0; }
 .story-art img {
   position: absolute;
   width: calc(100% * var(--art-columns));
@@ -115,7 +116,6 @@ p { margin: 0; }
   --scene-tint: #15152c;
   --direction: 1;
   --backdrop-drift: calc(2.5% * var(--direction));
-  --art-arrival: calc(24px * var(--direction));
   isolation: isolate;
   position: relative;
 }
@@ -134,15 +134,33 @@ p { margin: 0; }
   pointer-events: none;
   mask-image: linear-gradient(to bottom, transparent, #0008 calc(var(--scene-blend) * .48), black var(--scene-blend));
 }
-.scene-backdrop::before {
+.scene-backdrop:empty::before, .scene-backdrop::after {
   content: '';
   position: absolute;
   inset: 0;
+}
+.scene-backdrop:empty::before {
+  background: var(--scene-art) center / cover;
+}
+.scene-backdrop > .story-art {
+  position: absolute;
+  inset: 0;
+  aspect-ratio: auto;
+  container-type: size;
+}
+/* Cover the scene using only the selected panel of a multi-image sheet. */
+.scene-backdrop .story-art-panel {
+  inset: 35% auto auto 50%;
+  width: max(100cqw, calc(100cqh * var(--art-ratio)));
+  height: max(100cqh, calc(100cqw / var(--art-ratio)));
+  transform: translate(-50%, -35%);
+  overflow: clip;
+}
+.scene-backdrop::after {
   background:
-    linear-gradient(105deg, color-mix(in srgb, var(--scene-tint) 88%, transparent) 6%,
-      color-mix(in srgb, var(--scene-tint) 71%, transparent) 62%,
-      color-mix(in srgb, var(--scene-tint) 76%, transparent)),
-    var(--scene-art) center / cover;
+    linear-gradient(to bottom, transparent 26%,
+      color-mix(in srgb, var(--scene-tint) 42%, transparent) 59%, #080b13e8 100%),
+    linear-gradient(to right, #080b1373, transparent 75%);
 }
 .timeline-entry:first-child .scene-backdrop {
   --scene-blend: var(--formation-blend);
@@ -152,14 +170,17 @@ p { margin: 0; }
     black calc(100% - var(--blend)), transparent);
 }
 .milestone {
-  position: relative; display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, .95fr); align-items: start;
-  gap: clamp(24px, 6vw, 90px);
-  width: min(100%, 1370px); margin-inline: auto;
-  padding: max(var(--blend), clamp(62px, 9vw, 110px)) var(--gutter);
+  position: relative;
+  display: grid;
+  align-items: end;
+  min-block-size: clamp(410px, 68svh, 690px);
+  padding: clamp(155px, 28svh, 245px) var(--gutter) calc(var(--blend) + 28px);
   text-shadow: var(--ink-shadow);
 }
-.milestone-heading { min-width: 0; }
+.entry-boss .milestone, .entry-pvp .milestone, .entry-legacy .milestone {
+  min-block-size: clamp(460px, 76svh, 780px);
+}
+.milestone-copy { width: min(100%, 52rem); }
 .milestone-heading .event-time { margin: 0 0 12px; color: #fff5e4; font-weight: 600; }
 .milestone-heading .eyebrow { font-size: .82rem; letter-spacing: .13em; }
 .milestone h3 {
@@ -169,27 +190,28 @@ p { margin: 0; }
 .entry-level h3, .entry-profession h3 { font-size: clamp(2.12rem, 4.1vw, 3.55rem); }
 .milestone-hero { margin-top: 10px; font-size: clamp(1.08rem, 2vw, 1.45rem); font-weight: 600; }
 .milestone-details {
-  display: grid; align-content: center; align-items: center; gap: 12px;
-  min-width: 0;
-  margin-block-start: 32px;
+  display: grid;
+  gap: 10px;
+  margin-block-start: 12px;
 }
+.milestone-details:empty { display: none; }
 .milestone-details > p { max-width: 46ch; line-height: 1.5; }
 .story-party { display: flex; flex-wrap: wrap; gap: 8px 18px; }
 .story-party > div { display: flex; align-items: center; gap: 8px; font-size: .99rem; font-weight: 600; }
 .story-party .story-art { width: 46px; flex: 0 0 auto; }
-.milestone-details > .story-art {
-  width: min(100%, calc(340px * var(--art-ratio)));
-  margin-bottom: 4px;
-}
 @media (max-width: 610px) {
   .timeline { --blend: clamp(38px, 13vw, 76px); }
-  .timeline-entry {
-    --art-arrival: calc(10px * var(--direction));
-    --backdrop-drift: calc(1.25% * var(--direction));
+  .timeline-entry { --backdrop-drift: calc(1.25% * var(--direction)); }
+  .milestone {
+    min-block-size: clamp(330px, 51svh, 460px);
+    padding-block: clamp(145px, 26svh, 200px) calc(var(--blend) + 20px);
   }
-  .milestone { grid-template-columns: minmax(0, 1fr); gap: 18px; }
-  .milestone-details { margin-block-start: 0; }
-  .scene-backdrop::before { background-position: center, 66% 50%; }
+  .entry-boss .milestone, .entry-pvp .milestone, .entry-legacy .milestone {
+    min-block-size: clamp(380px, 58svh, 540px);
+  }
+  .scene-backdrop::after {
+    background: linear-gradient(to bottom, transparent 22%, #080b1359 44%, #080b13f2 100%);
+  }
   .milestone-heading .event-time { margin-bottom: 8px; }
 }
 @media (prefers-reduced-motion: no-preference) {
@@ -213,7 +235,7 @@ p { margin: 0; }
       animation-timeline: --scene;
       animation-range: entry 0% entry 85%;
     }
-    .scene-backdrop::before {
+    .scene-backdrop > .story-art, .scene-backdrop:empty::before {
       animation: backdrop-parallax linear both;
       animation-timeline: --scene;
       animation-range: cover;
@@ -235,11 +257,6 @@ p { margin: 0; }
     }
 
     .milestone-details { view-timeline-name: --details; }
-    .milestone-details > .story-art {
-      animation: painting-arrival cubic-bezier(.18, .74, .25, 1) both;
-      animation-timeline: --details;
-      animation-range: entry 18% entry 90%;
-    }
     .milestone-details > p, .story-party > div {
       --text-rise: 14px;
       animation: text-arrival ease-out both;
@@ -248,13 +265,6 @@ p { margin: 0; }
     }
     .story-party > div {
       animation-range: entry calc(43% + 6% * var(--arrival-order)) entry calc(76% + 6% * var(--arrival-order));
-    }
-    @media (min-width: 611px) {
-      :is(.entry-boss, .entry-pvp, .entry-legacy) .milestone-details > .story-art {
-        animation: painting-arrival cubic-bezier(.18, .74, .25, 1) both, painting-parallax linear both;
-        animation-timeline: --details, --scene;
-        animation-range: entry 18% entry 90%, cover;
-      }
     }
   }
 }
@@ -273,12 +283,4 @@ p { margin: 0; }
 @keyframes text-arrival {
   from { opacity: .22; transform: translateY(var(--text-rise)); }
   to { opacity: 1; transform: none; }
-}
-@keyframes painting-arrival {
-  from { opacity: .15; transform: translateX(var(--art-arrival)) scale(.96); }
-  to { opacity: 1; transform: none; }
-}
-@keyframes painting-parallax {
-  from { translate: 0 14px; }
-  to { translate: 0 -14px; }
 }
