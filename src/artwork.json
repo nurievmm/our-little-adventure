@@ -33,6 +33,13 @@
     "rows": 2,
     "width": 1440
   },
+  "classic-schmosby-level10": {
+    "columns": 1,
+    "height": 480,
+    "revision": "1ddf54753e",
+    "rows": 1,
+    "width": 720
+  },
   "dargor-springhill": {
     "columns": 2,
     "height": 960,
