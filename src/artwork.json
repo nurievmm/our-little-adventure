@@ -277,7 +277,7 @@
   "orcs-trolls": {
     "columns": 1,
     "height": 853,
-    "revision": "b7db3b5419",
+    "revision": "6279b2fa4a",
     "rows": 1,
     "width": 1280
   },
@@ -312,7 +312,7 @@
   "ragefire-1": {
     "columns": 1,
     "height": 853,
-    "revision": "6be18ca66c",
+    "revision": "20a16fb512",
     "rows": 1,
     "width": 1280
   },
@@ -326,7 +326,7 @@
   "ragefire-2-varied": {
     "columns": 1,
     "height": 960,
-    "revision": "1690fd1df7",
+    "revision": "2599b99145",
     "rows": 1,
     "width": 1440
   },
@@ -346,7 +346,7 @@
   "shadowfang": {
     "columns": 1,
     "height": 853,
-    "revision": "888f808594",
+    "revision": "ea62e0d535",
     "rows": 1,
     "width": 1280
   },
@@ -367,7 +367,7 @@
   "tauren": {
     "columns": 1,
     "height": 853,
-    "revision": "16a64c648a",
+    "revision": "f702c79a1c",
     "rows": 1,
     "width": 1280
   },
@@ -381,7 +381,7 @@
   "wailing-caverns": {
     "columns": 1,
     "height": 853,
-    "revision": "bf0354c80c",
+    "revision": "ca46583cbe",
     "rows": 1,
     "width": 1280
   },
