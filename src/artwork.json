@@ -36,7 +36,7 @@
   "classic-schmosby-level10": {
     "columns": 1,
     "height": 480,
-    "revision": "4156c685e5",
+    "revision": "8e4f05e34d",
     "rows": 1,
     "width": 720
   },
@@ -49,7 +49,7 @@
   "deadmines": {
     "columns": 1,
     "height": 853,
-    "revision": "491666ab8e",
+    "revision": "d0142bb655",
     "rows": 1,
     "width": 1280
   },
@@ -80,7 +80,7 @@
       25,
       null
     ],
-    "revision": "834b8a19a4",
+    "revision": "2b2b1c2f3b",
     "rows": 2,
     "width": 1440
   },
@@ -374,7 +374,7 @@
   "undead": {
     "columns": 1,
     "height": 853,
-    "revision": "fa685f2055",
+    "revision": "759bce83f9",
     "rows": 1,
     "width": 1280
   },
@@ -409,7 +409,7 @@
   "work-allison-burgerrs-fishing-225": {
     "columns": 1,
     "height": 480,
-    "revision": "d95908d303",
+    "revision": "9d1b0218e6",
     "rows": 1,
     "width": 480
   },
@@ -480,14 +480,14 @@
   "work-chipson-bomfrey-cooking-150": {
     "columns": 1,
     "height": 960,
-    "revision": "bf0dd5cdea",
+    "revision": "d24e0da54d",
     "rows": 1,
     "width": 960
   },
   "work-chipson-bomfrey-engineering-150": {
     "columns": 1,
     "height": 480,
-    "revision": "50c182db43",
+    "revision": "0044aa8504",
     "rows": 1,
     "width": 480
   },
@@ -612,7 +612,7 @@
         "skill": "Fishing"
       }
     ],
-    "revision": "f92d6b0245",
+    "revision": "b13f065465",
     "rows": 2,
     "width": 1440
   },
