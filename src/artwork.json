@@ -140,7 +140,7 @@
       10,
       20
     ],
-    "revision": "416028224c",
+    "revision": "f7a923a465",
     "rows": 1,
     "width": 1920
   },
@@ -277,7 +277,7 @@
   "orcs-trolls": {
     "columns": 1,
     "height": 853,
-    "revision": "6279b2fa4a",
+    "revision": "7122efd6f5",
     "rows": 1,
     "width": 1280
   },
@@ -312,7 +312,7 @@
   "ragefire-1": {
     "columns": 1,
     "height": 853,
-    "revision": "20a16fb512",
+    "revision": "dbd799a5bd",
     "rows": 1,
     "width": 1280
   },
@@ -326,7 +326,7 @@
   "ragefire-2-varied": {
     "columns": 1,
     "height": 960,
-    "revision": "2599b99145",
+    "revision": "5becdc4e28",
     "rows": 1,
     "width": 1440
   },
@@ -700,7 +700,7 @@
         "skill": "Fishing"
       }
     ],
-    "revision": "63a6e14c1e",
+    "revision": "a4849131e8",
     "rows": 2,
     "width": 1440
   },
