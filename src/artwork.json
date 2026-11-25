@@ -105,7 +105,7 @@
       25,
       40
     ],
-    "revision": "95f677e2aa",
+    "revision": "dbb740901c",
     "rows": 2,
     "width": 1440
   },
@@ -355,7 +355,7 @@
   "tauren": {
     "columns": 1,
     "height": 853,
-    "revision": "e69deee564",
+    "revision": "3a1cf34431",
     "rows": 1,
     "width": 1280
   },
@@ -487,7 +487,7 @@
         "skill": "Mining"
       }
     ],
-    "revision": "3421b099f7",
+    "revision": "34c8a69e9a",
     "rows": 2,
     "width": 1440
   },
