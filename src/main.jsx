@@ -8,6 +8,7 @@ import { useSceneMotion } from './useSceneMotion.js';
 import './style.css';
 
 const base = import.meta.env.BASE_URL;
+const sceneRatio = 3 / 2;
 const locale = { day: 'numeric', month: 'short', timeZone: 'Asia/Jerusalem' };
 const day = new Intl.DateTimeFormat('en-GB', locale);
 const clock = new Intl.DateTimeFormat('en-GB', {
@@ -39,18 +40,29 @@ function EventTime({ event }) {
 
 const panelRatio = ({ width, height, columns, rows }) => (width / columns) / (height / rows);
 
-function StoryArt({ art, alt = '', eager = false }) {
+function StoryArt({ art, alt = '', eager = false, framed = false }) {
   if (!art) return null;
   const { key, width, height, panel, columns, rows, revision } = art;
   const src = base + 'art/paint-' + key + '.webp';
+  const ratio = panelRatio(art);
+  // Ignore small rounding differences in the source dimensions.
+  const needsBleed = framed && Math.abs(ratio / sceneRatio - 1) >= .01;
+  const narrow = ratio < sceneRatio;
+  const image = {
+    src: revision ? src + '?v=' + revision : src,
+    width, height, loading: eager ? 'eager' : 'lazy', decoding: eager ? 'auto' : 'async',
+  };
   return <div className="story-art" style={{
-    '--art-ratio': panelRatio(art), '--art-columns': columns, '--art-rows': rows,
+    '--art-ratio': ratio, '--art-columns': columns, '--art-rows': rows,
     '--art-x': panel % columns, '--art-y': Math.floor(panel / columns),
+    '--art-feather-direction': narrow ? 'to right' : 'to bottom',
   }}>
+    {needsBleed && <div className="story-art-bleed" data-axis={narrow ? 'inline' : 'block'} aria-hidden="true">
+      <div className="story-art-panel"><img {...image} alt="" /></div>
+      <div className="story-art-panel"><img {...image} alt="" /></div>
+    </div>}
     <div className="story-art-panel">
-      <img src={revision ? src + '?v=' + revision : src} alt={alt}
-        width={width} height={height} loading={eager ? 'eager' : 'lazy'}
-        fetchPriority={eager ? 'high' : undefined} decoding={eager ? 'auto' : 'async'} />
+      <img {...image} alt={alt} fetchPriority={eager ? 'high' : undefined} />
     </div>
   </div>;
 }
@@ -63,7 +75,7 @@ function Creation() {
       return <figure key={art} data-reading-stop={'formation/' + art}
         className={'formation formation-' + art} aria-label={race}>
         <div className="scene-backdrop" aria-hidden="true"><StoryArt art={portrait} /></div>
-        <StoryArt art={portrait} eager={index === 0} />
+        <StoryArt art={portrait} eager={index === 0} framed />
         <figcaption className="formation-caption">
           <ul className="formation-members" style={{ '--party-size': members.length }}>
             {members.map((name) => <li className="arrival" key={name}>
@@ -148,7 +160,7 @@ function Scene({ event, roster }) {
       <StoryArt art={art} />
     </div>
     <div className="milestone-frame">
-      <StoryArt art={art} alt={'Illustration of ' + subject} />
+      <StoryArt art={art} alt={'Illustration of ' + subject} framed />
       <div className="milestone-copy">
         <header className="milestone-heading">
           <EventTime event={event} />
@@ -198,7 +210,7 @@ function App() {
     };
   }, []);
   const heroes = snapshot?.heroes ?? roster;
-  return <main className="journal" ref={journal}>
+  return <main className="journal" ref={journal} style={{ '--frame-ratio': sceneRatio }}>
     <h1 className="visually-hidden">Our Little Adventure</h1>
     <Creation />
     <Timeline heroes={heroes} snapshot={snapshot} />
