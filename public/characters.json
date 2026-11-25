@@ -1,0 +1,1694 @@
+{
+  "version": 1,
+  "fetchedAt": "2026-11-25T05:30:09.672Z",
+  "syncedCount": 13,
+  "heroes": [
+    {
+      "name": "Allison Burgerrs",
+      "race": "Undead",
+      "className": "Paladin",
+      "level": 26,
+      "characterId": 14067353,
+      "portrait": "https://render.worldofwarcraft.com/forever-eu/character/153/14067353-avatar.jpg",
+      "model": "https://render.worldofwarcraft.com/forever-eu/character/153/14067353-main-sd-raw.png",
+      "faction": "HORDE",
+      "observedAt": "2026-11-25T05:30:09.672Z",
+      "skillsObservedAt": "2026-11-25T05:30:09.672Z",
+      "pvpObservedAt": "2026-11-25T05:30:09.672Z",
+      "gear": [
+        {
+          "slot": "HEAD",
+          "name": "Taurajo Headband"
+        },
+        {
+          "slot": "SHOULDER",
+          "name": "Bronzed Shoulderguards"
+        },
+        {
+          "slot": "SHIRT",
+          "name": "Brawler's Harness"
+        },
+        {
+          "slot": "CHEST",
+          "name": "Phantom Armor"
+        },
+        {
+          "slot": "WAIST",
+          "name": "Burnished Girdle"
+        },
+        {
+          "slot": "LEGS",
+          "name": "Bonerust Leggings"
+        },
+        {
+          "slot": "FEET",
+          "name": "Half-Eaten Boots"
+        },
+        {
+          "slot": "WRIST",
+          "name": "Steel-clasped Bracers"
+        },
+        {
+          "slot": "HANDS",
+          "name": "Dagmire Gauntlets"
+        },
+        {
+          "slot": "FINGER_1",
+          "name": "First Mate Band"
+        },
+        {
+          "slot": "FINGER_2",
+          "name": "Seal of Sylvanas"
+        },
+        {
+          "slot": "BACK",
+          "name": "Bandit Cloak of Holy Wrath"
+        },
+        {
+          "slot": "MAIN_HAND",
+          "name": "Forsaken Greataxe"
+        }
+      ],
+      "honorableKills": 0,
+      "skills": [
+        {
+          "name": "Mining",
+          "skill": 120
+        },
+        {
+          "name": "Blacksmithing",
+          "skill": 106
+        },
+        {
+          "name": "Cooking",
+          "skill": 150
+        },
+        {
+          "name": "Fishing",
+          "skill": 225
+        },
+        {
+          "name": "First Aid",
+          "skill": 144
+        }
+      ],
+      "profession": {
+        "name": "Fishing",
+        "skill": 225
+      },
+      "mounts": []
+    },
+    {
+      "name": "Aloy Cosem",
+      "race": "Troll",
+      "className": "Mage",
+      "level": 15,
+      "characterId": 4801846,
+      "portrait": "https://render.worldofwarcraft.com/forever-eu/character/54/4801846-avatar.jpg",
+      "model": "https://render.worldofwarcraft.com/forever-eu/character/54/4801846-main-sd-raw.png",
+      "faction": "HORDE",
+      "observedAt": "2026-11-25T05:30:09.672Z",
+      "skillsObservedAt": "2026-11-25T05:30:09.672Z",
+      "pvpObservedAt": "2026-11-25T05:30:09.672Z",
+      "gear": [
+        {
+          "slot": "SHIRT",
+          "name": "Apprentice's Shirt"
+        },
+        {
+          "slot": "CHEST",
+          "name": "Brown Linen Robe"
+        },
+        {
+          "slot": "WAIST",
+          "name": "Aboriginal Sash of the Eagle"
+        },
+        {
+          "slot": "LEGS",
+          "name": "Ghastly Trousers"
+        },
+        {
+          "slot": "FEET",
+          "name": "Ancestral Boots"
+        },
+        {
+          "slot": "WRIST",
+          "name": "Featherbead Bracers"
+        },
+        {
+          "slot": "HANDS",
+          "name": "Barbaric Cloth Gloves"
+        },
+        {
+          "slot": "FINGER_1",
+          "name": "Depleted Ritual Band"
+        },
+        {
+          "slot": "BACK",
+          "name": "Handsewn Cloak"
+        },
+        {
+          "slot": "MAIN_HAND",
+          "name": "Staff of Orgrimmar"
+        },
+        {
+          "slot": "RANGED",
+          "name": "Fire Wand"
+        }
+      ],
+      "honorableKills": 0,
+      "skills": [
+        {
+          "name": "Tailoring",
+          "skill": 42
+        },
+        {
+          "name": "Enchanting",
+          "skill": 27
+        },
+        {
+          "name": "Cooking",
+          "skill": 1
+        },
+        {
+          "name": "First Aid",
+          "skill": 1
+        }
+      ],
+      "profession": {
+        "name": "Tailoring",
+        "skill": 42
+      },
+      "mounts": [
+        {
+          "id": 3111,
+          "name": "Cerulean Prideclaw"
+        },
+        {
+          "id": 3130,
+          "name": "Veteran Adventurer's Loyal Companion"
+        }
+      ]
+    },
+    {
+      "name": "Chipson Bomfrey",
+      "race": "Undead",
+      "className": "Rogue",
+      "level": 43,
+      "profession": {
+        "name": "Mining",
+        "skill": 254
+      },
+      "characterId": 6125030,
+      "portrait": "https://render.worldofwarcraft.com/forever-eu/character/230/6125030-avatar.jpg",
+      "model": "https://render.worldofwarcraft.com/forever-eu/character/230/6125030-main-sd-raw.png",
+      "faction": "HORDE",
+      "observedAt": "2026-11-25T05:30:09.672Z",
+      "skillsObservedAt": "2026-11-25T05:30:09.672Z",
+      "pvpObservedAt": "2026-11-25T05:30:09.672Z",
+      "gear": [
+        {
+          "slot": "HEAD",
+          "name": "Scoutmaster's Eyepatch"
+        },
+        {
+          "slot": "NECK",
+          "name": "Amberglow Talisman"
+        },
+        {
+          "slot": "SHOULDER",
+          "name": "Forest Tracker Epaulets"
+        },
+        {
+          "slot": "SHIRT",
+          "name": "Thug Shirt"
+        },
+        {
+          "slot": "CHEST",
+          "name": "Deathcrawler's Chest"
+        },
+        {
+          "slot": "WAIST",
+          "name": "Ranger Cord of the Bandit"
+        },
+        {
+          "slot": "LEGS",
+          "name": "Twilight Enforcer's Legs"
+        },
+        {
+          "slot": "FEET",
+          "name": "Draftsman Boots"
+        },
+        {
+          "slot": "WRIST",
+          "name": "Branded Leather Bracers"
+        },
+        {
+          "slot": "HANDS",
+          "name": "Outrider's Gloves"
+        },
+        {
+          "slot": "FINGER_1",
+          "name": "Nogg's Gold Ring"
+        },
+        {
+          "slot": "FINGER_2",
+          "name": "Pyrewood Signet Ring"
+        },
+        {
+          "slot": "TRINKET_1",
+          "name": "Satchel of Potions"
+        },
+        {
+          "slot": "TRINKET_2",
+          "name": "Transformative Cocoon"
+        },
+        {
+          "slot": "BACK",
+          "name": "Furs of the Earthen Ring"
+        },
+        {
+          "slot": "MAIN_HAND",
+          "name": "Vanquisher's Sword"
+        },
+        {
+          "slot": "OFF_HAND",
+          "name": "Sword of Omen"
+        },
+        {
+          "slot": "RANGED",
+          "name": "Houndmaster Boomerang"
+        }
+      ],
+      "honorableKills": 0,
+      "skills": [
+        {
+          "name": "Mining",
+          "skill": 254
+        },
+        {
+          "name": "Engineering",
+          "skill": 194
+        },
+        {
+          "name": "Cooking",
+          "skill": 150
+        },
+        {
+          "name": "Fishing",
+          "skill": 225
+        },
+        {
+          "name": "First Aid",
+          "skill": 140
+        }
+      ],
+      "mounts": [
+        {
+          "id": 65,
+          "name": "Red Skeletal Horse"
+        },
+        {
+          "id": 3111,
+          "name": "Cerulean Prideclaw"
+        },
+        {
+          "id": 3130,
+          "name": "Veteran Adventurer's Loyal Companion"
+        }
+      ]
+    },
+    {
+      "name": "Classic Schmosby",
+      "race": "Undead",
+      "className": "Priest",
+      "level": 26,
+      "characterId": 6806331,
+      "portrait": "https://render.worldofwarcraft.com/forever-eu/character/59/6806331-avatar.jpg",
+      "model": "https://render.worldofwarcraft.com/forever-eu/character/59/6806331-main-sd-raw.png",
+      "faction": "HORDE",
+      "observedAt": "2026-11-25T05:30:09.672Z",
+      "skillsObservedAt": "2026-11-25T05:30:09.672Z",
+      "pvpObservedAt": "2026-11-25T05:30:09.672Z",
+      "gear": [
+        {
+          "slot": "NECK",
+          "name": "Roadwatcher's Confidence"
+        },
+        {
+          "slot": "SHOULDER",
+          "name": "Ghostly Mantle"
+        },
+        {
+          "slot": "SHIRT",
+          "name": "Neophyte's Shirt"
+        },
+        {
+          "slot": "CHEST",
+          "name": "Rotmender's Garb"
+        },
+        {
+          "slot": "WAIST",
+          "name": "Rotmender's Sash"
+        },
+        {
+          "slot": "LEGS",
+          "name": "Rotmender's Leggings"
+        },
+        {
+          "slot": "FEET",
+          "name": "Rotmender's Treads"
+        },
+        {
+          "slot": "WRIST",
+          "name": "Tabitha's Cuffs"
+        },
+        {
+          "slot": "HANDS",
+          "name": "Rotmender's Gloves"
+        },
+        {
+          "slot": "FINGER_1",
+          "name": "Seal of Sylvanas"
+        },
+        {
+          "slot": "FINGER_2",
+          "name": "Loop of Sacrifice"
+        },
+        {
+          "slot": "BACK",
+          "name": "Seer's Cape"
+        },
+        {
+          "slot": "MAIN_HAND",
+          "name": "Gnarled Necromancer's Staff"
+        },
+        {
+          "slot": "RANGED",
+          "name": "Cookie's Stirring Rod"
+        }
+      ],
+      "honorableKills": 107,
+      "skills": [
+        {
+          "name": "Tailoring",
+          "skill": 95
+        },
+        {
+          "name": "Enchanting",
+          "skill": 111
+        },
+        {
+          "name": "Cooking",
+          "skill": 150
+        },
+        {
+          "name": "Fishing",
+          "skill": 169
+        },
+        {
+          "name": "First Aid",
+          "skill": 80
+        }
+      ],
+      "profession": {
+        "name": "Fishing",
+        "skill": 169
+      },
+      "mounts": []
+    },
+    {
+      "name": "Dargor Springhill",
+      "race": "Tauren",
+      "className": "Shaman",
+      "level": 26,
+      "characterId": 8887165,
+      "portrait": "https://render.worldofwarcraft.com/forever-eu/character/125/8887165-avatar.jpg",
+      "model": "https://render.worldofwarcraft.com/forever-eu/character/125/8887165-main-sd-raw.png",
+      "faction": "HORDE",
+      "observedAt": "2026-11-25T05:30:09.672Z",
+      "skillsObservedAt": "2026-11-25T05:30:09.672Z",
+      "pvpObservedAt": "2026-11-25T05:30:09.672Z",
+      "gear": [
+        {
+          "slot": "HEAD",
+          "name": "Blindwatcher's Sight"
+        },
+        {
+          "slot": "SHOULDER",
+          "name": "Tanned Shoulderpads"
+        },
+        {
+          "slot": "SHIRT",
+          "name": "Blue Linen Shirt"
+        },
+        {
+          "slot": "CHEST",
+          "name": "Bloodied Chestwraps"
+        },
+        {
+          "slot": "WAIST",
+          "name": "Defender's Leather Belt"
+        },
+        {
+          "slot": "LEGS",
+          "name": "Dark Leather Pants"
+        },
+        {
+          "slot": "FEET",
+          "name": "Grizzled Boots"
+        },
+        {
+          "slot": "WRIST",
+          "name": "Scouting Bracers of the Whale"
+        },
+        {
+          "slot": "HANDS",
+          "name": "Brawler's Leather Gloves"
+        },
+        {
+          "slot": "FINGER_1",
+          "name": "Seal of Sylvanas"
+        },
+        {
+          "slot": "FINGER_2",
+          "name": "Bounty Hunter's Ring"
+        },
+        {
+          "slot": "BACK",
+          "name": "Wolfmaster Cape"
+        },
+        {
+          "slot": "MAIN_HAND",
+          "name": "Arced War Axe"
+        },
+        {
+          "slot": "RANGED",
+          "name": "Totem of Charged Flames"
+        }
+      ],
+      "honorableKills": 0,
+      "skills": [
+        {
+          "name": "Leatherworking",
+          "skill": 110
+        },
+        {
+          "name": "Skinning",
+          "skill": 182
+        },
+        {
+          "name": "Cooking",
+          "skill": 1
+        }
+      ],
+      "profession": {
+        "name": "Skinning",
+        "skill": 182
+      },
+      "mounts": []
+    },
+    {
+      "name": "Edou Khil",
+      "race": "Troll",
+      "className": "Shaman",
+      "level": 25,
+      "characterId": 13915609,
+      "portrait": "https://render.worldofwarcraft.com/forever-eu/character/217/13915609-avatar.jpg",
+      "model": "https://render.worldofwarcraft.com/forever-eu/character/217/13915609-main-sd-raw.png",
+      "faction": "HORDE",
+      "observedAt": "2026-11-25T05:30:09.672Z",
+      "skillsObservedAt": "2026-11-25T05:30:09.672Z",
+      "pvpObservedAt": "2026-11-25T05:30:09.672Z",
+      "gear": [
+        {
+          "slot": "SHOULDER",
+          "name": "Hillman's Shoulders"
+        },
+        {
+          "slot": "SHIRT",
+          "name": "Blue Linen Shirt"
+        },
+        {
+          "slot": "CHEST",
+          "name": "Dry Moss Tunic"
+        },
+        {
+          "slot": "WAIST",
+          "name": "Dark Leather Belt"
+        },
+        {
+          "slot": "LEGS",
+          "name": "Light Leather Pants"
+        },
+        {
+          "slot": "FEET",
+          "name": "Prospector's Boots"
+        },
+        {
+          "slot": "WRIST",
+          "name": "Spare Part Bindings"
+        },
+        {
+          "slot": "HANDS",
+          "name": "Feral Gloves of the Gorilla"
+        },
+        {
+          "slot": "FINGER_1",
+          "name": "Depleted Ritual Band"
+        },
+        {
+          "slot": "FINGER_2",
+          "name": "Slain Baron's Signet"
+        },
+        {
+          "slot": "BACK",
+          "name": "Satyrskin Cloak"
+        },
+        {
+          "slot": "MAIN_HAND",
+          "name": "Hammer of Orgrimmar"
+        },
+        {
+          "slot": "OFF_HAND",
+          "name": "Mirror of Rath'mael"
+        },
+        {
+          "slot": "RANGED",
+          "name": "Totem of Charged Flames"
+        }
+      ],
+      "honorableKills": 0,
+      "skills": [
+        {
+          "name": "Alchemy",
+          "skill": 145
+        },
+        {
+          "name": "Herbalism",
+          "skill": 154
+        },
+        {
+          "name": "Cooking",
+          "skill": 109
+        },
+        {
+          "name": "Fishing",
+          "skill": 150
+        },
+        {
+          "name": "First Aid",
+          "skill": 150
+        }
+      ],
+      "profession": {
+        "name": "Herbalism",
+        "skill": 154
+      },
+      "mounts": []
+    },
+    {
+      "name": "Graag Gogkhilghak",
+      "race": "Orc",
+      "className": "Warlock",
+      "level": 19,
+      "characterId": 14070198,
+      "portrait": "https://render.worldofwarcraft.com/forever-eu/character/182/14070198-avatar.jpg",
+      "model": "https://render.worldofwarcraft.com/forever-eu/character/182/14070198-main-sd-raw.png",
+      "faction": "HORDE",
+      "observedAt": "2026-11-25T05:30:09.672Z",
+      "skillsObservedAt": "2026-11-25T05:30:09.672Z",
+      "pvpObservedAt": "2026-11-25T05:30:09.672Z",
+      "gear": [
+        {
+          "slot": "CHEST",
+          "name": "Rotmender's Garb"
+        },
+        {
+          "slot": "WAIST",
+          "name": "Tuskwrap Belt"
+        },
+        {
+          "slot": "LEGS",
+          "name": "Rotmender's Leggings"
+        },
+        {
+          "slot": "FEET",
+          "name": "Seer's Boots"
+        },
+        {
+          "slot": "WRIST",
+          "name": "Crystalline Cuffs"
+        },
+        {
+          "slot": "HANDS",
+          "name": "Rotmender's Gloves"
+        },
+        {
+          "slot": "FINGER_1",
+          "name": "Depleted Ritual Band"
+        },
+        {
+          "slot": "FINGER_2",
+          "name": "Slain Baron's Signet"
+        },
+        {
+          "slot": "BACK",
+          "name": "Mystic Shawl"
+        },
+        {
+          "slot": "MAIN_HAND",
+          "name": "Kris of Orgrimmar"
+        },
+        {
+          "slot": "OFF_HAND",
+          "name": "Nightglow Concoction"
+        },
+        {
+          "slot": "RANGED",
+          "name": "Shadow Wand"
+        }
+      ],
+      "honorableKills": 0,
+      "skills": [
+        {
+          "name": "Alchemy",
+          "skill": 64
+        },
+        {
+          "name": "Herbalism",
+          "skill": 73
+        },
+        {
+          "name": "Cooking",
+          "skill": 20
+        },
+        {
+          "name": "Fishing",
+          "skill": 1
+        },
+        {
+          "name": "First Aid",
+          "skill": 63
+        }
+      ],
+      "profession": {
+        "name": "Herbalism",
+        "skill": 73
+      },
+      "mounts": []
+    },
+    {
+      "name": "Hehehehe Hahahaha",
+      "race": "Orc",
+      "className": "Hunter",
+      "level": 23,
+      "characterId": 14090992,
+      "portrait": "https://render.worldofwarcraft.com/forever-eu/character/240/14090992-avatar.jpg",
+      "model": "https://render.worldofwarcraft.com/forever-eu/character/240/14090992-main-sd-raw.png",
+      "faction": "HORDE",
+      "observedAt": "2026-11-25T05:30:09.672Z",
+      "skillsObservedAt": "2026-11-25T05:30:09.672Z",
+      "pvpObservedAt": "2026-11-25T05:30:09.672Z",
+      "gear": [
+        {
+          "slot": "SHOULDER",
+          "name": "Patched Leather Shoulderpads"
+        },
+        {
+          "slot": "SHIRT",
+          "name": "Trapper's Shirt"
+        },
+        {
+          "slot": "CHEST",
+          "name": "Ceremonial Leather Harness"
+        },
+        {
+          "slot": "WAIST",
+          "name": "Grassland Sash"
+        },
+        {
+          "slot": "LEGS",
+          "name": "Dredgemire Leggings"
+        },
+        {
+          "slot": "FEET",
+          "name": "Bard's Boots of the Gorilla"
+        },
+        {
+          "slot": "WRIST",
+          "name": "Spare Part Bindings"
+        },
+        {
+          "slot": "HANDS",
+          "name": "Ceremonial Leather Gloves"
+        },
+        {
+          "slot": "FINGER_1",
+          "name": "Depleted Ritual Band"
+        },
+        {
+          "slot": "FINGER_2",
+          "name": "Slain Baron's Signet"
+        },
+        {
+          "slot": "BACK",
+          "name": "Barkeeper's Cloak"
+        },
+        {
+          "slot": "MAIN_HAND",
+          "name": "Forsaken Greataxe"
+        },
+        {
+          "slot": "RANGED",
+          "name": "Orcish Battle Bow"
+        },
+        {
+          "slot": "AMMO",
+          "name": "Sharp Arrow"
+        }
+      ],
+      "honorableKills": 0,
+      "skills": [
+        {
+          "name": "Skinning",
+          "skill": 146
+        },
+        {
+          "name": "Mining",
+          "skill": 77
+        },
+        {
+          "name": "Cooking",
+          "skill": 13
+        },
+        {
+          "name": "Fishing",
+          "skill": 65
+        },
+        {
+          "name": "First Aid",
+          "skill": 85
+        }
+      ],
+      "profession": {
+        "name": "Skinning",
+        "skill": 146
+      },
+      "mounts": []
+    },
+    {
+      "name": "Lailah Primali",
+      "race": "Undead",
+      "className": "Warlock",
+      "level": 10,
+      "characterId": 18538656,
+      "portrait": "https://render.worldofwarcraft.com/forever-eu/character/160/18538656-avatar.jpg",
+      "model": "https://render.worldofwarcraft.com/forever-eu/character/160/18538656-main-sd-raw.png",
+      "faction": "HORDE",
+      "observedAt": "2026-11-25T05:30:09.672Z",
+      "skillsObservedAt": "2026-11-25T05:30:09.672Z",
+      "pvpObservedAt": "2026-11-25T05:30:09.672Z",
+      "gear": [
+        {
+          "slot": "SHIRT",
+          "name": "White Linen Shirt"
+        },
+        {
+          "slot": "CHEST",
+          "name": "Flax Vest"
+        },
+        {
+          "slot": "WAIST",
+          "name": "Flax Belt"
+        },
+        {
+          "slot": "LEGS",
+          "name": "Sturdy Cloth Trousers"
+        },
+        {
+          "slot": "FEET",
+          "name": "Flax Boots"
+        },
+        {
+          "slot": "WRIST",
+          "name": "Flax Bracers"
+        },
+        {
+          "slot": "HANDS",
+          "name": "Simple Gloves"
+        },
+        {
+          "slot": "BACK",
+          "name": "Linen Cloak"
+        },
+        {
+          "slot": "MAIN_HAND",
+          "name": "Forsaken Dagger"
+        }
+      ],
+      "honorableKills": 0,
+      "skills": [
+        {
+          "name": "Tailoring",
+          "skill": 26
+        },
+        {
+          "name": "Enchanting",
+          "skill": 4
+        },
+        {
+          "name": "Cooking",
+          "skill": 1
+        },
+        {
+          "name": "First Aid",
+          "skill": 1
+        }
+      ],
+      "profession": {
+        "name": "Tailoring",
+        "skill": 26
+      },
+      "mounts": [
+        {
+          "id": 3111,
+          "name": "Cerulean Prideclaw"
+        },
+        {
+          "id": 3130,
+          "name": "Veteran Adventurer's Loyal Companion"
+        }
+      ]
+    },
+    {
+      "name": "Lailah Shemesh",
+      "race": "Windshaper Skyborne",
+      "className": "Druid",
+      "level": 20,
+      "characterId": 4920034,
+      "portrait": "https://render.worldofwarcraft.com/forever-eu/character/226/4920034-avatar.jpg",
+      "model": "https://render.worldofwarcraft.com/forever-eu/character/226/4920034-main-sd-raw.png",
+      "faction": "HORDE",
+      "observedAt": "2026-11-25T05:30:09.672Z",
+      "skillsObservedAt": "2026-11-25T05:30:09.672Z",
+      "pvpObservedAt": "2026-11-25T05:30:09.672Z",
+      "gear": [
+        {
+          "slot": "SHIRT",
+          "name": "Thendal Survivalist's Shirt"
+        },
+        {
+          "slot": "CHEST",
+          "name": "Grizzly Jerkin of the Eagle"
+        },
+        {
+          "slot": "WAIST",
+          "name": "Aquarius Belt"
+        },
+        {
+          "slot": "LEGS",
+          "name": "Dredgemire Leggings"
+        },
+        {
+          "slot": "FEET",
+          "name": "Bard's Boots of the Whale"
+        },
+        {
+          "slot": "WRIST",
+          "name": "Spare Part Bindings"
+        },
+        {
+          "slot": "HANDS",
+          "name": "Hunting Gloves"
+        },
+        {
+          "slot": "FINGER_1",
+          "name": "Ancient Heirloom"
+        },
+        {
+          "slot": "FINGER_2",
+          "name": "Slain Baron's Signet"
+        },
+        {
+          "slot": "BACK",
+          "name": "Satyrskin Cloak"
+        },
+        {
+          "slot": "MAIN_HAND",
+          "name": "Segmented Spider Leg"
+        },
+        {
+          "slot": "RANGED",
+          "name": "Idol of Shifting Tides"
+        }
+      ],
+      "honorableKills": 27,
+      "skills": [
+        {
+          "name": "Leatherworking",
+          "skill": 56
+        },
+        {
+          "name": "Skinning",
+          "skill": 121
+        },
+        {
+          "name": "Cooking",
+          "skill": 31
+        },
+        {
+          "name": "Fishing",
+          "skill": 54
+        },
+        {
+          "name": "First Aid",
+          "skill": 1
+        }
+      ],
+      "profession": {
+        "name": "Skinning",
+        "skill": 121
+      },
+      "mounts": [
+        {
+          "id": 3111,
+          "name": "Cerulean Prideclaw"
+        },
+        {
+          "id": 3130,
+          "name": "Veteran Adventurer's Loyal Companion"
+        }
+      ]
+    },
+    {
+      "name": "Lior Shadowlord",
+      "race": "Undead",
+      "className": "Priest",
+      "level": 22,
+      "characterId": 18320733,
+      "portrait": "https://render.worldofwarcraft.com/forever-eu/character/93/18320733-avatar.jpg",
+      "model": "https://render.worldofwarcraft.com/forever-eu/character/93/18320733-main-sd-raw.png",
+      "faction": "HORDE",
+      "observedAt": "2026-11-25T05:30:09.672Z",
+      "skillsObservedAt": "2026-11-25T05:30:09.672Z",
+      "pvpObservedAt": "2026-11-25T05:30:09.672Z",
+      "gear": [
+        {
+          "slot": "NECK",
+          "name": "Roadwatcher's Confidence"
+        },
+        {
+          "slot": "SHOULDER",
+          "name": "Double-Stitched Woolen Shoulders"
+        },
+        {
+          "slot": "SHIRT",
+          "name": "Neophyte's Shirt"
+        },
+        {
+          "slot": "CHEST",
+          "name": "Shimmering Armor of the Eagle"
+        },
+        {
+          "slot": "WAIST",
+          "name": "Rotmender's Sash"
+        },
+        {
+          "slot": "LEGS",
+          "name": "Rotmender's Leggings"
+        },
+        {
+          "slot": "FEET",
+          "name": "Rotmender's Treads"
+        },
+        {
+          "slot": "WRIST",
+          "name": "Tabitha's Cuffs"
+        },
+        {
+          "slot": "HANDS",
+          "name": "Blight Gloves"
+        },
+        {
+          "slot": "FINGER_1",
+          "name": "Slain Baron's Signet"
+        },
+        {
+          "slot": "FINGER_2",
+          "name": "Loop of Sacrifice"
+        },
+        {
+          "slot": "BACK",
+          "name": "Fortified Cloak of the Owl"
+        },
+        {
+          "slot": "MAIN_HAND",
+          "name": "Segmented Spider Leg"
+        },
+        {
+          "slot": "RANGED",
+          "name": "Greater Magic Wand"
+        }
+      ],
+      "honorableKills": 1,
+      "skills": [
+        {
+          "name": "Tailoring",
+          "skill": 95
+        },
+        {
+          "name": "Enchanting",
+          "skill": 81
+        },
+        {
+          "name": "Cooking",
+          "skill": 11
+        },
+        {
+          "name": "Fishing",
+          "skill": 2
+        }
+      ],
+      "profession": {
+        "name": "Tailoring",
+        "skill": 95
+      },
+      "mounts": []
+    },
+    {
+      "name": "Lioren Aurelith",
+      "race": "Windshaper Skyborne",
+      "className": "Shaman",
+      "level": 29,
+      "profession": {
+        "name": "Alchemy",
+        "skill": 209
+      },
+      "characterId": 19191188,
+      "portrait": "https://render.worldofwarcraft.com/forever-eu/character/148/19191188-avatar.jpg",
+      "model": "https://render.worldofwarcraft.com/forever-eu/character/148/19191188-main-sd-raw.png",
+      "faction": "HORDE",
+      "observedAt": "2026-11-25T05:30:09.672Z",
+      "skillsObservedAt": "2026-11-25T05:30:09.672Z",
+      "pvpObservedAt": "2026-11-25T05:30:09.672Z",
+      "gear": [
+        {
+          "slot": "HEAD",
+          "name": "Taurajo Headband"
+        },
+        {
+          "slot": "SHOULDER",
+          "name": "Tanned Shoulderpads"
+        },
+        {
+          "slot": "SHIRT",
+          "name": "Thendal Novice's Shirt"
+        },
+        {
+          "slot": "CHEST",
+          "name": "Brawnhide Armor"
+        },
+        {
+          "slot": "WAIST",
+          "name": "Rigid Belt of Agility"
+        },
+        {
+          "slot": "LEGS",
+          "name": "Leggings of the Fang"
+        },
+        {
+          "slot": "FEET",
+          "name": "Grizzled Boots"
+        },
+        {
+          "slot": "WRIST",
+          "name": "Pathfinder Bracers of the Bandit"
+        },
+        {
+          "slot": "HANDS",
+          "name": "Gold-flecked Gloves"
+        },
+        {
+          "slot": "FINGER_1",
+          "name": "Inventor's League Ring"
+        },
+        {
+          "slot": "FINGER_2",
+          "name": "Seal of Sylvanas"
+        },
+        {
+          "slot": "BACK",
+          "name": "Cape of the Brotherhood"
+        },
+        {
+          "slot": "MAIN_HAND",
+          "name": "Hammerbone"
+        },
+        {
+          "slot": "RANGED",
+          "name": "Totem of Charged Flames"
+        }
+      ],
+      "honorableKills": 0,
+      "skills": [
+        {
+          "name": "Alchemy",
+          "skill": 209
+        },
+        {
+          "name": "Herbalism",
+          "skill": 201
+        },
+        {
+          "name": "Cooking",
+          "skill": 1
+        },
+        {
+          "name": "Fishing",
+          "skill": 80
+        }
+      ],
+      "mounts": [
+        {
+          "id": 3111,
+          "name": "Cerulean Prideclaw"
+        },
+        {
+          "id": 3130,
+          "name": "Veteran Adventurer's Loyal Companion"
+        }
+      ]
+    },
+    {
+      "name": "Saar Oathwell",
+      "race": "Orc",
+      "className": "Warrior",
+      "level": 24,
+      "characterId": 18529279,
+      "portrait": "https://render.worldofwarcraft.com/forever-eu/character/255/18529279-avatar.jpg",
+      "model": "https://render.worldofwarcraft.com/forever-eu/character/255/18529279-main-sd-raw.png",
+      "faction": "HORDE",
+      "observedAt": "2026-11-25T05:30:09.672Z",
+      "skillsObservedAt": "2026-11-25T05:30:09.672Z",
+      "pvpObservedAt": "2026-11-25T05:30:09.672Z",
+      "gear": [
+        {
+          "slot": "SHOULDER",
+          "name": "Laced Mail Shoulderpads"
+        },
+        {
+          "slot": "SHIRT",
+          "name": "Deckhand's Shirt"
+        },
+        {
+          "slot": "CHEST",
+          "name": "Violet Scale Armor"
+        },
+        {
+          "slot": "WAIST",
+          "name": "Grunt's Belt of the Monkey"
+        },
+        {
+          "slot": "LEGS",
+          "name": "Bonerust Leggings"
+        },
+        {
+          "slot": "FEET",
+          "name": "Hulking Boots"
+        },
+        {
+          "slot": "WRIST",
+          "name": "Fortified Bracers of the Eagle"
+        },
+        {
+          "slot": "HANDS",
+          "name": "Riveted Gauntlets"
+        },
+        {
+          "slot": "FINGER_1",
+          "name": "Depleted Ritual Band"
+        },
+        {
+          "slot": "FINGER_2",
+          "name": "Slain Baron's Signet"
+        },
+        {
+          "slot": "BACK",
+          "name": "Boar Hunter's Cape"
+        },
+        {
+          "slot": "MAIN_HAND",
+          "name": "Forsaken Greataxe"
+        },
+        {
+          "slot": "RANGED",
+          "name": "Heavy Shortbow"
+        },
+        {
+          "slot": "AMMO",
+          "name": "Sharp Arrow"
+        }
+      ],
+      "honorableKills": 77,
+      "skills": [
+        {
+          "name": "Mining",
+          "skill": 104
+        },
+        {
+          "name": "Blacksmithing",
+          "skill": 77
+        },
+        {
+          "name": "Cooking",
+          "skill": 5
+        }
+      ],
+      "profession": {
+        "name": "Mining",
+        "skill": 104
+      },
+      "mounts": []
+    }
+  ],
+  "milestones": [
+    {
+      "key": "13915609/Herbalism-150",
+      "name": "Edou Khil",
+      "text": "reached 150 in Herbalism.",
+      "observedAt": "2026-11-24T23:58:42.957Z",
+      "observedAfter": "2026-11-24T23:52:53.074Z"
+    },
+    {
+      "key": "13915609/First Aid-150",
+      "name": "Edou Khil",
+      "text": "reached 150 in First Aid.",
+      "observedAt": "2026-11-24T23:58:42.957Z",
+      "observedAfter": "2026-11-24T23:52:53.074Z"
+    },
+    {
+      "key": "6806331/level-25",
+      "name": "Classic Schmosby",
+      "text": "reached level 25.",
+      "observedAt": "2026-11-24T05:29:01.130Z"
+    }
+  ],
+  "legacy": [
+    {
+      "id": 62003,
+      "title": "Novice Rogue",
+      "at": "2026-11-10T20:51:00.000Z",
+      "members": [
+        "Chipson Bomfrey"
+      ],
+      "description": "Level 25 on a Rogue.",
+      "level": 25,
+      "className": "Rogue"
+    },
+    {
+      "id": 62021,
+      "title": "Journeyman Engineer",
+      "at": "2026-11-11T21:54:00.000Z",
+      "members": [
+        "Chipson Bomfrey"
+      ],
+      "description": "Reached 150 skill in Engineering.",
+      "skill": "Engineering",
+      "cap": 150
+    },
+    {
+      "id": 62012,
+      "title": "Journeyman Alchemist",
+      "at": "2026-11-15T19:44:00.000Z",
+      "members": [
+        "Lioren Aurelith"
+      ],
+      "description": "Reached 150 skill in Alchemy.",
+      "skill": "Alchemy",
+      "cap": 150
+    },
+    {
+      "id": 62031,
+      "title": "Novice Spelunker",
+      "at": "2026-11-16T20:37:00.000Z",
+      "members": [
+        "Chipson Bomfrey"
+      ],
+      "description": "Completed the six-dungeon Legacy set."
+    },
+    {
+      "id": 62006,
+      "title": "Novice Shaman",
+      "at": "2026-11-18T18:13:00.000Z",
+      "members": [
+        "Lioren Aurelith"
+      ],
+      "description": "Level 25 on a Shaman.",
+      "level": 25,
+      "className": "Shaman"
+    },
+    {
+      "id": 61997,
+      "title": "Novice Paladin",
+      "at": "2026-11-21T21:21:00.000Z",
+      "members": [
+        "Allison Burgerrs"
+      ],
+      "description": "Level 25 on a Paladin.",
+      "level": 25,
+      "className": "Paladin"
+    },
+    {
+      "id": 61997,
+      "title": "Novice Paladin",
+      "at": "2026-11-21T21:21:00.000Z",
+      "members": [
+        "Hehehehe Hahahaha"
+      ],
+      "description": "Level 25 on a Paladin.",
+      "level": 25,
+      "className": "Paladin"
+    },
+    {
+      "id": 62006,
+      "title": "Novice Shaman",
+      "at": "2026-11-22T15:12:00.000Z",
+      "members": [
+        "Dargor Springhill"
+      ],
+      "description": "Level 25 on a Shaman.",
+      "level": 25,
+      "className": "Shaman"
+    },
+    {
+      "id": 62006,
+      "title": "Novice Shaman",
+      "at": "2026-11-22T15:12:00.000Z",
+      "members": [
+        "Lior Shadowlord"
+      ],
+      "description": "Level 25 on a Shaman.",
+      "level": 25,
+      "className": "Shaman"
+    },
+    {
+      "id": 62006,
+      "title": "Novice Shaman",
+      "at": "2026-11-22T15:12:00.000Z",
+      "members": [
+        "Saar Oathwell"
+      ],
+      "description": "Level 25 on a Shaman.",
+      "level": 25,
+      "className": "Shaman"
+    },
+    {
+      "id": 62000,
+      "title": "Novice Priest",
+      "at": "2026-11-23T18:58:00.000Z",
+      "members": [
+        "Classic Schmosby"
+      ],
+      "description": "Level 25 on a Priest.",
+      "level": 25,
+      "className": "Priest"
+    },
+    {
+      "id": 62006,
+      "title": "Novice Shaman",
+      "at": "2026-11-24T23:10:00.000Z",
+      "members": [
+        "Edou Khil"
+      ],
+      "description": "Level 25 on a Shaman.",
+      "level": 25,
+      "className": "Shaman"
+    }
+  ],
+  "legacyCatalog": {
+    "61997": {
+      "description": "Level 25 on a Paladin.",
+      "level": 25,
+      "className": "Paladin"
+    },
+    "62000": {
+      "description": "Level 25 on a Priest.",
+      "level": 25,
+      "className": "Priest"
+    },
+    "62003": {
+      "description": "Level 25 on a Rogue.",
+      "level": 25,
+      "className": "Rogue"
+    },
+    "62006": {
+      "description": "Level 25 on a Shaman.",
+      "level": 25,
+      "className": "Shaman"
+    },
+    "62012": {
+      "description": "Reached 150 skill in Alchemy.",
+      "skill": "Alchemy",
+      "cap": 150
+    },
+    "62021": {
+      "description": "Reached 150 skill in Engineering.",
+      "skill": "Engineering",
+      "cap": 150
+    },
+    "62031": {
+      "description": "Completed the six-dungeon Legacy set."
+    }
+  },
+  "bossMatches": [
+    {
+      "id": 15027,
+      "boss": "Bazzalan",
+      "dungeon": "Ragefire Chasm",
+      "at": "2026-11-07T08:47:31.000Z",
+      "members": [
+        "Chipson Bomfrey"
+      ]
+    },
+    {
+      "id": 15028,
+      "boss": "Mutanus the Devourer",
+      "dungeon": "Wailing Caverns",
+      "at": "2026-11-09T19:27:30.000Z",
+      "members": [
+        "Chipson Bomfrey"
+      ]
+    },
+    {
+      "id": 15027,
+      "boss": "Bazzalan",
+      "dungeon": "Ragefire Chasm",
+      "at": "2026-11-10T23:34:31.000Z",
+      "members": [
+        "Saar Oathwell"
+      ]
+    },
+    {
+      "id": 1092,
+      "boss": "Archmage Arugal",
+      "dungeon": "Shadowfang Keep",
+      "at": "2026-11-11T16:25:16.000Z",
+      "members": [
+        "Chipson Bomfrey"
+      ]
+    },
+    {
+      "id": 15027,
+      "boss": "Bazzalan",
+      "dungeon": "Ragefire Chasm",
+      "at": "2026-11-11T22:05:03.000Z",
+      "members": [
+        "Allison Burgerrs"
+      ]
+    },
+    {
+      "id": 15027,
+      "boss": "Bazzalan",
+      "dungeon": "Ragefire Chasm",
+      "at": "2026-11-12T20:56:08.000Z",
+      "members": [
+        "Dargor Springhill",
+        "Lioren Aurelith"
+      ]
+    },
+    {
+      "id": 15027,
+      "boss": "Bazzalan",
+      "dungeon": "Ragefire Chasm",
+      "at": "2026-11-12T22:38:55.000Z",
+      "members": [
+        "Classic Schmosby",
+        "Edou Khil",
+        "Graag Gogkhilghak",
+        "Lailah Shemesh"
+      ]
+    },
+    {
+      "id": 63589,
+      "boss": "Lyn the Ignored",
+      "dungeon": "City of Dalaran",
+      "at": "2026-11-14T20:34:58.000Z",
+      "members": [
+        "Chipson Bomfrey"
+      ]
+    },
+    {
+      "id": 63572,
+      "boss": "Shade of the Archmage",
+      "dungeon": "City of Dalaran",
+      "at": "2026-11-14T21:07:07.000Z",
+      "members": [
+        "Chipson Bomfrey"
+      ]
+    },
+    {
+      "id": 6139,
+      "boss": "Charlga Razorflank",
+      "dungeon": "Razorfen Kraul",
+      "at": "2026-11-15T17:29:11.000Z",
+      "members": [
+        "Chipson Bomfrey"
+      ]
+    },
+    {
+      "id": 63571,
+      "boss": "Rath'mael",
+      "dungeon": "Ruins of Lordaeron",
+      "at": "2026-11-15T20:52:05.000Z",
+      "members": [
+        "Dargor Springhill",
+        "Lioren Aurelith"
+      ]
+    },
+    {
+      "id": 6140,
+      "boss": "Mekgineer Thermaplugg",
+      "dungeon": "Gnomeregan",
+      "at": "2026-11-16T17:41:24.000Z",
+      "members": [
+        "Chipson Bomfrey"
+      ]
+    },
+    {
+      "id": 63570,
+      "boss": "Edwin VanCleef",
+      "dungeon": "Deadmines",
+      "at": "2026-11-16T21:22:07.000Z",
+      "members": [
+        "Allison Burgerrs",
+        "Chipson Bomfrey",
+        "Classic Schmosby",
+        "Lioren Aurelith"
+      ]
+    },
+    {
+      "id": 15027,
+      "boss": "Bazzalan",
+      "dungeon": "Ragefire Chasm",
+      "at": "2026-11-19T20:00:56.000Z",
+      "members": [
+        "Aloy Cosem",
+        "Hehehehe Hahahaha",
+        "Lior Shadowlord"
+      ]
+    },
+    {
+      "id": 6141,
+      "boss": "Amnennar the Coldbringer",
+      "dungeon": "Razorfen Downs",
+      "at": "2026-11-19T20:40:51.000Z",
+      "members": [
+        "Chipson Bomfrey"
+      ]
+    },
+    {
+      "id": 63571,
+      "boss": "Rath'mael",
+      "dungeon": "Ruins of Lordaeron",
+      "at": "2026-11-19T21:37:11.000Z",
+      "members": [
+        "Classic Schmosby",
+        "Hehehehe Hahahaha",
+        "Lailah Shemesh",
+        "Saar Oathwell"
+      ]
+    },
+    {
+      "id": 1093,
+      "boss": "Scarlet Commander Mograine",
+      "dungeon": "Scarlet Monastery",
+      "at": "2026-11-20T18:20:11.000Z",
+      "members": [
+        "Chipson Bomfrey"
+      ]
+    },
+    {
+      "id": 6786,
+      "boss": "High Inquisitor Whitemane",
+      "dungeon": "Scarlet Monastery",
+      "at": "2026-11-20T18:20:11.000Z",
+      "members": [
+        "Chipson Bomfrey"
+      ]
+    },
+    {
+      "id": 15028,
+      "boss": "Mutanus the Devourer",
+      "dungeon": "Wailing Caverns",
+      "at": "2026-11-20T22:42:26.000Z",
+      "members": [
+        "Allison Burgerrs",
+        "Classic Schmosby",
+        "Dargor Springhill",
+        "Lioren Aurelith"
+      ]
+    },
+    {
+      "id": 63571,
+      "boss": "Rath'mael",
+      "dungeon": "Ruins of Lordaeron",
+      "at": "2026-11-20T23:45:52.000Z",
+      "members": [
+        "Allison Burgerrs",
+        "Edou Khil",
+        "Graag Gogkhilghak"
+      ]
+    },
+    {
+      "id": 63571,
+      "boss": "Rath'mael",
+      "dungeon": "Ruins of Lordaeron",
+      "at": "2026-11-21T20:42:54.000Z",
+      "members": [
+        "Lior Shadowlord"
+      ]
+    },
+    {
+      "id": 63571,
+      "boss": "Rath'mael",
+      "dungeon": "Ruins of Lordaeron",
+      "at": "2026-11-22T19:56:46.000Z",
+      "members": [
+        "Chipson Bomfrey"
+      ]
+    },
+    {
+      "id": 1092,
+      "boss": "Archmage Arugal",
+      "dungeon": "Shadowfang Keep",
+      "at": "2026-11-23T20:09:17.000Z",
+      "members": [
+        "Allison Burgerrs",
+        "Classic Schmosby",
+        "Dargor Springhill",
+        "Lioren Aurelith"
+      ]
+    }
+  ]
+}

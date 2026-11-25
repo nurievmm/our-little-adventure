@@ -273,4 +273,9 @@ async function sync() {
   console.log('Refreshed ' + syncedCount + '/' + roster.length + ' profiles and observed ' + observed.length + ' new milestones.');
 }
 
-await sync();
+// This deployment publishes the archived morning snapshot.
+const archivedSnapshot = JSON.parse(await readFile(target, 'utf8'));
+if (archivedSnapshot.version !== 1 || !Array.isArray(archivedSnapshot.heroes)) {
+  throw new Error('Invalid morning snapshot.');
+}
+console.log('Publishing the archived snapshot from ' + archivedSnapshot.fetchedAt);
