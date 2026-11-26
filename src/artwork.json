@@ -500,10 +500,10 @@
   },
   "work-chipson-bomfrey-engineering-150": {
     "columns": 1,
-    "height": 480,
-    "revision": "0ebca61d45",
+    "height": 1254,
+    "revision": "2a7ee7c473",
     "rows": 1,
-    "width": 480
+    "width": 1254
   },
   "work-chipson-bomfrey-progression": {
     "columns": 3,
