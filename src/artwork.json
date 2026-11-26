@@ -40,6 +40,13 @@
     "rows": 1,
     "width": 720
   },
+  "dargor-springhill-level10": {
+    "columns": 1,
+    "height": 480,
+    "revision": "1116e21b49",
+    "rows": 1,
+    "width": 720
+  },
   "dargor-springhill": {
     "columns": 2,
     "height": 960,
