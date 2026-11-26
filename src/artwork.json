@@ -60,6 +60,13 @@
     "rows": 1,
     "width": 1280
   },
+  "edou-khil-level10": {
+    "columns": 1,
+    "height": 640,
+    "revision": "fafa423523",
+    "rows": 1,
+    "width": 960
+  },
   "edou-khil": {
     "columns": 2,
     "height": 960,
