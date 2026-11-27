@@ -267,6 +267,13 @@
     "rows": 2,
     "width": 1440
   },
+  "lioren-aurelith-level20": {
+    "columns": 1,
+    "height": 1024,
+    "revision": "e4217e1523",
+    "rows": 1,
+    "width": 1536
+  },
   "lordaeron-1": {
     "columns": 1,
     "height": 853,
