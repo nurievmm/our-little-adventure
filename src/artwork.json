@@ -283,10 +283,10 @@
   },
   "lordaeron-1": {
     "columns": 1,
-    "height": 853,
-    "revision": "4156a2922e",
+    "height": 1024,
+    "revision": "af258cd70c",
     "rows": 1,
-    "width": 1280
+    "width": 1536
   },
   "lordaeron-2": {
     "columns": 1,
