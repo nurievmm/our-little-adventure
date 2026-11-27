@@ -62,10 +62,10 @@
   },
   "edou-khil-level10": {
     "columns": 1,
-    "height": 640,
-    "revision": "fafa423523",
+    "height": 1024,
+    "revision": "5c0c8bcfbc",
     "rows": 1,
-    "width": 960
+    "width": 1536
   },
   "edou-khil-level20": {
     "columns": 1,
