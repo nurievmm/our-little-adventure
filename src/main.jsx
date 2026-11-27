@@ -106,7 +106,7 @@ function EventDetails({ event, hasPainting }) {
       <Party event={event} portraits={!hasPainting} />
     </>;
   }
-  if (event.kind !== 'level') return null;
+  if (event.kind !== 'level' || event.key === 'Lioren Aurelith/level/30') return null;
   const gear = event.gear?.filter(({ slot }) => ['MAIN_HAND', 'OFF_HAND', 'CHEST'].includes(slot));
   return gear?.length > 0
     ? <p className="gear">Gear at sync · {gear.map(({ name }) => name).join(' · ')}</p>
