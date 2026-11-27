@@ -68,6 +68,7 @@ function legacyMilestones(legacy) {
   };
   return [...mergeTimed(story.legacy, legacy, keyOf)]
     .filter(([, event]) => event.level !== 25 && event.cap !== 75)
+    .filter(([, event]) => event.id !== 62004 || !event.members.includes('Chipson Bomfrey'))
     .map(([key, event]) => ({
       ...event,
       title: event.cap === 150 && event.skill ? event.skill + ' ' + event.cap : event.title,
