@@ -380,10 +380,10 @@
   },
   "shadowfang": {
     "columns": 1,
-    "height": 853,
-    "revision": "ea62e0d535",
+    "height": 1024,
+    "revision": "fe4e034d57",
     "rows": 1,
-    "width": 1280
+    "width": 1536
   },
   "skyborne": {
     "columns": 1,
