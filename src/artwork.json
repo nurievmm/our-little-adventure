@@ -353,10 +353,10 @@
   },
   "ragefire-2-varied": {
     "columns": 1,
-    "height": 960,
-    "revision": "5becdc4e28",
+    "height": 1024,
+    "revision": "4d2d6efdb3",
     "rows": 1,
-    "width": 1440
+    "width": 1536
   },
   "saar-oathwell": {
     "columns": 2,
