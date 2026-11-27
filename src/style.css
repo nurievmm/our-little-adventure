@@ -233,7 +233,8 @@ p { margin: 0; }
     linear-gradient(to bottom, transparent 28%, #080b13d9 100%),
     color-mix(in srgb, var(--scene-tint) 58%, transparent);
 }
-.timeline-entry:last-child .scene-backdrop {
+.timeline-entry:last-child .scene-backdrop,
+.timeline-entry:has(+ .text-milestone-entry) .scene-backdrop {
   mask-image: linear-gradient(to bottom, transparent, black var(--scene-blend),
     black calc(100% - var(--scene-blend)), transparent);
 }
@@ -265,6 +266,24 @@ p { margin: 0; }
 .story-party { display: flex; flex-wrap: wrap; gap: 8px 18px; }
 .story-party > div { display: flex; align-items: center; gap: 8px; font-size: .99rem; font-weight: 600; }
 .story-party .story-art { width: 46px; flex: 0 0 auto; }
+.text-milestone-entry {
+  padding-inline: var(--caption-inset);
+  background: var(--night);
+}
+.text-milestone {
+  display: grid;
+  gap: 5px;
+  width: min(100%, 48rem);
+  margin-inline: auto;
+  padding-block: clamp(20px, 5vmin, 42px);
+  border-block-start: 1px solid #fff5e426;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.text-milestone h3 {
+  margin: 0;
+  font: 600 clamp(1.25rem, 3vmin, 1.8rem)/1.2 var(--display);
+}
 .screenshot-trigger,
 .screenshot-toolbar button {
   display: inline-flex;

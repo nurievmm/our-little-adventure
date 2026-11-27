@@ -3,6 +3,10 @@ import story from './story-data.json';
 const accountByHero = new Map(story.accounts.flatMap((group) => group.map((hero) => [hero, group[0]])));
 export const accountOf = (hero) => accountByHero.get(hero) ?? hero;
 
+// Curated scenes and the previously published scenes can use the existing artwork.
+const illustratedKeys = new Set([...story.timelineOrder.map(({ key }) => key), ...story.illustratedMilestones]);
+export const isIllustratedMilestone = (event) => illustratedKeys.has(event.key);
+
 const dateValue = (value) => Date.parse(value);
 export const validTime = (value) => typeof value === 'string' && Number.isFinite(dateValue(value));
 

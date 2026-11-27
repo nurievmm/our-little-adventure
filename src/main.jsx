@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import roster from './roster.json';
-import { journeyMilestones, validTime } from './timeline.js';
+import { isIllustratedMilestone, journeyMilestones, validTime } from './timeline.js';
 import { eventPainting, formations, heroPainting, painting } from './illustrations.js';
 import { useReadingPosition } from './useReadingPosition.js';
 import { useSceneMotion } from './useSceneMotion.js';
@@ -177,14 +177,33 @@ function Scene({ event, roster }) {
   </article>;
 }
 
+function TextMilestone({ event }) {
+  const participants = event.hero?.name ?? event.members?.join(', ');
+  return <article className="text-milestone">
+    <EventTime event={event} />
+    {event.dungeon && <p>{event.dungeon}</p>}
+    <h3>{event.title}</h3>
+    {participants && <p>{participants}</p>}
+    {event.kind === 'legacy' && event.description && <p>{event.description}</p>}
+  </article>;
+}
+
 function Timeline({ heroes, snapshot }) {
   const byName = new Map(heroes.map((hero) => [hero.name, hero]));
   const milestones = journeyMilestones(heroes, snapshot);
+  const illustrated = [];
+  const textOnly = [];
+  for (const event of milestones) {
+    (isIllustratedMilestone(event) ? illustrated : textOnly).push(event);
+  }
   return <section className="timeline" aria-labelledby="timeline-title">
     <h2 id="timeline-title" className="visually-hidden">Adventure timeline</h2>
     <ol className="timeline-list">
-      {milestones.map((event) => <li key={event.key} data-reading-stop={event.key} className={'timeline-entry entry-' + event.kind}>
+      {illustrated.map((event) => <li key={event.key} data-reading-stop={event.key} className={'timeline-entry entry-' + event.kind}>
         <Scene event={event} roster={byName} />
+      </li>)}
+      {textOnly.map((event) => <li key={event.key} data-reading-stop={event.key} className="text-milestone-entry">
+        <TextMilestone event={event} />
       </li>)}
     </ol>
   </section>;
